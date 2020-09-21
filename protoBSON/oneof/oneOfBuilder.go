@@ -20,7 +20,9 @@ type CodecBuilder struct {
 	embeddedDocTypeMap map[string]reflect.Type
 }
 
-func (builder *CodecBuilder) ValidateType(oneOfType reflect.Type) error {
+// Validate that a type conforms to the expected constraints to a concrete one-of
+// wrapper type spat out by the protoc codegen.
+func (builder *CodecBuilder) validateValueWrapperType(oneOfType reflect.Type) error {
 	// Our concrete type must implement our oneof type
 	if !oneOfType.Implements(builder.oneOfInterface) {
 		return fmt.Errorf(
@@ -45,29 +47,31 @@ func (builder *CodecBuilder) ValidateType(oneOfType reflect.Type) error {
 	return nil
 }
 
-func (builder *CodecBuilder) autoRegisterOneOfType(
+// Automatically register a new concrete one-of wrapper type for the interface
+// we are building this codec for.
+func (builder *CodecBuilder) deduceConcreteTypeEncoding(
 	oneOfType reflect.Type,
 ) error {
 	var err error
-	if err = builder.ValidateType(oneOfType); err != nil {
+	if err = builder.validateValueWrapperType(oneOfType); err != nil {
 		return err
 	}
 
 	innerType := oneOfType.Elem().Field(0).Type
 	// First try to register it if it's a known type that serialized to something
 	// other than an embedded doc
-	bsonTypes, known := builder.autoRegisterKnownTypes(oneOfType, innerType)
+	bsonTypes, known := builder.deduceKnownTypeEncoding(oneOfType, innerType)
 
 	// If it's not known, we're next try to register it as an unknown type.
 	if !known {
-		bsonTypes, err = builder.autoRegisterUnknownTypes(oneOfType, innerType)
+		bsonTypes, err = builder.deduceUnknownTypeEncoding(oneOfType, innerType)
 		if err != nil {
 			return err
 		}
 	}
 
 	for _, thisBsonKey := range bsonTypes {
-		err := builder.RegisterOneOfType(
+		err := builder.AddConcrete(
 			oneOfType, thisBsonKey.BsonType(), thisBsonKey.BinaryType(),
 		)
 		if err != nil {
@@ -78,7 +82,10 @@ func (builder *CodecBuilder) autoRegisterOneOfType(
 	return nil
 }
 
-func (builder *CodecBuilder) autoRegisterUnknownTypes(
+// automatically register a concrete one-of type for an inner type for which we don't
+// have privileged information about what the inner type encodes / decodes from. We
+// make a best-guess.
+func (builder *CodecBuilder) deduceUnknownTypeEncoding(
 	oneOfType reflect.Type, innerType reflect.Type,
 ) (bsonTypes []bsonTypeKey, err error) {
 	switch innerType.Kind() {
@@ -142,8 +149,8 @@ func (builder *CodecBuilder) autoRegisterUnknownTypes(
 }
 
 // inspects the type to see if it is a known type (like decimal or UUID) that we
-// can handle specially since we have for-knowledge of it's serialized type.
-func (builder *CodecBuilder) autoRegisterKnownTypes(
+// can handle specially since we have foreknowledge of it's serialized type.
+func (builder *CodecBuilder) deduceKnownTypeEncoding(
 	oneOfType reflect.Type, innerType reflect.Type,
 ) (typeKeys []bsonTypeKey, known bool) {
 	known = true
@@ -192,11 +199,12 @@ func (builder *CodecBuilder) autoRegisterKnownTypes(
 	return typeKeys, known
 }
 
-func (builder *CodecBuilder) AutoRegisterOneOfTypes(
+// Try to automatically deduce the encoding / decoding mapping of the wrapper types.
+func (builder *CodecBuilder) AutoAddConcrete(
 	oneOfTypes ...reflect.Type,
 ) error {
 	for _, thisType := range oneOfTypes {
-		err := builder.autoRegisterOneOfType(thisType)
+		err := builder.deduceConcreteTypeEncoding(thisType)
 		if err != nil {
 			return err
 		}
@@ -205,10 +213,15 @@ func (builder *CodecBuilder) AutoRegisterOneOfTypes(
 	return nil
 }
 
-func (builder *CodecBuilder) RegisterOneOfType(
+// Register a concrete one of type and the bson type it is encoded to. We don't know
+// what other codecs are in the registry, so to properly round-trip a one-of field
+// we need to create a 1-1 mapping of the wrapper type and it's bson encoded type,
+// except for the special case of message types that encoded to embedded docs, since
+// we can add a field with the proto message type.
+func (builder *CodecBuilder) AddConcrete(
 	oneOfType reflect.Type, bsonType bsontype.Type, binaryType byte,
 ) error {
-	if err := builder.ValidateType(oneOfType); err != nil {
+	if err := builder.validateValueWrapperType(oneOfType); err != nil {
 		return err
 	}
 
@@ -237,7 +250,8 @@ func (builder *CodecBuilder) RegisterOneOfType(
 	return nil
 }
 
-func (builder *CodecBuilder) autoRegisterOneOfsField(
+// auto-register the interface and concrete type for a messages one-of field.
+func (builder *CodecBuilder) fromMessageOneOfField(
 	message proto.Message, oneOfField protoreflect.OneofDescriptor,
 ) error {
 	// Get the proto field name for our master one-of
@@ -307,27 +321,9 @@ func (builder *CodecBuilder) autoRegisterOneOfsField(
 	builder.decodeMap = make(map[bsonTypeKey]reflect.Type)
 	builder.embeddedDocTypeMap = make(map[string]reflect.Type)
 
-	err := builder.AutoRegisterOneOfTypes(concreteWrapperTypes...)
+	err := builder.AutoAddConcrete(concreteWrapperTypes...)
 	if err != nil {
 		return err
-	}
-
-	return nil
-}
-
-// Register the one-of fields for a message
-func (builder *CodecBuilder) RegisterOneOfFields(message proto.Message) error {
-	oneOfs := message.ProtoReflect().Descriptor().Oneofs()
-	for i := 0; i < oneOfs.Len(); i++ {
-		oneOfField := oneOfs.Get(i)
-		err := builder.autoRegisterOneOfsField(message, oneOfField)
-		if err != nil {
-			return fmt.Errorf(
-				"error registering one-of field '%v' of type '%v'",
-				oneOfField.Name(),
-				reflect.TypeOf(message),
-			)
-		}
 	}
 
 	return nil
@@ -343,14 +339,34 @@ func (builder *CodecBuilder) Register(registryBuilder *bsoncodec.RegistryBuilder
 	registryBuilder.RegisterCodec(codec.oneOfInterface, codec)
 }
 
-func NewCodecBuilder(oneOfInterface reflect.Type) (*CodecBuilder, error) {
-	if oneOfInterface.Kind() != reflect.Interface {
-		return nil, fmt.Errorf("'%v' is not an interface", oneOfInterface)
-	}
-
+func NewCodecBuilder() *CodecBuilder {
 	return &CodecBuilder{
-		oneOfInterface:     oneOfInterface,
 		decodeMap:          make(map[bsonTypeKey]reflect.Type),
 		embeddedDocTypeMap: make(map[string]reflect.Type),
-	}, nil
+	}
+}
+
+func CodecBuildersForMessage(message proto.Message) ([]*CodecBuilder, error) {
+	// Register the one-of fields for a message
+	oneOfs := message.ProtoReflect().Descriptor().Oneofs()
+	builders := make([]*CodecBuilder, 0, oneOfs.Len())
+
+	for i := 0; i < oneOfs.Len(); i++ {
+		oneOfField := oneOfs.Get(i)
+
+		builder := NewCodecBuilder()
+
+		err := builder.fromMessageOneOfField(message, oneOfField)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"error registering one-of field '%v' of type '%v'",
+				oneOfField.Name(),
+				reflect.TypeOf(message),
+			)
+		}
+
+		builders = append(builders, builder)
+	}
+
+	return builders, nil
 }
