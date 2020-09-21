@@ -27,7 +27,7 @@ func (codec protoWrapperCodec) EncodeValue(
 	innerEncoder, err := context.LookupEncoder(innerValue.Type())
 	if err != nil {
 		return fmt.Errorf(
-			"could not get encoder for inner type '%v' of protobuf wrapper" +
+			"could not get encoder for inner type '%v' of protobuf wrapper"+
 				" type '%v': %w",
 			innerValue.Type(),
 			value.Type(),
@@ -71,7 +71,7 @@ func (codec protoWrapperCodec) DecodeValue(
 	innerDecoder, err := context.LookupDecoder(innerValue.Type())
 	if err != nil {
 		return fmt.Errorf(
-			"could not get encoder for inner type '%v' of protobuf wrapper" +
+			"could not get encoder for inner type '%v' of protobuf wrapper"+
 				" type '%v': %w",
 			innerValue.Type(),
 			value.Type(),

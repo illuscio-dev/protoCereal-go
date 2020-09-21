@@ -10,6 +10,10 @@ message Wizard {
   string name = 1;
 }
 
+message Witch {
+  string name = 1;
+}
+
 message TestProto {
   // @inject_tag: bson:"field_string"
   string field_string = 1;
@@ -28,5 +32,13 @@ message TestOneOfFirst {
     UUID field_uuid = 7;
     RawData field_raw = 8;
     Wizard field_wizard = 9;
+  }
+}
+
+// Used to test the ability to encode and decode multiple sub-messages as embedded docs.
+message TestOneOfMultiMessage {
+  oneof mage {
+    Witch witch = 1;
+    Wizard wizard = 2;
   }
 }

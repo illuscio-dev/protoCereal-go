@@ -4,10 +4,13 @@ import (
 	"fmt"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
 	"go.mongodb.org/mongo-driver/bson/bsontype"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/reflect/protoreflect"
 	"reflect"
 )
 
 type CodecBuilder struct {
+	// The master interface for the possible field values.
 	oneOfInterface reflect.Type
 	// Map of the encoded bson type to the oneof field type it decodes to
 	decodeMap map[bsonTypeKey]reflect.Type
@@ -46,7 +49,7 @@ func (builder *CodecBuilder) autoRegisterOneOfType(
 	oneOfType reflect.Type,
 ) error {
 	var err error
-	if err = builder.ValidateType(oneOfType) ; err != nil {
+	if err = builder.ValidateType(oneOfType); err != nil {
 		return err
 	}
 
@@ -108,7 +111,7 @@ func (builder *CodecBuilder) autoRegisterUnknownTypes(
 		// and we cannot handle it.
 		if innerType.Elem().Kind() != reflect.Struct {
 			return nil, fmt.Errorf(
-				"inner pointer type '%v' does not point to struct in" +
+				"inner pointer type '%v' does not point to struct in"+
 					" oneof wrapper '%v'",
 				innerType,
 				oneOfType,
@@ -116,19 +119,19 @@ func (builder *CodecBuilder) autoRegisterUnknownTypes(
 		}
 		// If the pointer type does not implement the proto message interface, we can't
 		// handle it.
-		if !innerType.Implements(protoMessageInterface ) {
+		if !innerType.Implements(protoMessageInterface) {
 			return nil, fmt.Errorf(
-				"inner value type '%v' is not proto message for " +
+				"inner value type '%v' is not proto message for "+
 					" oneof wrapper '%v'",
 				innerType,
 				oneOfType,
 			)
 		}
-
 		bsonTypes = []bsonTypeKey{newSimpleKey(bsontype.EmbeddedDocument)}
+
 	default:
 		return nil, fmt.Errorf(
-			"could not determine bson type for inner type '%v' for oneof" +
+			"could not determine bson type for inner type '%v' for oneof"+
 				" wrapper '%v'",
 			innerType,
 			oneOfType,
@@ -159,29 +162,29 @@ func (builder *CodecBuilder) autoRegisterKnownTypes(
 			typeKeys, newBsonTypeKey(bsontype.Binary, bsontype.BinaryGeneric),
 		)
 	case wrapperBoolType:
-		typeKeys =  append(typeKeys, newSimpleKey(bsontype.Boolean))
+		typeKeys = append(typeKeys, newSimpleKey(bsontype.Boolean))
 	case wrapperBytesType:
 		typeKeys = append(
 			typeKeys, newBsonTypeKey(bsontype.Binary, bsontype.BinaryGeneric),
 		)
 	case wrapperDoubleType:
-		typeKeys =  append(typeKeys, newSimpleKey(bsontype.Double))
+		typeKeys = append(typeKeys, newSimpleKey(bsontype.Double))
 	case wrapperFloatType:
-		typeKeys =  append(typeKeys, newSimpleKey(bsontype.Double))
+		typeKeys = append(typeKeys, newSimpleKey(bsontype.Double))
 	case wrapperInt32Type:
-		typeKeys =  append(typeKeys, newSimpleKey(bsontype.Int32))
-		typeKeys =  append(typeKeys, newSimpleKey(bsontype.Int64))
+		typeKeys = append(typeKeys, newSimpleKey(bsontype.Int32))
+		typeKeys = append(typeKeys, newSimpleKey(bsontype.Int64))
 	case wrapperInt64Type:
-		typeKeys =  append(typeKeys, newSimpleKey(bsontype.Int32))
-		typeKeys =  append(typeKeys, newSimpleKey(bsontype.Int64))
+		typeKeys = append(typeKeys, newSimpleKey(bsontype.Int32))
+		typeKeys = append(typeKeys, newSimpleKey(bsontype.Int64))
 	case wrapperStringType:
-		typeKeys =  append(typeKeys, newSimpleKey(bsontype.String))
+		typeKeys = append(typeKeys, newSimpleKey(bsontype.String))
 	case wrapperUInt32Type:
-		typeKeys =  append(typeKeys, newSimpleKey(bsontype.Int32))
-		typeKeys =  append(typeKeys, newSimpleKey(bsontype.Int64))
+		typeKeys = append(typeKeys, newSimpleKey(bsontype.Int32))
+		typeKeys = append(typeKeys, newSimpleKey(bsontype.Int64))
 	case wrapperUInt64Type:
-		typeKeys =  append(typeKeys, newSimpleKey(bsontype.Int32))
-		typeKeys =  append(typeKeys, newSimpleKey(bsontype.Int64))
+		typeKeys = append(typeKeys, newSimpleKey(bsontype.Int32))
+		typeKeys = append(typeKeys, newSimpleKey(bsontype.Int64))
 	default:
 		known = false
 	}
@@ -204,14 +207,23 @@ func (builder *CodecBuilder) AutoRegisterOneOfTypes(
 
 func (builder *CodecBuilder) RegisterOneOfType(
 	oneOfType reflect.Type, bsonType bsontype.Type, binaryType byte,
-) error  {
-	if err := builder.ValidateType(oneOfType) ; err != nil {
+) error {
+	if err := builder.ValidateType(oneOfType); err != nil {
 		return err
 	}
 
 	typeKey := newBsonTypeKey(bsonType, binaryType)
 
-	if existingType, ok := builder.decodeMap[typeKey] ; ok {
+	existingType, ok := builder.decodeMap[typeKey]
+	if bsonType == bsontype.EmbeddedDocument {
+		// Get the de-referenced struct type of the wrapper
+		innerType := structTypeFromOneOfWrapperType(oneOfType)
+		// Make a key from the fully qualified type path and add it to our embedded
+		// struct types
+		docTypeKey := embeddedDocKeyFromType(innerType)
+		// Store the oneOf type wrapper for this type
+		builder.embeddedDocTypeMap[docTypeKey] = oneOfType.Elem()
+	} else if ok {
 		return fmt.Errorf(
 			"bson type '%v' is already registered to oneof type '%v'",
 			bsonType,
@@ -219,15 +231,113 @@ func (builder *CodecBuilder) RegisterOneOfType(
 		)
 	}
 
+	// Store the struct type for the one-of wrapper
 	builder.decodeMap[typeKey] = oneOfType.Elem()
+
+	return nil
+}
+
+func (builder *CodecBuilder) autoRegisterOneOfsField(
+	message proto.Message, oneOfField protoreflect.OneofDescriptor,
+) error {
+	// Get the proto field name for our master one-of
+	protoFieldName := string(oneOfField.Name())
+	// We're going to store the corresponding go struct field name here.
+	goFieldName := ""
+
+	// Find the struct field that has this proto field name in it's tag and remember the
+	// name so we can inspect it later..
+	messageType := reflect.TypeOf(message).Elem()
+	for i := 0; i < messageType.NumField(); i++ {
+		thisField := messageType.Field(i)
+		tagVal, ok := thisField.Tag.Lookup("protobuf_oneof")
+		if ok && tagVal == protoFieldName {
+			goFieldName = thisField.Name
+			break
+		}
+	}
+
+	if goFieldName == "" {
+		return fmt.Errorf(
+			"could not find go stuct field for proto field %v", protoFieldName,
+		)
+	}
+
+	// Store the master interface for this one-of (it's a private interface, but that's
+	// okay for reflection-based operations.)
+	wrapperInterfaceField, _ := messageType.FieldByName(goFieldName)
+	builder.oneOfInterface = wrapperInterfaceField.Type
+
+	// We'll store a list of our concrete wrapper types here.
+	concreteWrapperTypes := make([]reflect.Type, 0)
+
+	// Proto message one-ofs are actually a list of sub-fields under the hood with some
+	// syntactic and language-interface specific sugar. We are going to go through and
+	// set each of these subfields to a new value, then inspect the go struct to get
+	// the one-of wrapper type for that specific sub-field so we can register it as
+	// part of the codec.
+	subFields := oneOfField.Fields()
+	for i := 0; i < subFields.Len(); i++ {
+		// Get the possible sub-field descriptor
+		thisPossible := subFields.Get(i)
+
+		// make a new message
+		newMessage := message.ProtoReflect().New()
+
+		// Now set this field to its initial value for this one-of type
+		newMessage.Set(thisPossible, newMessage.NewField(thisPossible))
+
+		// Now we want to extract the actual go wrapper value for this one-of type
+		goWrapperType := reflect.
+			// Get the go reflect value of the new protoreflect message
+			ValueOf(newMessage.Interface()).
+			// Dereference the pointer
+			Elem().
+			// Get the one-of struct field
+			FieldByName(goFieldName).
+			// Push through the interface to the concrete value
+			Elem().
+			// Get the type (this will be a pointer to it)
+			Type()
+
+		concreteWrapperTypes = append(concreteWrapperTypes, goWrapperType)
+	}
+
+	// Initialize our decode type maps here
+	builder.decodeMap = make(map[bsonTypeKey]reflect.Type)
+	builder.embeddedDocTypeMap = make(map[string]reflect.Type)
+
+	err := builder.AutoRegisterOneOfTypes(concreteWrapperTypes...)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// Register the one-of fields for a message
+func (builder *CodecBuilder) RegisterOneOfFields(message proto.Message) error {
+	oneOfs := message.ProtoReflect().Descriptor().Oneofs()
+	for i := 0; i < oneOfs.Len(); i++ {
+		oneOfField := oneOfs.Get(i)
+		err := builder.autoRegisterOneOfsField(message, oneOfField)
+		if err != nil {
+			return fmt.Errorf(
+				"error registering one-of field '%v' of type '%v'",
+				oneOfField.Name(),
+				reflect.TypeOf(message),
+			)
+		}
+	}
 
 	return nil
 }
 
 func (builder *CodecBuilder) Register(registryBuilder *bsoncodec.RegistryBuilder) {
 	codec := &oneOfCodec{
-		oneOfInterface: builder.oneOfInterface,
-		decodeMap:      builder.decodeMap,
+		oneOfInterface:     builder.oneOfInterface,
+		decodeMap:          builder.decodeMap,
+		embeddedDocTypeMap: builder.embeddedDocTypeMap,
 	}
 
 	registryBuilder.RegisterCodec(codec.oneOfInterface, codec)
@@ -239,7 +349,8 @@ func NewCodecBuilder(oneOfInterface reflect.Type) (*CodecBuilder, error) {
 	}
 
 	return &CodecBuilder{
-		oneOfInterface: oneOfInterface,
-		decodeMap:      make(map[bsonTypeKey]reflect.Type),
+		oneOfInterface:     oneOfInterface,
+		decodeMap:          make(map[bsonTypeKey]reflect.Type),
+		embeddedDocTypeMap: make(map[string]reflect.Type),
 	}, nil
 }

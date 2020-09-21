@@ -11,24 +11,13 @@ import (
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
 	"go.mongodb.org/mongo-driver/bson/bsontype"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"reflect"
 	"testing"
 )
 
 func TestOneOfFirst(t *testing.T) {
 	cerealOpts := protoBson.NewMongoOpts()
 
-	cerealOpts.WithOneOfType(
-		reflect.TypeOf((*messagesCereal_test.IsTestOneOfFirstSomeValue)(nil)).Elem(),
-		reflect.TypeOf(new(messagesCereal_test.TestOneOfFirst_FieldString)),
-		reflect.TypeOf(new(messagesCereal_test.TestOneOfFirst_FieldInt32)),
-		reflect.TypeOf(new(messagesCereal_test.TestOneOfFirst_FieldBool)),
-		reflect.TypeOf(new(messagesCereal_test.TestOneOfFirst_FieldDouble)),
-		reflect.TypeOf(new(messagesCereal_test.TestOneOfFirst_FieldDecimal)),
-		reflect.TypeOf(new(messagesCereal_test.TestOneOfFirst_FieldUuid)),
-		reflect.TypeOf(new(messagesCereal_test.TestOneOfFirst_FieldRaw)),
-		reflect.TypeOf(new(messagesCereal_test.TestOneOfFirst_FieldWizard)),
-	)
+	cerealOpts.WithOneOfFields(new(messagesCereal_test.TestOneOfFirst))
 
 	uuidVal, err := uuid.NewRandom()
 	if !assert.NoError(t, err, "uuid generation") {
@@ -44,8 +33,8 @@ func TestOneOfFirst(t *testing.T) {
 	registry := builder.Build()
 
 	type testCase struct {
-		name string
-		value messagesCereal_test.IsTestOneOfFirstSomeValue
+		name            string
+		value           messagesCereal_test.IsTestOneOfFirstSomeValue
 		serializedValue interface{}
 	}
 
@@ -95,6 +84,17 @@ func TestOneOfFirst(t *testing.T) {
 			},
 		},
 		{
+			name: "wizard",
+			value: &messagesCereal_test.TestOneOfFirst_FieldWizard{
+				FieldWizard: &messagesCereal_test.Wizard{
+					Name: "Harry Potter",
+				},
+			},
+			serializedValue: primitive.M{
+				"name": "Harry Potter",
+			},
+		},
+		{
 			name: "interior nil",
 			value: &messagesCereal_test.TestOneOfFirst_FieldDecimal{
 				FieldDecimal: nil,
@@ -102,8 +102,8 @@ func TestOneOfFirst(t *testing.T) {
 			serializedValue: nil,
 		},
 		{
-			name: "field nil",
-			value: nil,
+			name:            "field nil",
+			value:           nil,
 			serializedValue: nil,
 		},
 	}
@@ -157,6 +157,79 @@ func TestOneOfFirst(t *testing.T) {
 	for _, thisCase = range testCases {
 		t.Run(thisCase.name, runTest)
 	}
+}
 
+func TestOneOfMultiMessageTargets(t *testing.T) {
+	builder := bson.NewRegistryBuilder()
+	cerealOpts := protoBson.NewMongoOpts().WithOneOfFields(
+		new(messagesCereal_test.TestOneOfMultiMessage),
+	)
 
+	err := protoBson.RegisterCerealCodecs(builder, cerealOpts)
+	if !assert.NoError(t, err, "cereal registration") {
+		t.FailNow()
+	}
+
+	registry := builder.Build()
+
+	type hasMessage struct {
+		Message *messagesCereal_test.TestOneOfMultiMessage
+	}
+
+	assert := assert.New(t)
+
+	original := &hasMessage{
+		Message: &messagesCereal_test.TestOneOfMultiMessage{
+			Mage: &messagesCereal_test.TestOneOfMultiMessage_Wizard{
+				Wizard: &messagesCereal_test.Wizard{Name: "Harry Potter"},
+			},
+		},
+	}
+
+	encoded, err := bson.MarshalWithRegistry(registry, original)
+	if !assert.NoError(err, "marshal message") {
+		t.FailNow()
+	}
+
+	mapDecoded := bson.M{}
+	err = bson.UnmarshalWithRegistry(registry, encoded, mapDecoded)
+	if !assert.NoError(err, "unmarshal message.") {
+		t.FailNow()
+	}
+
+	t.Log("MAP:", mapDecoded)
+	if !assert.Contains(mapDecoded, "message") {
+		t.FailNow()
+	}
+
+	messageMap := mapDecoded["message"].(bson.M)
+	if !assert.Contains(messageMap, "mage") {
+		t.FailNow()
+	}
+
+	mageMap := messageMap["mage"].(bson.M)
+	if !assert.Contains(mageMap, "name") {
+		t.FailNow()
+	}
+
+	if !assert.Equal("Harry Potter", mageMap["name"]) {
+		t.FailNow()
+	}
+
+	decoded := new(hasMessage)
+	err = bson.UnmarshalWithRegistry(registry, encoded, decoded)
+	if !assert.NoError(err, "unmarshall to struct") {
+		t.FailNow()
+	}
+
+	fmt.Println("DECODED:", decoded)
+}
+
+func TestAutoRegisterOneOfs(t *testing.T) {
+	builder := bson.NewRegistryBuilder()
+	cerealOpts := protoBson.
+		NewMongoOpts().
+		WithOneOfFields(new(messagesCereal_test.TestOneOfFirst))
+
+	_ = protoBson.RegisterCerealCodecs(builder, cerealOpts)
 }

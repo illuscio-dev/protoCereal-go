@@ -19,7 +19,7 @@ func (x *UUID) Validate() error {
 
 // Converts cereal UUID value into google UUID value.
 func (x *UUID) ToGoogle() (googleUUID.UUID, error) {
-	if err := x.Validate() ; err != nil {
+	if err := x.Validate(); err != nil {
 		return [16]byte{}, err
 	}
 	return googleUUID.FromBytes(x.Value)
@@ -28,7 +28,7 @@ func (x *UUID) ToGoogle() (googleUUID.UUID, error) {
 // Converts cereal UUID value into mongo helper UUID value (NOT the binary primitive
 // value).
 func (x *UUID) ToMongo() (mongoUUID.UUID, error) {
-	if err := x.Validate() ; err != nil {
+	if err := x.Validate(); err != nil {
 		return [16]byte{}, err
 	}
 	result := mongoUUID.UUID{}

@@ -7,6 +7,7 @@ import (
 	"github.com/illuscio-dev/protoCereal-go/messagesCereal"
 	"github.com/illuscio-dev/protoCereal-go/protoBSON/oneof"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
+	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"reflect"
@@ -15,7 +16,7 @@ import (
 // Holds options for registering codecs.
 type MongoOpts struct {
 	addDefaultCodecs bool
-	oneOfBuilders []*oneof.CodecBuilder
+	oneOfBuilders    []*oneof.CodecBuilder
 }
 
 // Whether to add the default mongo codecs to the registry. Default: true.
@@ -40,9 +41,23 @@ func (opts *MongoOpts) WithOneOfType(
 				"error registering oneOfTypes with codec builder: %w", err,
 			),
 		)
-	}  
+	}
 
 	opts.oneOfBuilders = append(opts.oneOfBuilders, builder)
+	return opts
+}
+
+// Extract one-of fields from this message type and register their encoders / decoders
+func (opts *MongoOpts) WithOneOfFields(messages ...proto.Message) *MongoOpts {
+	for _, thisMessage := range messages {
+		oneOfBuilder := new(oneof.CodecBuilder)
+		err := oneOfBuilder.RegisterOneOfFields(thisMessage)
+		if err != nil {
+			panic(fmt.Errorf("error creating oneof codec: %w", err))
+		}
+		opts.oneOfBuilders = append(opts.oneOfBuilders, oneOfBuilder)
+	}
+
 	return opts
 }
 

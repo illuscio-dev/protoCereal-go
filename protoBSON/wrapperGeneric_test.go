@@ -13,26 +13,26 @@ import (
 
 func TestGenericWrapper(t *testing.T) {
 	type testMessage struct {
-		BoolVal *wrappers.BoolValue
-		BytesVal *wrappers.BytesValue
+		BoolVal     *wrappers.BoolValue
+		BytesVal    *wrappers.BytesValue
 		DoubleValue *wrappers.DoubleValue
-		FloatValue *wrappers.FloatValue
-		Int32Value *wrappers.Int32Value
-		Int64Value *wrappers.Int64Value
+		FloatValue  *wrappers.FloatValue
+		Int32Value  *wrappers.Int32Value
+		Int64Value  *wrappers.Int64Value
 		StringValue *wrappers.StringValue
 		UInt32Value *wrappers.UInt32Value
 		UInt64Value *wrappers.UInt64Value
 	}
 
 	type TestCase struct {
-		field string
-		value interface{}
+		field           string
+		value           interface{}
 		serializedValue interface{}
 	}
 
 	testCases := []*TestCase{
 		{
-			field:           "BoolVal",
+			field: "BoolVal",
 			value: &wrappers.BoolValue{
 				Value: true,
 			},
@@ -40,11 +40,11 @@ func TestGenericWrapper(t *testing.T) {
 		},
 		{
 			field:           "BoolVal",
-			value: nil,
+			value:           nil,
 			serializedValue: nil,
 		},
 		{
-			field:           "BytesVal",
+			field: "BytesVal",
 			value: &wrappers.BytesValue{
 				Value: []byte("some data"),
 			},
@@ -55,11 +55,11 @@ func TestGenericWrapper(t *testing.T) {
 		},
 		{
 			field:           "BytesVal",
-			value: nil,
+			value:           nil,
 			serializedValue: nil,
 		},
 		{
-			field:           "DoubleValue",
+			field: "DoubleValue",
 			value: &wrappers.DoubleValue{
 				Value: 0.0002688172043010753,
 			},
@@ -67,11 +67,11 @@ func TestGenericWrapper(t *testing.T) {
 		},
 		{
 			field:           "DoubleValue",
-			value: nil,
+			value:           nil,
 			serializedValue: nil,
 		},
 		{
-			field:           "FloatValue",
+			field: "FloatValue",
 			value: &wrappers.FloatValue{
 				Value: 0.0002688172043010753,
 			},
@@ -79,11 +79,11 @@ func TestGenericWrapper(t *testing.T) {
 		},
 		{
 			field:           "FloatValue",
-			value: nil,
+			value:           nil,
 			serializedValue: nil,
 		},
 		{
-			field:           "Int32Value",
+			field: "Int32Value",
 			value: &wrappers.Int32Value{
 				Value: 42,
 			},
@@ -91,11 +91,11 @@ func TestGenericWrapper(t *testing.T) {
 		},
 		{
 			field:           "Int32Value",
-			value: nil,
+			value:           nil,
 			serializedValue: nil,
 		},
 		{
-			field:           "Int64Value",
+			field: "Int64Value",
 			value: &wrappers.Int64Value{
 				Value: 42,
 			},
@@ -103,11 +103,11 @@ func TestGenericWrapper(t *testing.T) {
 		},
 		{
 			field:           "Int64Value",
-			value: nil,
+			value:           nil,
 			serializedValue: nil,
 		},
 		{
-			field:           "StringValue",
+			field: "StringValue",
 			value: &wrappers.StringValue{
 				Value: "some text",
 			},
@@ -115,11 +115,11 @@ func TestGenericWrapper(t *testing.T) {
 		},
 		{
 			field:           "StringValue",
-			value: nil,
+			value:           nil,
 			serializedValue: nil,
 		},
 		{
-			field:           "UInt32Value",
+			field: "UInt32Value",
 			value: &wrappers.UInt32Value{
 				Value: 42,
 			},
@@ -127,11 +127,11 @@ func TestGenericWrapper(t *testing.T) {
 		},
 		{
 			field:           "UInt32Value",
-			value: nil,
+			value:           nil,
 			serializedValue: nil,
 		},
 		{
-			field:           "UInt64Value",
+			field: "UInt64Value",
 			value: &wrappers.UInt64Value{
 				Value: 42,
 			},
@@ -139,7 +139,7 @@ func TestGenericWrapper(t *testing.T) {
 		},
 		{
 			field:           "UInt64Value",
-			value: nil,
+			value:           nil,
 			serializedValue: nil,
 		},
 	}
@@ -166,8 +166,7 @@ func TestGenericWrapper(t *testing.T) {
 			value.Set(reflect.ValueOf(thisCase.value))
 		}
 
-
-		encoded, err  := bson.MarshalWithRegistry(registry, original)
+		encoded, err := bson.MarshalWithRegistry(registry, original)
 		if !assert.NoError(err, "error marshalling message") {
 			t.FailNow()
 		}

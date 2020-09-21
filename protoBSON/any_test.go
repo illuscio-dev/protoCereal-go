@@ -3,7 +3,7 @@ package protoBson_test
 import (
 	"fmt"
 	"github.com/illuscio-dev/protoCereal-go/messagesCereal_test"
-	"github.com/illuscio-dev/protoCereal-go/protoBSON"
+	"github.com/illuscio-dev/protoCereal-go/protoBSON/common"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"google.golang.org/protobuf/types/known/anypb"
@@ -58,7 +58,7 @@ func TestCodec_Any_MapValues(t *testing.T) {
 
 	assert.Equal("some string", int32Value)
 
-	typeUrlVal, ok := testMap[protoBson.AnyTypeUrlField]
+	typeUrlVal, ok := testMap[common.TypeUrlField]
 	assert.True(ok)
 	assert.NotZero(typeUrlVal)
 }
