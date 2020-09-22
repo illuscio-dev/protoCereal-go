@@ -1,0 +1,44 @@
+syntax = "proto3";
+package proto_cereal_test;
+option go_package = "github.com/illuscio-dev/protoCereal-go/messagesCereal_test";
+
+import "cereal_proto/decimal.proto";
+import "cereal_proto/uuid.proto";
+import "cereal_proto/raw_data.proto";
+
+message Wizard {
+  string name = 1;
+}
+
+message Witch {
+  string name = 1;
+}
+
+message TestProto {
+  // @inject_tag: bson:"field_string"
+  string field_string = 1;
+  // @inject_tag: bson:"field_int32"
+  int32 field_int32 = 2;
+}
+
+message TestOneOfFirst {
+  // @inject_tag: bson:"some_value"
+  oneof some_value {
+    string field_string = 1;
+    int32 field_int32 = 2;
+    bool field_bool = 3;
+    double field_double = 5;
+    proto_cereal.Decimal field_decimal = 6;
+    proto_cereal.UUID field_uuid = 7;
+    proto_cereal.RawData field_raw = 8;
+    Wizard field_wizard = 9;
+  }
+}
+
+// Used to test the ability to encode and decode multiple sub-messages as embedded docs.
+message TestOneOfMultiMessage {
+  oneof mage {
+    Witch witch = 1;
+    Wizard wizard = 2;
+  }
+}

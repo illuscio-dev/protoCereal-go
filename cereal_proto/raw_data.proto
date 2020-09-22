@@ -1,0 +1,10 @@
+syntax = "proto3";
+package proto_cereal;
+option go_package = "github.com/illuscio-dev/protoCereal-go/messagesCereal";
+
+// Wrapper type for Raw binary data for ease of type-based marshalling and
+// unmarshalling.
+message RawData {
+  // Raw data bytes go here.
+  bytes data = 1;
+}

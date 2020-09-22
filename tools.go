@@ -1,6 +1,6 @@
 // +build tools
 
-package tools
+package protoCereal
 
 import (
 	_ "github.com/ains/go-test-html"
