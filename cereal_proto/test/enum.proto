@@ -1,0 +1,16 @@
+syntax = "proto3";
+package proto_cereal_test;
+option go_package = "github.com/illuscio-dev/protoCereal-go/messagesCereal_test";
+
+// The hogwarts houses.
+enum Houses {
+  GRYFFINDOR = 0;
+  RAVENCLAW = 1;
+  HUFFLEPUFF = 2;
+  SLYTHERIN = 3;
+}
+
+// Use for testing enum logic
+message EnumTest {
+  Houses house = 1;
+}

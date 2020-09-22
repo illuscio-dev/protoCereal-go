@@ -79,7 +79,7 @@ func TestOneOfFirst(t *testing.T) {
 				FieldRaw: &messagesCereal.RawData{Data: []byte("some bin data")},
 			},
 			serializedValue: primitive.Binary{
-				Subtype: bsontype.BinaryGeneric,
+				Subtype: bsontype.BinaryUserDefined,
 				Data:    []byte("some bin data"),
 			},
 		},

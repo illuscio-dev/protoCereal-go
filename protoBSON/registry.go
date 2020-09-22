@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/illuscio-dev/protoCereal-go/messagesCereal"
+	"github.com/illuscio-dev/protoCereal-go/protoBSON/enum"
 	"github.com/illuscio-dev/protoCereal-go/protoBSON/oneof"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
 	"google.golang.org/protobuf/proto"
@@ -16,12 +17,19 @@ import (
 // Holds options for registering codecs.
 type Opts struct {
 	addDefaultCodecs bool
+	enumStrings      bool
 	oneOfBuilders    []*oneof.CodecBuilder
 }
 
 // Whether to add the default mongo codecs to the registry. Default: true.
 func (opts *Opts) WithAddDefaultCodecs(add bool) *Opts {
 	opts.addDefaultCodecs = add
+	return opts
+}
+
+// Whether to add the default mongo codecs to the registry. Default: true.
+func (opts *Opts) WithEnumStrings(enable bool) *Opts {
+	opts.enumStrings = enable
 	return opts
 }
 
@@ -105,6 +113,13 @@ func RegisterCerealCodecs(builder *bsoncodec.RegistryBuilder, opts *Opts) error 
 	// Register our one-of codecs with the registry
 	for _, oneOfBuilder := range opts.oneOfBuilders {
 		oneOfBuilder.Register(builder)
+	}
+
+	if opts.enumStrings {
+		enumCodec := new(enum.CodecEnumStringer)
+		enumInterfaceType := reflect.TypeOf((*enum.ProtoEnum)(nil)).Elem()
+		builder.RegisterHookEncoder(enumInterfaceType, enumCodec)
+		builder.RegisterHookDecoder(enumInterfaceType, enumCodec)
 	}
 
 	return nil

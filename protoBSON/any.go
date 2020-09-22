@@ -41,11 +41,11 @@ func (codec protoAnyCodec) EncodeValue(
 	return nil
 }
 
-func messageTypeFromUrl(typeUrl string) (reflect.Type, error) {
-	messageType, err := protoregistry.GlobalTypes.FindMessageByURL(typeUrl)
+func messageTypeFromURL(typeURL string) (reflect.Type, error) {
+	messageType, err := protoregistry.GlobalTypes.FindMessageByURL(typeURL)
 	if err != nil {
 		return nil, fmt.Errorf(
-			"could not find proto message for url '%v': %w", typeUrl, err,
+			"could not find proto message for url '%v': %w", typeURL, err,
 		)
 	}
 
@@ -61,7 +61,7 @@ func (codec protoAnyCodec) DecodeValue(
 	}
 
 	anyPayload, err := common.DecodeStructWithTypeInfo(
-		context, reader, messageTypeFromUrl,
+		context, reader, messageTypeFromURL,
 	)
 	if err != nil {
 		return fmt.Errorf("error extracting typed message: %w", err)

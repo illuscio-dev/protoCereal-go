@@ -58,7 +58,7 @@ func TestCodec_Any_MapValues(t *testing.T) {
 
 	assert.Equal("some string", int32Value)
 
-	typeUrlVal, ok := testMap[common.TypeUrlField]
+	typeUrlVal, ok := testMap[common.TypeURLField]
 	assert.True(ok)
 	assert.NotZero(typeUrlVal)
 }

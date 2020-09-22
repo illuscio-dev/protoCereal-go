@@ -52,3 +52,23 @@ func UUIDFromMongo(value mongoUUID.UUID) *UUID {
 		Value: value[:],
 	}
 }
+
+// Generate a new random UUID using google's UUID implementation.
+func NewUUIDRandom() (*UUID, error) {
+	gUUID, err := googleUUID.NewRandom()
+	if err != nil {
+		return nil, err
+	}
+
+	return UUIDFromGoogle(gUUID), nil
+}
+
+// Generate a new random UUID using google's UUID implementation.
+func MustUUIDRandom() *UUID {
+	gUUID, err := NewUUIDRandom()
+	if err != nil {
+		panic(fmt.Errorf("error creating UUID: %w", err))
+	}
+
+	return gUUID
+}

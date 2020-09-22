@@ -41,7 +41,7 @@ func TestCodec_RawData_BsonVal(t *testing.T) {
 	}
 
 	assert.Equal(
-		bsontype.BinaryGeneric,
+		bsontype.BinaryUserDefined,
 		binValue.Subtype,
 		"value is correct binary subtype",
 	)

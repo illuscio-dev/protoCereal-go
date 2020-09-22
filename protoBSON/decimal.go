@@ -5,7 +5,6 @@ import (
 	"github.com/illuscio-dev/protoCereal-go/messagesCereal"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
 	"go.mongodb.org/mongo-driver/bson/bsonrw"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"reflect"
 )
 
@@ -28,9 +27,7 @@ func (codec protoDecimalCodec) EncodeValue(
 		)
 	}
 
-	decimalBson := primitive.NewDecimal128(decimalProto.High, decimalProto.Low)
-
-	err := writer.WriteDecimal128(decimalBson)
+	err := writer.WriteDecimal128(decimalProto.ToBson())
 	if err != nil {
 		return fmt.Errorf("error writing decimal value: %w", err)
 	}
@@ -53,13 +50,7 @@ func (codec protoDecimalCodec) DecodeValue(
 		)
 	}
 
-	high, low := decimalBson.GetBytes()
-
-	decimalProto := &messagesCereal.Decimal{
-		High: high,
-		Low:  low,
-	}
-
+	decimalProto := messagesCereal.DecimalFromBson(decimalBson)
 	value.Set(reflect.ValueOf(decimalProto))
 
 	return nil

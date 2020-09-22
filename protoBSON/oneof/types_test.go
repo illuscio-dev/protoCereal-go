@@ -1,3 +1,5 @@
+//revive:disable:import-shadowing
+
 package oneof
 
 import (

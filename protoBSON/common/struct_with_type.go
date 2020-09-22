@@ -9,7 +9,7 @@ import (
 	"reflect"
 )
 
-const TypeUrlField = "pb_type"
+const TypeURLField = "pb_type"
 
 // We're going to use this struct to marshall and unmarshall the Any field
 type typedData struct {

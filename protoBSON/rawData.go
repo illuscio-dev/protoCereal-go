@@ -23,7 +23,7 @@ func (codec protoRawDataCodec) EncodeValue(
 	}
 
 	valueRaw := value.Interface().(*messagesCereal.RawData)
-	err := writer.WriteBinaryWithSubtype(valueRaw.Data, bsontype.BinaryGeneric)
+	err := writer.WriteBinaryWithSubtype(valueRaw.Data, bsontype.BinaryUserDefined)
 	if err != nil {
 		return err
 	}

@@ -82,6 +82,8 @@ func (builder *CodecBuilder) deduceConcreteTypeEncoding(
 	return nil
 }
 
+//revive:disable:cyclomatic
+
 // automatically register a concrete one-of type for an inner type for which we don't
 // have privileged information about what the inner type encodes / decodes from. We
 // make a best-guess.
@@ -166,7 +168,7 @@ func (builder *CodecBuilder) deduceKnownTypeEncoding(
 		)
 	case rawDataType:
 		typeKeys = append(
-			typeKeys, newBsonTypeKey(bsontype.Binary, bsontype.BinaryGeneric),
+			typeKeys, newBsonTypeKey(bsontype.Binary, bsontype.BinaryUserDefined),
 		)
 	case wrapperBoolType:
 		typeKeys = append(typeKeys, newSimpleKey(bsontype.Boolean))
@@ -198,6 +200,8 @@ func (builder *CodecBuilder) deduceKnownTypeEncoding(
 
 	return typeKeys, known
 }
+
+//revive:enable:cyclomatic
 
 // Try to automatically deduce the encoding / decoding mapping of the wrapper types.
 func (builder *CodecBuilder) AutoAddConcrete(

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#375EAB">
 
-  <title>scratch - Go Documentation Server</title>
+  <title>messagesCereal - Go Documentation Server</title>
 
 <link type="text/css" rel="stylesheet" href="style.css">
 
@@ -43,7 +43,7 @@
 
 
   <h1>
-    Command scratch
+    Package messagesCereal
     <span class="text-muted"></span>
   </h1>
 
@@ -75,6 +75,672 @@
 
 	
 		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "github.com/illuscio-dev/protoCereal-go/messagesCereal"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="godoc.3.html#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="godoc.3.html#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+			
+				<dd><a href="godoc.3.html#pkg-variables">Variables</a></dd>
+			
+			
+				
+				<dd><a href="godoc.3.html#ClipTimestamp">func ClipTimestamp(timestamp *timestamppb.Timestamp)</a></dd>
+			
+			
+				
+				<dd><a href="godoc.3.html#Decimal">type Decimal</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#DecimalFromBson">func DecimalFromBson(value primitive.Decimal128) *Decimal</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Decimal.Descriptor">func (*Decimal) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Decimal.GetHigh">func (x *Decimal) GetHigh() uint64</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Decimal.GetLow">func (x *Decimal) GetLow() uint64</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Decimal.ProtoMessage">func (*Decimal) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Decimal.ProtoReflect">func (x *Decimal) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Decimal.Reset">func (x *Decimal) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Decimal.String">func (x *Decimal) String() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Decimal.ToBson">func (x *Decimal) ToBson() primitive.Decimal128</a></dd>
+				
+			
+				
+				<dd><a href="godoc.3.html#RawData">type RawData</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#RawData.Descriptor">func (*RawData) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#RawData.GetData">func (x *RawData) GetData() []byte</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#RawData.ProtoMessage">func (*RawData) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#RawData.ProtoReflect">func (x *RawData) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#RawData.Reset">func (x *RawData) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#RawData.String">func (x *RawData) String() string</a></dd>
+				
+			
+				
+				<dd><a href="godoc.3.html#UUID">type UUID</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#MustUUIDRandom">func MustUUIDRandom() *UUID</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#NewUUIDRandom">func NewUUIDRandom() (*UUID, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUIDFromGoogle">func UUIDFromGoogle(value googleUUID.UUID) *UUID</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUIDFromMongo">func UUIDFromMongo(value mongoUUID.UUID) *UUID</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.Descriptor">func (*UUID) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.GetValue">func (x *UUID) GetValue() []byte</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.ProtoMessage">func (*UUID) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.ProtoReflect">func (x *UUID) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.Reset">func (x *UUID) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.String">func (x *UUID) String() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.ToGoogle">func (x *UUID) ToGoogle() (googleUUID.UUID, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.ToMongo">func (x *UUID) ToMongo() (mongoUUID.UUID, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.Validate">func (x *UUID) Validate() error</a></dd>
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go">decimal.pb.go</a>
+			
+				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimalMethods.go">decimalMethods.go</a>
+			
+				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/raw_data.pb.go">raw_data.pb.go</a>
+			
+				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/timeMethods.proto.go">timeMethods.proto.go</a>
+			
+				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuid.pb.go">uuid.pb.go</a>
+			
+				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go">uuidMethods.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+		
+			<h2 id="pkg-variables">Variables</h2>
+			
+				
+				<pre>var <span id="ErrUUIDByteLen">ErrUUIDByteLen</span> = <a href="http://localhost:6161/pkg/errors/">errors</a>.<a href="http://localhost:6161/pkg/errors/#New">New</a>(&#34;proto uuid message must be 16 bytes&#34;)</pre>
+			
+				
+				<pre>var <span id="File_cereal_proto_decimal_proto">File_cereal_proto_decimal_proto</span> <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#FileDescriptor">FileDescriptor</a></pre>
+			
+				
+				<pre>var <span id="File_cereal_proto_raw_data_proto">File_cereal_proto_raw_data_proto</span> <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#FileDescriptor">FileDescriptor</a></pre>
+			
+				
+				<pre>var <span id="File_cereal_proto_uuid_proto">File_cereal_proto_uuid_proto</span> <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#FileDescriptor">FileDescriptor</a></pre>
+			
+		
+		
+			
+			
+			<h2 id="ClipTimestamp">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/timeMethods.proto.go?s=301:353#L1">ClipTimestamp</a>
+				<a class="permalink" href="godoc.3.html#ClipTimestamp">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func ClipTimestamp(timestamp *<a href="http://localhost:6161/pkg/google.golang.org/protobuf/types/known/timestamppb/">timestamppb</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/types/known/timestamppb/#Timestamp">Timestamp</a>)</pre>
+			<p>
+Mongo db only stores time down to the millisecond, this method clips the accuracy
+of the protobuf time message to match mongo db. This can be useful for testing
+code round trips through BSON / the database.
+</p>
+
+			
+			
+
+		
+		
+			
+			
+			<h2 id="Decimal">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go?s=885:1203#L19">Decimal</a>
+				<a class="permalink" href="godoc.3.html#Decimal">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+Decimal 128 binary that matches the bson specification using a dual uint64 encoding.
+</p>
+
+			<pre>type Decimal struct {
+
+<span id="Decimal.High"></span>    <span class="comment">// High bytes</span>
+    High <a href="http://localhost:6161/pkg/builtin/#uint64">uint64</a> `protobuf:&#34;varint,1,opt,name=high,proto3&#34; json:&#34;high,omitempty&#34;`
+    <span class="comment">// low bytes</span>
+<span id="Decimal.Low"></span>    Low <a href="http://localhost:6161/pkg/builtin/#uint64">uint64</a> `protobuf:&#34;varint,2,opt,name=low,proto3&#34; json:&#34;low,omitempty&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="DecimalFromBson">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimalMethods.go?s=182:239#L1">DecimalFromBson</a>
+					<a class="permalink" href="godoc.3.html#DecimalFromBson">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func DecimalFromBson(value <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/primitive/">primitive</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/primitive/#Decimal128">Decimal128</a>) *<a href="godoc.3.html#Decimal">Decimal</a></pre>
+				
+				
+				
+			
+
+			
+				
+				<h3 id="Decimal.Descriptor">func (*Decimal) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go?s=1909:1953#L58">Descriptor</a>
+					<a class="permalink" href="godoc.3.html#Decimal.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#Decimal">Decimal</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use Decimal.ProtoReflect.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Decimal.GetHigh">func (*Decimal) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go?s=2023:2057#L62">GetHigh</a>
+					<a class="permalink" href="godoc.3.html#Decimal.GetHigh">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#Decimal">Decimal</a>) GetHigh() <a href="http://localhost:6161/pkg/builtin/#uint64">uint64</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Decimal.GetLow">func (*Decimal) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go?s=2107:2140#L69">GetLow</a>
+					<a class="permalink" href="godoc.3.html#Decimal.GetLow">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#Decimal">Decimal</a>) GetLow() <a href="http://localhost:6161/pkg/builtin/#uint64">uint64</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Decimal.ProtoMessage">func (*Decimal) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go?s=1499:1529#L43">ProtoMessage</a>
+					<a class="permalink" href="godoc.3.html#Decimal.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#Decimal">Decimal</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Decimal.ProtoReflect">func (*Decimal) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go?s=1534:1587#L45">ProtoReflect</a>
+					<a class="permalink" href="godoc.3.html#Decimal.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#Decimal">Decimal</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Decimal.Reset">func (*Decimal) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go?s=1205:1230#L30">Reset</a>
+					<a class="permalink" href="godoc.3.html#Decimal.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#Decimal">Decimal</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Decimal.String">func (*Decimal) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go?s=1421:1454#L39">String</a>
+					<a class="permalink" href="godoc.3.html#Decimal.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#Decimal">Decimal</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Decimal.ToBson">func (*Decimal) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimalMethods.go?s=82:129#L1">ToBson</a>
+					<a class="permalink" href="godoc.3.html#Decimal.ToBson">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#Decimal">Decimal</a>) ToBson() <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/primitive/">primitive</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/primitive/#Decimal128">Decimal128</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="RawData">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/raw_data.pb.go?s=891:1132#L20">RawData</a>
+				<a class="permalink" href="godoc.3.html#RawData">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+Wrapper type for Raw binary data for ease of type-based marshalling and
+unmarshalling.
+</p>
+
+			<pre>type RawData struct {
+
+    <span class="comment">// Raw data bytes go here.</span>
+<span id="RawData.Data"></span>    Data []<a href="http://localhost:6161/pkg/builtin/#byte">byte</a> `protobuf:&#34;bytes,1,opt,name=data,proto3&#34; json:&#34;data,omitempty&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="RawData.Descriptor">func (*RawData) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/raw_data.pb.go?s=1840:1884#L57">Descriptor</a>
+					<a class="permalink" href="godoc.3.html#RawData.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#RawData">RawData</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use RawData.ProtoReflect.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="RawData.GetData">func (*RawData) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/raw_data.pb.go?s=1955:1989#L61">GetData</a>
+					<a class="permalink" href="godoc.3.html#RawData.GetData">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#RawData">RawData</a>) GetData() []<a href="http://localhost:6161/pkg/builtin/#byte">byte</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="RawData.ProtoMessage">func (*RawData) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/raw_data.pb.go?s=1429:1459#L42">ProtoMessage</a>
+					<a class="permalink" href="godoc.3.html#RawData.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#RawData">RawData</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="RawData.ProtoReflect">func (*RawData) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/raw_data.pb.go?s=1464:1517#L44">ProtoReflect</a>
+					<a class="permalink" href="godoc.3.html#RawData.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#RawData">RawData</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="RawData.Reset">func (*RawData) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/raw_data.pb.go?s=1134:1159#L29">Reset</a>
+					<a class="permalink" href="godoc.3.html#RawData.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#RawData">RawData</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="RawData.String">func (*RawData) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/raw_data.pb.go?s=1351:1384#L38">String</a>
+					<a class="permalink" href="godoc.3.html#RawData.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#RawData">RawData</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="UUID">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuid.pb.go?s=875:1116#L19">UUID</a>
+				<a class="permalink" href="godoc.3.html#UUID">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+Wrapper type for UUID to make type-based marshalling and unmarshalling easier
+</p>
+
+			<pre>type UUID struct {
+
+    <span class="comment">// Raw uuid bytes go here.</span>
+<span id="UUID.Value"></span>    Value []<a href="http://localhost:6161/pkg/builtin/#byte">byte</a> `protobuf:&#34;bytes,1,opt,name=value,proto3&#34; json:&#34;value,omitempty&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="MustUUIDRandom">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1572:1599#L57">MustUUIDRandom</a>
+					<a class="permalink" href="godoc.3.html#MustUUIDRandom">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func MustUUIDRandom() *<a href="godoc.3.html#UUID">UUID</a></pre>
+				<p>
+Generate a new random UUID using google&#39;s UUID implementation.
+</p>
+
+				
+				
+			
+				
+				<h3 id="NewUUIDRandom">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1353:1388#L47">NewUUIDRandom</a>
+					<a class="permalink" href="godoc.3.html#NewUUIDRandom">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewUUIDRandom() (*<a href="godoc.3.html#UUID">UUID</a>, <a href="http://localhost:6161/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Generate a new random UUID using google&#39;s UUID implementation.
+</p>
+
+				
+				
+			
+				
+				<h3 id="UUIDFromGoogle">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1046:1094#L33">UUIDFromGoogle</a>
+					<a class="permalink" href="godoc.3.html#UUIDFromGoogle">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func UUIDFromGoogle(value <a href="http://localhost:6161/pkg/github.com/google/uuid/">googleUUID</a>.<a href="http://localhost:6161/pkg/github.com/google/uuid/#UUID">UUID</a>) *<a href="godoc.3.html#UUID">UUID</a></pre>
+				<p>
+Create a new protobuf UUID value from a Google UUID value.
+</p>
+
+				
+				
+			
+				
+				<h3 id="UUIDFromMongo">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1198:1244#L40">UUIDFromMongo</a>
+					<a class="permalink" href="godoc.3.html#UUIDFromMongo">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func UUIDFromMongo(value <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/x/mongo/driver/uuid/">mongoUUID</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/x/mongo/driver/uuid/#UUID">UUID</a>) *<a href="godoc.3.html#UUID">UUID</a></pre>
+				<p>
+Create a new protobuf UUID value from a Mongo UUID value.
+</p>
+
+				
+				
+			
+
+			
+				
+				<h3 id="UUID.Descriptor">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuid.pb.go?s=1798:1839#L56">Descriptor</a>
+					<a class="permalink" href="godoc.3.html#UUID.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#UUID">UUID</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use UUID.ProtoReflect.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="UUID.GetValue">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuid.pb.go?s=1906:1938#L60">GetValue</a>
+					<a class="permalink" href="godoc.3.html#UUID.GetValue">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) GetValue() []<a href="http://localhost:6161/pkg/builtin/#byte">byte</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="UUID.ProtoMessage">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuid.pb.go?s=1400:1427#L41">ProtoMessage</a>
+					<a class="permalink" href="godoc.3.html#UUID.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#UUID">UUID</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="UUID.ProtoReflect">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuid.pb.go?s=1432:1482#L43">ProtoReflect</a>
+					<a class="permalink" href="godoc.3.html#UUID.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="UUID.Reset">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuid.pb.go?s=1118:1140#L28">Reset</a>
+					<a class="permalink" href="godoc.3.html#UUID.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="UUID.String">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuid.pb.go?s=1325:1355#L37">String</a>
+					<a class="permalink" href="godoc.3.html#UUID.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="UUID.ToGoogle">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=497:547#L11">ToGoogle</a>
+					<a class="permalink" href="godoc.3.html#UUID.ToGoogle">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) ToGoogle() (<a href="http://localhost:6161/pkg/github.com/google/uuid/">googleUUID</a>.<a href="http://localhost:6161/pkg/github.com/google/uuid/#UUID">UUID</a>, <a href="http://localhost:6161/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Converts cereal UUID value into google UUID value.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="UUID.ToMongo">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=753:801#L20">ToMongo</a>
+					<a class="permalink" href="godoc.3.html#UUID.ToMongo">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) ToMongo() (<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/x/mongo/driver/uuid/">mongoUUID</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/x/mongo/driver/uuid/#UUID">UUID</a>, <a href="http://localhost:6161/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Converts cereal UUID value into mongo helper UUID value (NOT the binary primitive
+value).
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="UUID.Validate">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=294:325#L3">Validate</a>
+					<a class="permalink" href="godoc.3.html#UUID.Validate">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) Validate() <a href="http://localhost:6161/pkg/builtin/#error">error</a></pre>
+				<p>
+Validates that a protobuf UID value is the correct number of bytes.
+</p>
+
+				
+				
+				
+			
 		
 	
 
