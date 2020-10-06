@@ -1,11 +1,6 @@
-# Islelib
+# protoCereal-go
 
-Islelib is Illuscio's Golang Library template. "Isle" is the naming convention
-for Illuscio code, chosen for its auditory similarity to "I-L" ("AYE_ELL"), as
-opposed to illib which would be phonetically sounded out as "ill".
-
-Islelib comes pre-built with a number of tools for formatting, linting and 
-testing.
+protoCereal helps your databases ingest protocol buffers through golang!
 
 ## Getting Started
 For full documentation:
@@ -17,7 +12,7 @@ For library development guide,
 
 ### Prerequisites
 
-Golang 1.3+, Python 3.6+
+Golang 1.3+
 
 ## Authors
 
