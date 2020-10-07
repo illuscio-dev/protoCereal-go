@@ -1,5 +1,5 @@
 syntax = "proto3";
-package proto_cereal;
+package cereal;
 option go_package = "github.com/illuscio-dev/protoCereal-go/messagesCereal";
 
 // Decimal 128 binary that matches the bson specification using a dual uint64 encoding.

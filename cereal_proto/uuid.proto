@@ -1,5 +1,5 @@
 syntax = "proto3";
-package proto_cereal;
+package cereal;
 option go_package = "github.com/illuscio-dev/protoCereal-go/messagesCereal";
 
 // Wrapper type for UUID to make type-based marshalling and unmarshalling easier

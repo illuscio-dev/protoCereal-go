@@ -51,7 +51,7 @@ MongoDB, so they need to serialize the incoming protobuf message to BSON.
 
     // A unique Identifier for the Wizard.
     // @inject_tag: bson:"id"
-    proto_cereal.UUID id = 2;
+    cereal.UUID id = 2;
 
     // The exact moment the Wizard was sorted.
     // @inject_tag: bson:"sorted_at"
@@ -63,7 +63,7 @@ MongoDB, so they need to serialize the incoming protobuf message to BSON.
 
     // The current balance of the wizard's Gringott's account in Galleons.
     // @inject_tag: bson:"gingotts_balance"
-    proto_cereal.Decimal gingotts_balance = 5;
+    cereal.Decimal gingotts_balance = 5;
 
     // Name of the Wizard's familiar. Nil if Wizard does not have a familiar.
     // @inject_tag: bson:"familiar_name"
@@ -71,7 +71,7 @@ MongoDB, so they need to serialize the incoming protobuf message to BSON.
 
     // Image of the Wizard.
     // @inject_tag: bson:"portrait"
-    proto_cereal.RawData portrait = 7;
+    cereal.RawData portrait = 7;
 
     // The preferred weapon of this wizard.
     // @inject_tag: bson:"weapon"

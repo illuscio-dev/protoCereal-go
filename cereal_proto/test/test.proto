@@ -1,5 +1,5 @@
 syntax = "proto3";
-package proto_cereal_test;
+package cereal_test;
 option go_package = "github.com/illuscio-dev/protoCereal-go/messagesCereal_test";
 
 import "cereal_proto/decimal.proto";
@@ -28,9 +28,9 @@ message TestOneOfFirst {
     int32 field_int32 = 2;
     bool field_bool = 3;
     double field_double = 5;
-    proto_cereal.Decimal field_decimal = 6;
-    proto_cereal.UUID field_uuid = 7;
-    proto_cereal.RawData field_raw = 8;
+    cereal.Decimal field_decimal = 6;
+    cereal.UUID field_uuid = 7;
+    cereal.RawData field_raw = 8;
     Wizard field_wizard = 9;
   }
 }

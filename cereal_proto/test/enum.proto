@@ -1,5 +1,5 @@
 syntax = "proto3";
-package proto_cereal_test;
+package cereal_test;
 option go_package = "github.com/illuscio-dev/protoCereal-go/messagesCereal_test";
 
 // The hogwarts houses.
