@@ -17,17 +17,38 @@ func (x *UUID) Validate() error {
 	return nil
 }
 
-// Converts cereal UUID value into google UUID value.
+// Converts cereal UUID value into google UUID value. Returns zero value if
+// message pointer is nil.
 func (x *UUID) ToGoogle() (googleUUID.UUID, error) {
+	if x == nil {
+		return [16]byte{}, nil
+	}
+
 	if err := x.Validate(); err != nil {
 		return [16]byte{}, err
 	}
 	return googleUUID.FromBytes(x.Value)
 }
 
+// As .ToGoogle(), but panics on conversion error.
+func (x *UUID) MustGoogle() googleUUID.UUID {
+	val, err := x.ToGoogle()
+	if err != nil {
+		panic(fmt.Errorf(
+			"could not convert UUID message to google UUID: %w", err),
+		)
+	}
+
+	return val
+}
+
 // Converts cereal UUID value into mongo helper UUID value (NOT the binary primitive
 // value).
 func (x *UUID) ToMongo() (mongoUUID.UUID, error) {
+	if x == nil {
+		return [16]byte{}, nil
+	}
+
 	if err := x.Validate(); err != nil {
 		return [16]byte{}, err
 	}
@@ -37,6 +58,18 @@ func (x *UUID) ToMongo() (mongoUUID.UUID, error) {
 	}
 
 	return result, nil
+}
+
+// As .ToMongo(), but panics on conversion error.
+func (x *UUID) MustMongo() mongoUUID.UUID {
+	val, err := x.ToMongo()
+	if err != nil {
+		panic(fmt.Errorf(
+			"could not convert UUID message to Mongo UUID: %w", err),
+		)
+	}
+
+	return val
 }
 
 // Create a new protobuf UUID value from a Google UUID value.
