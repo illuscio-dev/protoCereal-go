@@ -1,9 +1,0 @@
-syntax = "proto3";
-package cereal;
-option go_package = "github.com/illuscio-dev/protoCereal-go/messagesCereal";
-
-// Wrapper type for UUID to make type-based marshalling and unmarshalling easier
-message UUID {
-  // Raw uuid bytes go here.
-  bytes value = 1;
-}
