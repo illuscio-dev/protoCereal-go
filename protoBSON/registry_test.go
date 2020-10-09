@@ -7,6 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
+	"google.golang.org/protobuf/reflect/protoreflect"
 	"testing"
 )
 
@@ -78,7 +79,7 @@ func TestOpts_WithCustomWrappers(t *testing.T) {
 	assert.Equal(original, unmarshalled, "message match")
 }
 
-func TestRegisterWrapperWithoutValueField(t *testing.T) {
+func TestRegisterCustomWrapper_WithoutValueField(t *testing.T) {
 	registryBuilder := bsoncodec.NewRegistryBuilder()
 	opts := protoBson.NewMongoOpts().
 		WithCustomWrappers(new(messagesCereal_test.Wizard))
@@ -89,5 +90,40 @@ func TestRegisterWrapperWithoutValueField(t *testing.T) {
 		err,
 		"custom wrapper message '*messagesCereal_test.Wizard' does not have"+
 			" 'Value' field",
+	)
+}
+
+func TestRegisterCustomWrapper_WithMultiplePublic(t *testing.T) {
+	registryBuilder := bsoncodec.NewRegistryBuilder()
+	opts := protoBson.NewMongoOpts().
+		WithCustomWrappers(new(messagesCereal_test.TestProto))
+
+	err := protoBson.RegisterCerealCodecs(registryBuilder, opts)
+	assert.EqualError(
+		t,
+		err,
+		"custom wrapper type '*messagesCereal_test.TestProto' must have"+
+			" exactly 1 public field, but contains 2",
+	)
+}
+
+type badMessage struct{}
+
+func (m badMessage) ProtoReflect() protoreflect.Message {
+	return (protoreflect.Message)(nil)
+}
+
+func TestRegisterCustomWrapper_NonStructPointerWrapper(t *testing.T) {
+
+	registryBuilder := bsoncodec.NewRegistryBuilder()
+	opts := protoBson.NewMongoOpts().
+		WithCustomWrappers(badMessage{})
+
+	err := protoBson.RegisterCerealCodecs(registryBuilder, opts)
+	assert.EqualError(
+		t,
+		err,
+		"custom wrapper type 'protoBson_test.badMessage' is not pointer"+
+			" to a struct",
 	)
 }

@@ -12,6 +12,7 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 	"reflect"
+	"strings"
 )
 
 // Holds options for registering codecs.
@@ -50,14 +51,64 @@ func (opts *Opts) WithOneOfFields(messages ...proto.Message) *Opts {
 
 // Add a new wrapper type (as wrappers.StringValue) that is not one of protoCereal's
 // default wrapper codecs.
-func (opts *Opts) WithCustomWrappers(wrapperProtos ...proto.Message) *Opts {
-	opts.customWrappers = append(opts.customWrappers, wrapperProtos...)
+func (opts *Opts) WithCustomWrappers(wrapperMessages ...proto.Message) *Opts {
+	opts.customWrappers = append(opts.customWrappers, wrapperMessages...)
 	return opts
 }
 
 // Create a new mongo opts object with default values.
 func NewMongoOpts() *Opts {
 	return new(Opts).WithAddDefaultCodecs(true)
+}
+
+func validateWrapperType(wrapperType reflect.Type) error {
+	// Check that this is a pointer to a struct
+	if wrapperType.Kind() != reflect.Ptr ||
+		wrapperType.Elem().Kind() != reflect.Struct {
+
+		return fmt.Errorf(
+			"custom wrapper type '%v' is not pointer to a struct", wrapperType,
+		)
+	}
+
+	// Dereference to the underlying struct
+	structType := wrapperType.Elem()
+
+	// Iterate through all the fields, counting the public ones and remembering the
+	// last one's name.
+	fieldCount := structType.NumField()
+	publicCount := 0
+	publicFieldName := ""
+	for i := 0; i < fieldCount; i++ {
+		fieldInfo := structType.Field(i)
+
+		firstLetter := string([]rune(fieldInfo.Name)[0])
+		if strings.ToUpper(firstLetter) == firstLetter {
+			publicCount++
+			publicFieldName = fieldInfo.Name
+		}
+	}
+
+	// Check that there is only one public field.
+	if publicCount != 1 {
+		return fmt.Errorf(
+			"custom wrapper type '%v' must have exactly 1 public field, but"+
+				" contains %v",
+			wrapperType,
+			publicCount,
+		)
+	}
+
+	// Check that it is called 'Value' (conforming to the google wrapper type
+	// convention).
+	if publicFieldName != "Value" {
+		return fmt.Errorf(
+			"custom wrapper message '%v' does not have 'Value' field",
+			wrapperType,
+		)
+	}
+
+	return nil
 }
 
 // Register a the cereal codecs onto a registry builder.
@@ -132,15 +183,10 @@ func RegisterCerealCodecs(builder *bsoncodec.RegistryBuilder, opts *Opts) error 
 	// Add custom wrapper type
 	for _, wrapper := range opts.customWrappers {
 		wrapperType := reflect.TypeOf(wrapper)
-
-		_, ok := wrapperType.Elem().FieldByName("Value")
-		if !ok {
-			return fmt.Errorf(
-				"custom wrapper message '%v' does not have 'Value' field",
-				wrapperType,
-			)
+		err := validateWrapperType(wrapperType)
+		if err != nil {
+			return err
 		}
-
 		builder.RegisterCodec(wrapperType, protoWrapperCodec{})
 	}
 

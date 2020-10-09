@@ -128,6 +128,9 @@
 					<dd>&nbsp; &nbsp; <a href="godoc.5.html#Opts.WithAddDefaultCodecs">func (opts *Opts) WithAddDefaultCodecs(add bool) *Opts</a></dd>
 				
 					
+					<dd>&nbsp; &nbsp; <a href="godoc.5.html#Opts.WithCustomWrappers">func (opts *Opts) WithCustomWrappers(wrapperProtos ...proto.Message) *Opts</a></dd>
+				
+					
 					<dd>&nbsp; &nbsp; <a href="godoc.5.html#Opts.WithEnumStrings">func (opts *Opts) WithEnumStrings(enable bool) *Opts</a></dd>
 				
 					
@@ -172,7 +175,7 @@
 		
 			
 			
-			<h2 id="RegisterCerealCodecs">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=1605:1684#L46">RegisterCerealCodecs</a>
+			<h2 id="RegisterCerealCodecs">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=1920:1999#L54">RegisterCerealCodecs</a>
 				<a class="permalink" href="godoc.5.html#RegisterCerealCodecs">&#xb6;</a>
 				
 				
@@ -189,7 +192,7 @@ Register a the cereal codecs onto a registry builder.
 		
 			
 			
-			<h2 id="Opts">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=502:608#L8">Opts</a>
+			<h2 id="Opts">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=509:649#L8">Opts</a>
 				<a class="permalink" href="godoc.5.html#Opts">&#xb6;</a>
 				
 				
@@ -213,7 +216,7 @@ Holds options for registering codecs.
 
 			
 				
-				<h3 id="NewMongoOpts">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=1472:1497#L41">NewMongoOpts</a>
+				<h3 id="NewMongoOpts">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=1787:1812#L49">NewMongoOpts</a>
 					<a class="permalink" href="godoc.5.html#NewMongoOpts">&#xb6;</a>
 					
 					
@@ -229,7 +232,7 @@ Create a new mongo opts object with default values.
 
 			
 				
-				<h3 id="Opts.WithAddDefaultCodecs">func (*Opts) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=685:739#L15">WithAddDefaultCodecs</a>
+				<h3 id="Opts.WithAddDefaultCodecs">func (*Opts) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=726:780#L16">WithAddDefaultCodecs</a>
 					<a class="permalink" href="godoc.5.html#Opts.WithAddDefaultCodecs">&#xb6;</a>
 					
 					
@@ -244,7 +247,23 @@ Whether to add the default mongo codecs to the registry. Default: true.
 				
 			
 				
-				<h3 id="Opts.WithEnumStrings">func (*Opts) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=862:914#L21">WithEnumStrings</a>
+				<h3 id="Opts.WithCustomWrappers">func (*Opts) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=1570:1644#L43">WithCustomWrappers</a>
+					<a class="permalink" href="godoc.5.html#Opts.WithCustomWrappers">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (opts *<a href="godoc.5.html#Opts">Opts</a>) WithCustomWrappers(wrapperProtos ...<a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/">proto</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/#Message">Message</a>) *<a href="godoc.5.html#Opts">Opts</a></pre>
+				<p>
+Add a new wrapper type (as wrappers.StringValue) that is not one of protoCereal&#39;s
+default wrapper codecs.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Opts.WithEnumStrings">func (*Opts) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=903:955#L22">WithEnumStrings</a>
 					<a class="permalink" href="godoc.5.html#Opts.WithEnumStrings">&#xb6;</a>
 					
 					
@@ -259,7 +278,7 @@ Whether to add the default mongo codecs to the registry. Default: true.
 				
 			
 				
-				<h3 id="Opts.WithOneOfFields">func (*Opts) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=1071:1137#L28">WithOneOfFields</a>
+				<h3 id="Opts.WithOneOfFields">func (*Opts) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=1112:1178#L29">WithOneOfFields</a>
 					<a class="permalink" href="godoc.5.html#Opts.WithOneOfFields">&#xb6;</a>
 					
 					
