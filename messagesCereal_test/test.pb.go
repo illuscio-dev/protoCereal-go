@@ -424,6 +424,55 @@ func (*TestOneOfMultiMessage_Witch) isTestOneOfMultiMessage_Mage() {}
 
 func (*TestOneOfMultiMessage_Wizard) isTestOneOfMultiMessage_Mage() {}
 
+// Used to test custom wrapper types.
+type ListValue struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// @inject_tag: bson:"value"
+	Value []string `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" bson:"value"`
+}
+
+func (x *ListValue) Reset() {
+	*x = ListValue{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cereal_proto_test_test_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListValue) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListValue) ProtoMessage() {}
+
+func (x *ListValue) ProtoReflect() protoreflect.Message {
+	mi := &file_cereal_proto_test_test_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListValue.ProtoReflect.Descriptor instead.
+func (*ListValue) Descriptor() ([]byte, []int) {
+	return file_cereal_proto_test_test_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ListValue) GetValue() []string {
+	if x != nil {
+		return x.Value
+	}
+	return nil
+}
+
 var File_cereal_proto_test_test_proto protoreflect.FileDescriptor
 
 var file_cereal_proto_test_test_proto_rawDesc = []byte{
@@ -475,11 +524,13 @@ var file_cereal_proto_test_test_proto_rawDesc = []byte{
 	0x0a, 0x06, 0x77, 0x69, 0x7a, 0x61, 0x72, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13,
 	0x2e, 0x63, 0x65, 0x72, 0x65, 0x61, 0x6c, 0x5f, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x57, 0x69, 0x7a,
 	0x61, 0x72, 0x64, 0x48, 0x00, 0x52, 0x06, 0x77, 0x69, 0x7a, 0x61, 0x72, 0x64, 0x42, 0x06, 0x0a,
-	0x04, 0x6d, 0x61, 0x67, 0x65, 0x42, 0x3c, 0x5a, 0x3a, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x6c, 0x6c, 0x75, 0x73, 0x63, 0x69, 0x6f, 0x2d, 0x64, 0x65, 0x76,
-	0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x43, 0x65, 0x72, 0x65, 0x61, 0x6c, 0x2d, 0x67, 0x6f, 0x2f,
-	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73, 0x43, 0x65, 0x72, 0x65, 0x61, 0x6c, 0x5f, 0x74,
-	0x65, 0x73, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x04, 0x6d, 0x61, 0x67, 0x65, 0x22, 0x21, 0x0a, 0x09, 0x4c, 0x69, 0x73, 0x74, 0x56, 0x61, 0x6c,
+	0x75, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x42, 0x3c, 0x5a, 0x3a, 0x67, 0x69, 0x74, 0x68,
+	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x6c, 0x6c, 0x75, 0x73, 0x63, 0x69, 0x6f, 0x2d,
+	0x64, 0x65, 0x76, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x43, 0x65, 0x72, 0x65, 0x61, 0x6c, 0x2d,
+	0x67, 0x6f, 0x2f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73, 0x43, 0x65, 0x72, 0x65, 0x61,
+	0x6c, 0x5f, 0x74, 0x65, 0x73, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -494,21 +545,22 @@ func file_cereal_proto_test_test_proto_rawDescGZIP() []byte {
 	return file_cereal_proto_test_test_proto_rawDescData
 }
 
-var file_cereal_proto_test_test_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_cereal_proto_test_test_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_cereal_proto_test_test_proto_goTypes = []interface{}{
 	(*Wizard)(nil),                 // 0: cereal_test.Wizard
 	(*Witch)(nil),                  // 1: cereal_test.Witch
 	(*TestProto)(nil),              // 2: cereal_test.TestProto
 	(*TestOneOfFirst)(nil),         // 3: cereal_test.TestOneOfFirst
 	(*TestOneOfMultiMessage)(nil),  // 4: cereal_test.TestOneOfMultiMessage
-	(*messagesCereal.Decimal)(nil), // 5: cereal.Decimal
-	(*messagesCereal.UUID)(nil),    // 6: cereal.UUID
-	(*messagesCereal.RawData)(nil), // 7: cereal.RawData
+	(*ListValue)(nil),              // 5: cereal_test.ListValue
+	(*messagesCereal.Decimal)(nil), // 6: cereal.Decimal
+	(*messagesCereal.UUID)(nil),    // 7: cereal.UUID
+	(*messagesCereal.RawData)(nil), // 8: cereal.RawData
 }
 var file_cereal_proto_test_test_proto_depIdxs = []int32{
-	5, // 0: cereal_test.TestOneOfFirst.field_decimal:type_name -> cereal.Decimal
-	6, // 1: cereal_test.TestOneOfFirst.field_uuid:type_name -> cereal.UUID
-	7, // 2: cereal_test.TestOneOfFirst.field_raw:type_name -> cereal.RawData
+	6, // 0: cereal_test.TestOneOfFirst.field_decimal:type_name -> cereal.Decimal
+	7, // 1: cereal_test.TestOneOfFirst.field_uuid:type_name -> cereal.UUID
+	8, // 2: cereal_test.TestOneOfFirst.field_raw:type_name -> cereal.RawData
 	0, // 3: cereal_test.TestOneOfFirst.field_wizard:type_name -> cereal_test.Wizard
 	1, // 4: cereal_test.TestOneOfMultiMessage.witch:type_name -> cereal_test.Witch
 	0, // 5: cereal_test.TestOneOfMultiMessage.wizard:type_name -> cereal_test.Wizard
@@ -585,6 +637,18 @@ func file_cereal_proto_test_test_proto_init() {
 				return nil
 			}
 		}
+		file_cereal_proto_test_test_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListValue); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_cereal_proto_test_test_proto_msgTypes[3].OneofWrappers = []interface{}{
 		(*TestOneOfFirst_FieldString)(nil),
@@ -606,7 +670,7 @@ func file_cereal_proto_test_test_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_cereal_proto_test_test_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

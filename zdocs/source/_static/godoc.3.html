@@ -195,6 +195,12 @@
 					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.GetValue">func (x *UUID) GetValue() []byte</a></dd>
 				
 					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.MustGoogle">func (x *UUID) MustGoogle() googleUUID.UUID</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.MustMongo">func (x *UUID) MustMongo() mongoUUID.UUID</a></dd>
+				
+					
 					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.ProtoMessage">func (*UUID) ProtoMessage()</a></dd>
 				
 					
@@ -563,7 +569,7 @@ Wrapper type for UUID to make type-based marshalling and unmarshalling easier
 
 			
 				
-				<h3 id="MustUUIDRandom">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1572:1599#L57">MustUUIDRandom</a>
+				<h3 id="MustUUIDRandom">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=2194:2221#L90">MustUUIDRandom</a>
 					<a class="permalink" href="godoc.3.html#MustUUIDRandom">&#xb6;</a>
 					
 					
@@ -577,7 +583,7 @@ Generate a new random UUID using google&#39;s UUID implementation.
 				
 			
 				
-				<h3 id="NewUUIDRandom">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1353:1388#L47">NewUUIDRandom</a>
+				<h3 id="NewUUIDRandom">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1975:2010#L80">NewUUIDRandom</a>
 					<a class="permalink" href="godoc.3.html#NewUUIDRandom">&#xb6;</a>
 					
 					
@@ -591,7 +597,7 @@ Generate a new random UUID using google&#39;s UUID implementation.
 				
 			
 				
-				<h3 id="UUIDFromGoogle">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1046:1094#L33">UUIDFromGoogle</a>
+				<h3 id="UUIDFromGoogle">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1668:1716#L66">UUIDFromGoogle</a>
 					<a class="permalink" href="godoc.3.html#UUIDFromGoogle">&#xb6;</a>
 					
 					
@@ -605,7 +611,7 @@ Create a new protobuf UUID value from a Google UUID value.
 				
 			
 				
-				<h3 id="UUIDFromMongo">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1198:1244#L40">UUIDFromMongo</a>
+				<h3 id="UUIDFromMongo">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1820:1866#L73">UUIDFromMongo</a>
 					<a class="permalink" href="godoc.3.html#UUIDFromMongo">&#xb6;</a>
 					
 					
@@ -643,6 +649,36 @@ Deprecated: Use UUID.ProtoReflect.Descriptor instead.
 				</h3>
 				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) GetValue() []<a href="http://localhost:6161/pkg/builtin/#byte">byte</a></pre>
 				
+				
+				
+				
+			
+				
+				<h3 id="UUID.MustGoogle">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=801:844#L24">MustGoogle</a>
+					<a class="permalink" href="godoc.3.html#UUID.MustGoogle">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) MustGoogle() <a href="http://localhost:6161/pkg/github.com/google/uuid/">googleUUID</a>.<a href="http://localhost:6161/pkg/github.com/google/uuid/#UUID">UUID</a></pre>
+				<p>
+As .ToGoogle(), but panics on conversion error.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="UUID.MustMongo">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1416:1457#L54">MustMongo</a>
+					<a class="permalink" href="godoc.3.html#UUID.MustMongo">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) MustMongo() <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/x/mongo/driver/uuid/">mongoUUID</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/x/mongo/driver/uuid/#UUID">UUID</a></pre>
+				<p>
+As .ToMongo(), but panics on conversion error.
+</p>
+
 				
 				
 				
@@ -696,14 +732,15 @@ Deprecated: Use UUID.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="UUID.ToGoogle">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=497:547#L11">ToGoogle</a>
+				<h3 id="UUID.ToGoogle">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=546:596#L12">ToGoogle</a>
 					<a class="permalink" href="godoc.3.html#UUID.ToGoogle">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) ToGoogle() (<a href="http://localhost:6161/pkg/github.com/google/uuid/">googleUUID</a>.<a href="http://localhost:6161/pkg/github.com/google/uuid/#UUID">UUID</a>, <a href="http://localhost:6161/pkg/builtin/#error">error</a>)</pre>
 				<p>
-Converts cereal UUID value into google UUID value.
+Converts cereal UUID value into google UUID value. Returns zero value if
+message pointer is nil.
 </p>
 
 				
@@ -711,7 +748,7 @@ Converts cereal UUID value into google UUID value.
 				
 			
 				
-				<h3 id="UUID.ToMongo">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=753:801#L20">ToMongo</a>
+				<h3 id="UUID.ToMongo">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1091:1139#L37">ToMongo</a>
 					<a class="permalink" href="godoc.3.html#UUID.ToMongo">&#xb6;</a>
 					
 					

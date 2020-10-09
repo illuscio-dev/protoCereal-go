@@ -341,30 +341,29 @@ Default Codecs
 Registering the default options adds codecs that convert between the following
 protobuf and BSON types:
 
-========================    ==========================  ==========================
-Proto Type                  BSON Type                   Binary Subtype
-========================    ==========================  ==========================
-\*wrappers.BoolValue        boolean
-\*wrappers.BytesValue       primitive.Binary            bsontype.BinaryGeneric
-\*wrappers.FloatValue       double
-\*wrappers.DoubleValue      double
-\*wrappers.DoubleValue      double
-\*wrappers.Int32Value       int32
-\*wrappers.Int64Value       int32 / int64
-\*wrappers.StringValue      string
-\*wrappers.UInt32Value      int32 / int64
-\*wrappers.UInt64Value      int32 / int64
-\*anypb.Any                 bsontype.EmbeddedDocument
-\*timestamppb.Timestamp     primitive.DateTime
-\*messagesCereal.Decimal    primitive.Decimal128
-\*messagesCereal.RawData    primitive.Binary,           bsontype.BinaryUserDefined
-\*messagesCereal.UUID       primitive.Binary,           bsontype.UUID
-========================    ==========================  ==========================
+==========================    ==========================  ==========================
+Proto Type                    BSON Type                   Binary Subtype
+==========================    ==========================  ==========================
+\*wrapperspb.BoolValue        boolean
+\*wrapperspb.BytesValue       primitive.Binary            bsontype.BinaryGeneric
+\*wrapperspb.FloatValue       double
+\*wrapperspb.DoubleValue      double
+\*wrapperspb.Int32Value       int32
+\*wrapperspb.Int64Value       int32 / int64
+\*wrapperspb.StringValue      string
+\*wrapperspb.UInt32Value      int32 / int64
+\*wrapperspb.UInt64Value      int32 / int64
+\*anypb.Any                   bsontype.EmbeddedDocument
+\*timestamppb.Timestamp       primitive.DateTime
+\*messagesCereal.Decimal      primitive.Decimal128
+\*messagesCereal.RawData      primitive.Binary,           bsontype.BinaryUserDefined
+\*messagesCereal.UUID         primitive.Binary,           bsontype.UUID
+==========================    ==========================  ==========================
 
 .. note::
 
   The above packages ``wrappers``, ``timestamppb``, and ``anypb`` are all from the
-  `Go implementation <https://godoc.org/github.com/golang/protobuf/ptypes>`_ of google's
+  `Go implementation <https://godoc.org/google.golang.org/protobuf/types/known/wrapperspb>`_ of google's
   `well known types <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf>`_
   protobuf definitions.
 
@@ -499,3 +498,99 @@ Now when we encode our document, we get:
   This option turns on string conversion for ALL proto enum types. protoCereal
   currently does not support the selective conversion of enum types, but such a feature
   could be added if there is interest!
+
+Wrapper Types
+-------------
+
+Google uses wrapper types from it's
+` wrappers from it's Well Known Types package <https://godoc.org/google.golang.org/protobuf/types/known/wrapperspb>`_
+package to represent nillable values. Using the default options, protoCereal will
+register all of the wrapper types from google's Well Known Types into the codec
+registry.
+
+You can register custom wrapper types as well. For instance, google does not have
+a defined wrapper for a fixed64 value, we can define one like so:
+
+.. code-block:: protobuf
+
+  // Wrapper for fixed int64.
+  message Fixed64Value {
+    // @inject_tag: bson:"value"
+    fixed64 value= 1;
+  }
+
+Register the message as a wrapper type like so:
+
+.. code-block:: go
+
+  // Create a registry builder
+  registryBuilder := bsoncodec.NewRegistryBuilder()
+
+  // Pass an empty proto message to the WithCustomWrappers option to add it's type
+  // as a wrapper type.
+  opts := protoBson.NewMongoOpts().
+    WithCustomWrappers(new(docsProto.Fixed64Value))
+
+  // Register protoCereal BSON codecs with the registry.
+  err := protoBson.RegisterCerealCodecs(registryBuilder, opts)
+  if err != nil {
+    panic(fmt.Errorf("error adding to registry: %w", err))
+  }
+
+  // Build the registry
+  registry := registryBuilder.Build()
+
+Now we can use it while serializing a struct to extract the inner value directly
+into the key holding our wrapper:
+
+.. code-block:: go
+
+  type hasWrapper struct {
+    Info *docsProto.Fixed64Value
+  }
+
+  message := &hasWrapper{
+    Info: &docsProto.Fixed64Value{Value: 123456789},
+  }
+
+  serialized, err := bson.MarshalWithRegistry(registry, message)
+  if err != nil {
+    panic(fmt.Errorf("error serializing message: %w", err))
+  }
+
+  document := bson.M{}
+  err = bson.UnmarshalWithRegistry(registry, serialized, document)
+  if err != nil {
+    panic(fmt.Errorf("error umarshalling to BSON document: %w", err))
+  }
+
+  fmt.Println("BSON DOCUMENT:", document)
+
+  unmarshalled := new(hasWrapper)
+  err = bson.UnmarshalWithRegistry(registry, serialized, unmarshalled)
+  if err != nil {
+    panic(fmt.Errorf("error unmarhalling to struct: %w", err))
+  }
+
+  fmt.Printf("\nUNMARSHALLED: %+v\n", unmarshalled)
+
+Output:
+
+.. code-block:: text
+
+  BSON DOCUMENT: map[info:123456789]
+
+  UNMARSHALLED: &{Info:value:123456789}
+
+A wrapper type must:
+
+- Be a pointer to a struct.
+
+- Implement the ``proto.Message`` interface.
+
+- Contain only one public field.
+
+- The field must be called "Value"
+
+The codec will serialize a ``bsontype.Null`` value if the wrapper message is a nil
+pointer.
