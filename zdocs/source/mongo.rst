@@ -568,7 +568,7 @@ Custom Wrapper Types
 
 Google uses wrapper types from it's
 `wrappers from it's Well Known Types package <https://godoc.org/google.golang.org/protobuf/types/known/wrapperspb>`_
-to represent nillable values. Using the default options, protoCereal will
+package to represent nillable values. Using the default options, protoCereal will
 register all of the wrapper types from google's Well Known Types into the codec
 registry.
 

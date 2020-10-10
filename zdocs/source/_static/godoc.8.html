@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#375EAB">
 
-  <title>oneof - Go Documentation Server</title>
+  <title>/src/github.com/illuscio-dev/protoCereal-go/zdevelop - Go Documentation Server</title>
 
 <link type="text/css" rel="stylesheet" href="style.css">
 
@@ -43,7 +43,7 @@
 
 
   <h1>
-    Package oneof
+    Directory /src/github.com/illuscio-dev/protoCereal-go/zdevelop
     <span class="text-muted"></span>
   </h1>
 
@@ -68,249 +68,39 @@
 	correspond to Go identifiers).
 -->
 
-	<script>
-	document.ANALYSIS_DATA = null;
-	document.CALLGRAPH = null;
-	</script>
+
+
+
 
 	
-		
-		<div id="short-nav">
-			<dl>
-			<dd><code>import "github.com/illuscio-dev/protoCereal-go/protoBSON/oneof"</code></dd>
-			</dl>
-			<dl>
-			<dd><a href="godoc.8.html#pkg-overview" class="overviewLink">Overview</a></dd>
-			<dd><a href="godoc.8.html#pkg-index" class="indexLink">Index</a></dd>
-			
-			
-			</dl>
-		</div>
-		<!-- The package's Name is printed as title by the top-level template -->
-		<div id="pkg-overview" class="toggleVisible">
-			<div class="collapsed">
-				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
-			</div>
-			<div class="expanded">
-				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
-				
-				
-			</div>
-		</div>
-
-		<div id="pkg-index" class="toggleVisible">
-		<div class="collapsed">
-			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
-		</div>
-		<div class="expanded">
-			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
-
-		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
-			<div id="manual-nav">
-			<dl>
-			
-			
-				<dd><a href="godoc.8.html#pkg-variables">Variables</a></dd>
-			
-			
-			
-				
-				<dd><a href="godoc.8.html#CodecBuilder">type CodecBuilder</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.8.html#CodecBuildersForMessage">func CodecBuildersForMessage(message proto.Message, elementInfo []*ElementInfo) ([]*CodecBuilder, error)</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.8.html#NewCodecBuilder">func NewCodecBuilder() *CodecBuilder</a></dd>
-				
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.8.html#CodecBuilder.AddConcrete">func (builder *CodecBuilder) AddConcrete(oneOfType reflect.Type, bsonType bsontype.Type, binaryType byte) error</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.8.html#CodecBuilder.AutoAddConcrete">func (builder *CodecBuilder) AutoAddConcrete(oneOfTypes ...reflect.Type) error</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.8.html#CodecBuilder.Register">func (builder *CodecBuilder) Register(registryBuilder *bsoncodec.RegistryBuilder)</a></dd>
-				
-			
-				
-				<dd><a href="godoc.8.html#ElementInfo">type ElementInfo</a></dd>
-				
-				
-			
-			
-			</dl>
-			</div><!-- #manual-nav -->
-
-		
-
-		
-			<h3>Package files</h3>
-			<p>
-			<span style="font-size:90%">
-			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/bsonTypeKey.go">bsonTypeKey.go</a>
-			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/codec.go">codec.go</a>
-			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/common.go">common.go</a>
-			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go">oneOfBuilder.go</a>
-			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/types.go">types.go</a>
-			
-			</span>
-			</p>
-		
-		</div><!-- .expanded -->
-		</div><!-- #pkg-index -->
-
-		
-
-		
-		
-			<h2 id="pkg-variables">Variables</h2>
-			
-				
-				<pre>var <span id="ErrWrongOneOfInterface">ErrWrongOneOfInterface</span> = <a href="http://localhost:6161/pkg/errors/">errors</a>.<a href="http://localhost:6161/pkg/errors/#New">New</a>(&#34;oneof interface not implemented&#34;)</pre>
-			
-		
-		
-		
-			
-			
-			<h2 id="CodecBuilder">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=415:1037#L11">CodecBuilder</a>
-				<a class="permalink" href="godoc.8.html#CodecBuilder">&#xb6;</a>
-				
-				
-			</h2>
-			
-			<pre>type CodecBuilder struct {
-    <span class="comment">// contains filtered or unexported fields</span>
-}
-</pre>
-
-			
-
-			
-
-			
-			
-			
-
-			
-				
-				<h3 id="CodecBuildersForMessage">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=11682:11790#L350">CodecBuildersForMessage</a>
-					<a class="permalink" href="godoc.8.html#CodecBuildersForMessage">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func CodecBuildersForMessage(
-    message <a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/">proto</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/#Message">Message</a>, elementInfo []*<a href="godoc.8.html#ElementInfo">ElementInfo</a>,
-) ([]*<a href="godoc.8.html#CodecBuilder">CodecBuilder</a>, <a href="http://localhost:6161/pkg/builtin/#error">error</a>)</pre>
-				
-				
-				
-			
-				
-				<h3 id="NewCodecBuilder">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=11443:11479#L342">NewCodecBuilder</a>
-					<a class="permalink" href="godoc.8.html#NewCodecBuilder">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func NewCodecBuilder() *<a href="godoc.8.html#CodecBuilder">CodecBuilder</a></pre>
-				
-				
-				
-			
-
-			
-				
-				<h3 id="CodecBuilder.AddConcrete">func (*CodecBuilder) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=7579:7694#L225">AddConcrete</a>
-					<a class="permalink" href="godoc.8.html#CodecBuilder.AddConcrete">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (builder *<a href="godoc.8.html#CodecBuilder">CodecBuilder</a>) AddConcrete(
-    oneOfType <a href="http://localhost:6161/pkg/reflect/">reflect</a>.<a href="http://localhost:6161/pkg/reflect/#Type">Type</a>, bsonType <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsontype/">bsontype</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsontype/#Type">Type</a>, binaryType <a href="http://localhost:6161/pkg/builtin/#byte">byte</a>,
-) <a href="http://localhost:6161/pkg/builtin/#error">error</a></pre>
-				<p>
-Register a concrete one of type and the bson type it is encoded to. We don&#39;t know
-what other codecs are in the registry, so to properly round-trip a one-of field
-we need to create a 1-1 mapping of the wrapper type and it&#39;s bson encoded type,
-except for the special case of message types that encoded to embedded docs, since
-we can add a field with the proto message type.
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="CodecBuilder.AutoAddConcrete">func (*CodecBuilder) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=6959:7041#L207">AutoAddConcrete</a>
-					<a class="permalink" href="godoc.8.html#CodecBuilder.AutoAddConcrete">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (builder *<a href="godoc.8.html#CodecBuilder">CodecBuilder</a>) AutoAddConcrete(
-    oneOfTypes ...<a href="http://localhost:6161/pkg/reflect/">reflect</a>.<a href="http://localhost:6161/pkg/reflect/#Type">Type</a>,
-) <a href="http://localhost:6161/pkg/builtin/#error">error</a></pre>
-				<p>
-Try to automatically deduce the encoding / decoding mapping of the wrapper types.
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="CodecBuilder.Register">func (*CodecBuilder) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=11132:11213#L332">Register</a>
-					<a class="permalink" href="godoc.8.html#CodecBuilder.Register">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (builder *<a href="godoc.8.html#CodecBuilder">CodecBuilder</a>) Register(registryBuilder *<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/">bsoncodec</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/#RegistryBuilder">RegistryBuilder</a>)</pre>
-				
-				
-				
-				
-			
-		
-			
-			
-			<h2 id="ElementInfo">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=309:413#L5">ElementInfo</a>
-				<a class="permalink" href="godoc.8.html#ElementInfo">&#xb6;</a>
-				
-				
-			</h2>
-			
-			<pre>type ElementInfo struct {
-<span id="ElementInfo.InnerGoType"></span>    InnerGoType   <a href="http://localhost:6161/pkg/reflect/">reflect</a>.<a href="http://localhost:6161/pkg/reflect/#Type">Type</a>
-<span id="ElementInfo.BsonType"></span>    BsonType      <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsontype/">bsontype</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsontype/#Type">Type</a>
-<span id="ElementInfo.BinarySubType"></span>    BinarySubType <a href="http://localhost:6161/pkg/builtin/#byte">byte</a>
-}
-</pre>
-
-			
-
-			
-
-			
-			
-			
-
-			
-
-			
-		
 	
+	<div class="pkg-dir">
+		<table>
+			<tr>
+				<th class="pkg-name">Name</th>
+				<th class="pkg-synopsis">Synopsis</th>
+			</tr>
 
-	
+			
+			<tr>
+				<td colspan="2"><a href="protoCereal-go.html">..</a></td>
+			</tr>
+			
 
-
-
-
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="godoc.9.html">scratch</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						
+					</td>
+				</tr>
+			
+		</table>
+	</div>
 
 
 
