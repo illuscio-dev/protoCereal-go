@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#375EAB">
 
-  <title>protoBson - Go Documentation Server</title>
+  <title>common - Go Documentation Server</title>
 
 <link type="text/css" rel="stylesheet" href="style.css">
 
@@ -43,7 +43,7 @@
 
 
   <h1>
-    Package protoBson
+    Package common
     <span class="text-muted"></span>
   </h1>
 
@@ -77,14 +77,12 @@
 		
 		<div id="short-nav">
 			<dl>
-			<dd><code>import "github.com/illuscio-dev/protoCereal-go/protoBSON"</code></dd>
+			<dd><code>import "github.com/illuscio-dev/protoCereal-go/protoBSON/common"</code></dd>
 			</dl>
 			<dl>
 			<dd><a href="godoc.5.html#pkg-overview" class="overviewLink">Overview</a></dd>
 			<dd><a href="godoc.5.html#pkg-index" class="indexLink">Index</a></dd>
 			
-			
-				<dd><a href="godoc.5.html#pkg-subdirectories">Subdirectories</a></dd>
 			
 			</dl>
 		</div>
@@ -111,31 +109,19 @@
 			<div id="manual-nav">
 			<dl>
 			
+				<dd><a href="godoc.5.html#pkg-constants">Constants</a></dd>
 			
-			
-				
-				<dd><a href="godoc.5.html#RegisterCerealCodecs">func RegisterCerealCodecs(builder *bsoncodec.RegistryBuilder, opts *Opts) error</a></dd>
 			
 			
 				
-				<dd><a href="godoc.5.html#Opts">type Opts</a></dd>
+				<dd><a href="godoc.5.html#ConvertToBytesReader">func ConvertToBytesReader(reader interface{}) bsonrw.BytesReader</a></dd>
+			
 				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.5.html#NewMongoOpts">func NewMongoOpts() *Opts</a></dd>
+				<dd><a href="godoc.5.html#DecodeStructWithTypeInfo">func DecodeStructWithTypeInfo(context bsoncodec.DecodeContext, reader bsonrw.ValueReader, typeResolver func(string) (reflect.Type, error)) (reflect.Value, error)</a></dd>
+			
 				
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.5.html#Opts.WithAddDefaultCodecs">func (opts *Opts) WithAddDefaultCodecs(add bool) *Opts</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.5.html#Opts.WithCustomWrappers">func (opts *Opts) WithCustomWrappers(wrapperProtos ...proto.Message) *Opts</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.5.html#Opts.WithEnumStrings">func (opts *Opts) WithEnumStrings(enable bool) *Opts</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.5.html#Opts.WithOneOfFields">func (opts *Opts) WithOneOfFields(messages ...proto.Message) *Opts</a></dd>
-				
+				<dd><a href="godoc.5.html#EncodeStructWithTypeInfo">func EncodeStructWithTypeInfo(context bsoncodec.EncodeContext, writer bsonrw.ValueWriter, value proto.Message, typeIdentifier string) error</a></dd>
+			
 			
 			
 			</dl>
@@ -148,19 +134,9 @@
 			<p>
 			<span style="font-size:90%">
 			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/any.go">any.go</a>
+				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/common/convert_to_bytes_reader.go">convert_to_bytes_reader.go</a>
 			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/decimal.go">decimal.go</a>
-			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/rawData.go">rawData.go</a>
-			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go">registry.go</a>
-			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/timestamp.go">timestamp.go</a>
-			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/uuid.go">uuid.go</a>
-			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/wrapperGeneric.go">wrapperGeneric.go</a>
+				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/common/struct_with_type.go">struct_with_type.go</a>
 			
 			</span>
 			</p>
@@ -171,128 +147,66 @@
 		
 
 		
+			<h2 id="pkg-constants">Constants</h2>
+			
+				
+				<pre>const <span id="TypeURLField">TypeURLField</span> = &#34;pb_type&#34;</pre>
+			
+		
 		
 		
 			
 			
-			<h2 id="RegisterCerealCodecs">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=1920:1999#L54">RegisterCerealCodecs</a>
-				<a class="permalink" href="godoc.5.html#RegisterCerealCodecs">&#xb6;</a>
+			<h2 id="ConvertToBytesReader">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/common/convert_to_bytes_reader.go?s=66:130#L1">ConvertToBytesReader</a>
+				<a class="permalink" href="godoc.5.html#ConvertToBytesReader">&#xb6;</a>
 				
 				
 			</h2>
-			<pre>func RegisterCerealCodecs(builder *<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/">bsoncodec</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/#RegistryBuilder">RegistryBuilder</a>, opts *<a href="godoc.5.html#Opts">Opts</a>) <a href="http://localhost:6161/pkg/builtin/#error">error</a></pre>
-			<p>
-Register a the cereal codecs onto a registry builder.
-</p>
-
+			<pre>func ConvertToBytesReader(reader interface{}) <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/">bsonrw</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/#BytesReader">BytesReader</a></pre>
+			
 			
 			
 
 		
-		
 			
 			
-			<h2 id="Opts">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=509:649#L8">Opts</a>
-				<a class="permalink" href="godoc.5.html#Opts">&#xb6;</a>
+			<h2 id="DecodeStructWithTypeInfo">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/common/struct_with_type.go?s=2418:2585#L76">DecodeStructWithTypeInfo</a>
+				<a class="permalink" href="godoc.5.html#DecodeStructWithTypeInfo">&#xb6;</a>
 				
 				
 			</h2>
+			<pre>func DecodeStructWithTypeInfo(
+    context <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/">bsoncodec</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/#DecodeContext">DecodeContext</a>,
+    reader <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/">bsonrw</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/#ValueReader">ValueReader</a>,
+    typeResolver func(<a href="http://localhost:6161/pkg/builtin/#string">string</a>) (<a href="http://localhost:6161/pkg/reflect/">reflect</a>.<a href="http://localhost:6161/pkg/reflect/#Type">Type</a>, <a href="http://localhost:6161/pkg/builtin/#error">error</a>),
+) (<a href="http://localhost:6161/pkg/reflect/">reflect</a>.<a href="http://localhost:6161/pkg/reflect/#Value">Value</a>, <a href="http://localhost:6161/pkg/builtin/#error">error</a>)</pre>
 			<p>
-Holds options for registering codecs.
+Decode a document with the type information appended as a field. typeResolver must
+hand back the (non-pointer) message type
 </p>
 
-			<pre>type Opts struct {
-    <span class="comment">// contains filtered or unexported fields</span>
-}
-</pre>
-
-			
-
-			
-
-			
 			
 			
 
+		
 			
+			
+			<h2 id="EncodeStructWithTypeInfo">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/common/struct_with_type.go?s=1035:1181#L24">EncodeStructWithTypeInfo</a>
+				<a class="permalink" href="godoc.5.html#EncodeStructWithTypeInfo">&#xb6;</a>
 				
-				<h3 id="NewMongoOpts">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=1787:1812#L49">NewMongoOpts</a>
-					<a class="permalink" href="godoc.5.html#NewMongoOpts">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func NewMongoOpts() *<a href="godoc.5.html#Opts">Opts</a></pre>
-				<p>
-Create a new mongo opts object with default values.
-</p>
+				
+			</h2>
+			<pre>func EncodeStructWithTypeInfo(
+    context <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/">bsoncodec</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/#EncodeContext">EncodeContext</a>,
+    writer <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/">bsonrw</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/#ValueWriter">ValueWriter</a>,
+    value <a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/">proto</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/#Message">Message</a>,
+    typeIdentifier <a href="http://localhost:6161/pkg/builtin/#string">string</a>,
+) <a href="http://localhost:6161/pkg/builtin/#error">error</a></pre>
+			
+			
+			
 
-				
-				
-			
-
-			
-				
-				<h3 id="Opts.WithAddDefaultCodecs">func (*Opts) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=726:780#L16">WithAddDefaultCodecs</a>
-					<a class="permalink" href="godoc.5.html#Opts.WithAddDefaultCodecs">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (opts *<a href="godoc.5.html#Opts">Opts</a>) WithAddDefaultCodecs(add <a href="http://localhost:6161/pkg/builtin/#bool">bool</a>) *<a href="godoc.5.html#Opts">Opts</a></pre>
-				<p>
-Whether to add the default mongo codecs to the registry. Default: true.
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="Opts.WithCustomWrappers">func (*Opts) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=1570:1644#L43">WithCustomWrappers</a>
-					<a class="permalink" href="godoc.5.html#Opts.WithCustomWrappers">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (opts *<a href="godoc.5.html#Opts">Opts</a>) WithCustomWrappers(wrapperProtos ...<a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/">proto</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/#Message">Message</a>) *<a href="godoc.5.html#Opts">Opts</a></pre>
-				<p>
-Add a new wrapper type (as wrappers.StringValue) that is not one of protoCereal&#39;s
-default wrapper codecs.
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="Opts.WithEnumStrings">func (*Opts) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=903:955#L22">WithEnumStrings</a>
-					<a class="permalink" href="godoc.5.html#Opts.WithEnumStrings">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (opts *<a href="godoc.5.html#Opts">Opts</a>) WithEnumStrings(enable <a href="http://localhost:6161/pkg/builtin/#bool">bool</a>) *<a href="godoc.5.html#Opts">Opts</a></pre>
-				<p>
-Whether to add the default mongo codecs to the registry. Default: true.
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="Opts.WithOneOfFields">func (*Opts) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/registry.go?s=1112:1178#L29">WithOneOfFields</a>
-					<a class="permalink" href="godoc.5.html#Opts.WithOneOfFields">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (opts *<a href="godoc.5.html#Opts">Opts</a>) WithOneOfFields(messages ...<a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/">proto</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/#Message">Message</a>) *<a href="godoc.5.html#Opts">Opts</a></pre>
-				<p>
-Extract one-of fields from these message types and register their encoders / decoders
-with the registry.
-</p>
-
-				
-				
-				
-			
+		
 		
 	
 
@@ -301,60 +215,6 @@ with the registry.
 
 
 
-
-	
-	
-		<h2 id="pkg-subdirectories">Subdirectories</h2>
-	
-	<div class="pkg-dir">
-		<table>
-			<tr>
-				<th class="pkg-name">Name</th>
-				<th class="pkg-synopsis">Synopsis</th>
-			</tr>
-
-			
-			<tr>
-				<td colspan="2"><a href="protoCereal-go.html">..</a></td>
-			</tr>
-			
-
-			
-				<tr>
-				
-					<td class="pkg-name" style="padding-left: 0px;">
-						<a href="godoc.6.html">common</a>
-					</td>
-				
-					<td class="pkg-synopsis">
-						
-					</td>
-				</tr>
-			
-				<tr>
-				
-					<td class="pkg-name" style="padding-left: 0px;">
-						<a href="godoc.7.html">enum</a>
-					</td>
-				
-					<td class="pkg-synopsis">
-						
-					</td>
-				</tr>
-			
-				<tr>
-				
-					<td class="pkg-name" style="padding-left: 0px;">
-						<a href="godoc.8.html">oneof</a>
-					</td>
-				
-					<td class="pkg-synopsis">
-						
-					</td>
-				</tr>
-			
-		</table>
-	</div>
 
 
 
