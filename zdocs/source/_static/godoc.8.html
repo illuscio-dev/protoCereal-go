@@ -110,13 +110,15 @@
 			<dl>
 			
 			
+				<dd><a href="godoc.8.html#pkg-variables">Variables</a></dd>
+			
 			
 			
 				
 				<dd><a href="godoc.8.html#CodecBuilder">type CodecBuilder</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.8.html#CodecBuildersForMessage">func CodecBuildersForMessage(message proto.Message) ([]*CodecBuilder, error)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.8.html#CodecBuildersForMessage">func CodecBuildersForMessage(message proto.Message, elementInfo []*ElementInfo) ([]*CodecBuilder, error)</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="godoc.8.html#NewCodecBuilder">func NewCodecBuilder() *CodecBuilder</a></dd>
@@ -130,6 +132,11 @@
 				
 					
 					<dd>&nbsp; &nbsp; <a href="godoc.8.html#CodecBuilder.Register">func (builder *CodecBuilder) Register(registryBuilder *bsoncodec.RegistryBuilder)</a></dd>
+				
+			
+				
+				<dd><a href="godoc.8.html#ElementInfo">type ElementInfo</a></dd>
+				
 				
 			
 			
@@ -163,11 +170,17 @@
 
 		
 		
+			<h2 id="pkg-variables">Variables</h2>
+			
+				
+				<pre>var <span id="ErrWrongOneOfInterface">ErrWrongOneOfInterface</span> = <a href="http://localhost:6161/pkg/errors/">errors</a>.<a href="http://localhost:6161/pkg/errors/#New">New</a>(&#34;oneof interface not implemented&#34;)</pre>
+			
+		
 		
 		
 			
 			
-			<h2 id="CodecBuilder">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=223:688#L2">CodecBuilder</a>
+			<h2 id="CodecBuilder">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=415:1037#L11">CodecBuilder</a>
 				<a class="permalink" href="godoc.8.html#CodecBuilder">&#xb6;</a>
 				
 				
@@ -188,18 +201,20 @@
 
 			
 				
-				<h3 id="CodecBuildersForMessage">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=11371:11447#L343">CodecBuildersForMessage</a>
+				<h3 id="CodecBuildersForMessage">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=11682:11790#L350">CodecBuildersForMessage</a>
 					<a class="permalink" href="godoc.8.html#CodecBuildersForMessage">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func CodecBuildersForMessage(message <a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/">proto</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/#Message">Message</a>) ([]*<a href="godoc.8.html#CodecBuilder">CodecBuilder</a>, <a href="http://localhost:6161/pkg/builtin/#error">error</a>)</pre>
+				<pre>func CodecBuildersForMessage(
+    message <a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/">proto</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/#Message">Message</a>, elementInfo []*<a href="godoc.8.html#ElementInfo">ElementInfo</a>,
+) ([]*<a href="godoc.8.html#CodecBuilder">CodecBuilder</a>, <a href="http://localhost:6161/pkg/builtin/#error">error</a>)</pre>
 				
 				
 				
 			
 				
-				<h3 id="NewCodecBuilder">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=11192:11228#L336">NewCodecBuilder</a>
+				<h3 id="NewCodecBuilder">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=11443:11479#L342">NewCodecBuilder</a>
 					<a class="permalink" href="godoc.8.html#NewCodecBuilder">&#xb6;</a>
 					
 					
@@ -212,7 +227,7 @@
 
 			
 				
-				<h3 id="CodecBuilder.AddConcrete">func (*CodecBuilder) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=7170:7285#L215">AddConcrete</a>
+				<h3 id="CodecBuilder.AddConcrete">func (*CodecBuilder) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=7579:7694#L225">AddConcrete</a>
 					<a class="permalink" href="godoc.8.html#CodecBuilder.AddConcrete">&#xb6;</a>
 					
 					
@@ -233,7 +248,7 @@ we can add a field with the proto message type.
 				
 			
 				
-				<h3 id="CodecBuilder.AutoAddConcrete">func (*CodecBuilder) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=6550:6632#L197">AutoAddConcrete</a>
+				<h3 id="CodecBuilder.AutoAddConcrete">func (*CodecBuilder) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=6959:7041#L207">AutoAddConcrete</a>
 					<a class="permalink" href="godoc.8.html#CodecBuilder.AutoAddConcrete">&#xb6;</a>
 					
 					
@@ -250,7 +265,7 @@ Try to automatically deduce the encoding / decoding mapping of the wrapper types
 				
 			
 				
-				<h3 id="CodecBuilder.Register">func (*CodecBuilder) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=10881:10962#L326">Register</a>
+				<h3 id="CodecBuilder.Register">func (*CodecBuilder) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=11132:11213#L332">Register</a>
 					<a class="permalink" href="godoc.8.html#CodecBuilder.Register">&#xb6;</a>
 					
 					
@@ -260,6 +275,33 @@ Try to automatically deduce the encoding / decoding mapping of the wrapper types
 				
 				
 				
+			
+		
+			
+			
+			<h2 id="ElementInfo">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/oneof/oneOfBuilder.go?s=309:413#L5">ElementInfo</a>
+				<a class="permalink" href="godoc.8.html#ElementInfo">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type ElementInfo struct {
+<span id="ElementInfo.InnerGoType"></span>    InnerGoType   <a href="http://localhost:6161/pkg/reflect/">reflect</a>.<a href="http://localhost:6161/pkg/reflect/#Type">Type</a>
+<span id="ElementInfo.BsonType"></span>    BsonType      <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsontype/">bsontype</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsontype/#Type">Type</a>
+<span id="ElementInfo.BinarySubType"></span>    BinarySubType <a href="http://localhost:6161/pkg/builtin/#byte">byte</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
 			
 		
 	

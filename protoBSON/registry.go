@@ -7,59 +7,12 @@ import (
 	"github.com/illuscio-dev/protoCereal-go/protoBSON/enum"
 	"github.com/illuscio-dev/protoCereal-go/protoBSON/oneof"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
-	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 	"reflect"
 	"strings"
 )
-
-// Holds options for registering codecs.
-type Opts struct {
-	addDefaultCodecs bool
-	enumStrings      bool
-	oneOfBuilders    []*oneof.CodecBuilder
-	customWrappers   []proto.Message
-}
-
-// Whether to add the default mongo codecs to the registry. Default: true.
-func (opts *Opts) WithAddDefaultCodecs(add bool) *Opts {
-	opts.addDefaultCodecs = add
-	return opts
-}
-
-// Whether to add the default mongo codecs to the registry. Default: true.
-func (opts *Opts) WithEnumStrings(enable bool) *Opts {
-	opts.enumStrings = enable
-	return opts
-}
-
-// Extract one-of fields from these message types and register their encoders / decoders
-// with the registry.
-func (opts *Opts) WithOneOfFields(messages ...proto.Message) *Opts {
-	for _, thisMessage := range messages {
-		oneOfBuilders, err := oneof.CodecBuildersForMessage(thisMessage)
-		if err != nil {
-			panic(fmt.Errorf("error creating oneof codec: %w", err))
-		}
-		opts.oneOfBuilders = append(opts.oneOfBuilders, oneOfBuilders...)
-	}
-
-	return opts
-}
-
-// Add a new wrapper type (as wrappers.StringValue) that is not one of protoCereal's
-// default wrapper codecs.
-func (opts *Opts) WithCustomWrappers(wrapperMessages ...proto.Message) *Opts {
-	opts.customWrappers = append(opts.customWrappers, wrapperMessages...)
-	return opts
-}
-
-// Create a new mongo opts object with default values.
-func NewMongoOpts() *Opts {
-	return new(Opts).WithAddDefaultCodecs(true)
-}
 
 func validateWrapperType(wrapperType reflect.Type) error {
 	// Check that this is a pointer to a struct
@@ -111,23 +64,8 @@ func validateWrapperType(wrapperType reflect.Type) error {
 	return nil
 }
 
-// Register a the cereal codecs onto a registry builder.
-func RegisterCerealCodecs(builder *bsoncodec.RegistryBuilder, opts *Opts) error {
-	if builder == nil {
-		return errors.New("registry builder cannot be nil")
-	}
-
-	if opts == nil {
-		opts = NewMongoOpts()
-	}
-
-	// Default types
-	if opts.addDefaultCodecs {
-		bsoncodec.DefaultValueDecoders{}.RegisterDefaultDecoders(builder)
-		bsoncodec.DefaultValueEncoders{}.RegisterDefaultEncoders(builder)
-	}
-
-	// Custom types
+// Register the bson codecs that come with protoCereal.
+func registerProtoCerealCodecs(builder *bsoncodec.RegistryBuilder, opts *Opts) {
 	builder.RegisterCodec(reflect.TypeOf(new(anypb.Any)), protoAnyCodec{})
 	builder.RegisterCodec(reflect.TypeOf(new(messagesCereal.UUID)), protoUUIDCodec{})
 	builder.RegisterCodec(
@@ -168,18 +106,38 @@ func RegisterCerealCodecs(builder *bsoncodec.RegistryBuilder, opts *Opts) error 
 		reflect.TypeOf(new(wrapperspb.UInt64Value)), protoWrapperCodec{},
 	)
 
+}
+
+func buildAndRegisterOneOfCodecs(builder *bsoncodec.RegistryBuilder, opts *Opts) error {
 	// Register our one-of codecs with the registry
-	for _, oneOfBuilder := range opts.oneOfBuilders {
-		oneOfBuilder.Register(builder)
+	for _, oneOfMessage := range opts.oneOfMessages {
+		oneOfBuilders, err := oneof.CodecBuildersForMessage(
+			oneOfMessage, opts.oneOfElementInfo,
+		)
+		if err != nil {
+			return fmt.Errorf("error creating oneof codec: %w", err)
+		}
+		for _, thisOneOfBuilder := range oneOfBuilders {
+			thisOneOfBuilder.Register(builder)
+		}
+
 	}
 
-	if opts.enumStrings {
-		enumCodec := new(enum.CodecEnumStringer)
-		enumInterfaceType := reflect.TypeOf((*enum.ProtoEnum)(nil)).Elem()
-		builder.RegisterHookEncoder(enumInterfaceType, enumCodec)
-		builder.RegisterHookDecoder(enumInterfaceType, enumCodec)
+	return nil
+}
+
+func registerEnumStringCodec(builder *bsoncodec.RegistryBuilder, opts *Opts) {
+	if !opts.enumStrings {
+		return
 	}
 
+	enumCodec := new(enum.CodecEnumStringer)
+	enumInterfaceType := reflect.TypeOf((*enum.ProtoEnum)(nil)).Elem()
+	builder.RegisterHookEncoder(enumInterfaceType, enumCodec)
+	builder.RegisterHookDecoder(enumInterfaceType, enumCodec)
+}
+
+func registerCustomWrappers(builder *bsoncodec.RegistryBuilder, opts *Opts) error {
 	// Add custom wrapper type
 	for _, wrapper := range opts.customWrappers {
 		wrapperType := reflect.TypeOf(wrapper)
@@ -191,4 +149,41 @@ func RegisterCerealCodecs(builder *bsoncodec.RegistryBuilder, opts *Opts) error 
 	}
 
 	return nil
+}
+
+// Register a the cereal codecs onto a registry builder.
+func RegisterCerealCodecs(builder *bsoncodec.RegistryBuilder, opts *Opts) error {
+	if builder == nil {
+		return errors.New("registry builder cannot be nil")
+	}
+
+	if opts == nil {
+		opts = NewMongoOpts()
+	}
+
+	// Default types
+	if opts.addDefaultCodecs {
+		bsoncodec.DefaultValueDecoders{}.RegisterDefaultDecoders(builder)
+		bsoncodec.DefaultValueEncoders{}.RegisterDefaultEncoders(builder)
+	}
+
+	registerProtoCerealCodecs(builder, opts)
+	if err := buildAndRegisterOneOfCodecs(builder, opts); err != nil {
+		return err
+	}
+
+	registerEnumStringCodec(builder, opts)
+
+	err := registerCustomWrappers(builder, opts)
+	return err
+}
+
+func NewCerealRegistryBuilder(opts *Opts) (*bsoncodec.RegistryBuilder, error) {
+	builder := bsoncodec.NewRegistryBuilder()
+	err := RegisterCerealCodecs(builder, opts)
+	if err != nil {
+		return nil, err
+	}
+
+	return builder, err
 }

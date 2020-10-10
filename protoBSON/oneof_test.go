@@ -233,3 +233,115 @@ func TestAutoRegisterOneOfs(t *testing.T) {
 
 	_ = protoBson.RegisterCerealCodecs(builder, cerealOpts)
 }
+
+func TestOneOf_CustomMapping(t *testing.T) {
+	cerealOpts := protoBson.
+		NewMongoOpts().
+		WithCustomWrappers(
+			new(messagesCereal_test.DecimalList),
+		).
+		WithOneOfElementMapping(
+			new(messagesCereal_test.DecimalList),
+			bsontype.Array,
+			0x0,
+		).
+		WithOneOfFields(new(messagesCereal_test.HasCustomOneOf))
+
+	builder, err := protoBson.NewCerealRegistryBuilder(cerealOpts)
+	if !assert.NoError(t, err, "create registry") {
+		t.FailNow()
+	}
+
+	registry := builder.Build()
+
+	type testCase struct {
+		Name            string
+		ElementValue    messagesCereal_test.IsHasCustomOneofList
+		SerializedValue interface{}
+	}
+
+	var thisCase *testCase
+
+	testCases := []*testCase{
+		{
+			Name: "String",
+			ElementValue: &messagesCereal_test.HasCustomOneOf_StringValue{
+				StringValue: "some value",
+			},
+			SerializedValue: "some value",
+		},
+		{
+			Name: "Decimal",
+			ElementValue: &messagesCereal_test.HasCustomOneOf_DecimalValue{
+				DecimalValue: &messagesCereal.Decimal{
+					High: 47,
+					Low:  101,
+				},
+			},
+			SerializedValue: primitive.NewDecimal128(47, 101),
+		},
+		{
+			Name: "DecimalList",
+			ElementValue: &messagesCereal_test.HasCustomOneOf_DecimalList{
+				DecimalList: &messagesCereal_test.DecimalList{
+					Value: []*messagesCereal.Decimal{
+						{
+							High: 100,
+							Low:  101,
+						},
+						{
+							High: 102,
+							Low:  103,
+						},
+					},
+				},
+			},
+			SerializedValue: bson.A{
+				primitive.NewDecimal128(100, 101),
+				primitive.NewDecimal128(102, 103),
+			},
+		},
+	}
+
+	testFunc := func(t *testing.T) {
+		assert := assert.New(t)
+
+		message := &messagesCereal_test.HasCustomOneOf{
+			Many: thisCase.ElementValue,
+		}
+
+		serialized, err := bson.MarshalWithRegistry(registry, message)
+		if !assert.NoError(err, "marshal to bson") {
+			t.FailNow()
+		}
+
+		document := bson.M{}
+		err = bson.UnmarshalWithRegistry(registry, serialized, document)
+
+		if !assert.Contains(document, "many", "has key") {
+			t.FailNow()
+		}
+
+		t.Log("DOCUMENT:", document)
+
+		assert.Equal(
+			thisCase.SerializedValue,
+			document["many"],
+			"correct serialized value",
+		)
+
+		deserialized := new(messagesCereal_test.HasCustomOneOf)
+		err = bson.UnmarshalWithRegistry(registry, serialized, deserialized)
+		if !assert.NoError(err, "unmarshall to proto") {
+			t.FailNow()
+		}
+
+		assert.Equal(
+			message, deserialized, "deserialized equals original",
+		)
+	}
+
+	for _, thisCase = range testCases {
+		t.Run(thisCase.Name, testFunc)
+	}
+}

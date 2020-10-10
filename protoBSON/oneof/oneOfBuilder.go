@@ -1,6 +1,7 @@
 package oneof
 
 import (
+	"errors"
 	"fmt"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
 	"go.mongodb.org/mongo-driver/bson/bsontype"
@@ -8,6 +9,14 @@ import (
 	"google.golang.org/protobuf/reflect/protoreflect"
 	"reflect"
 )
+
+var ErrWrongOneOfInterface = errors.New("oneof interface not implemented")
+
+type ElementInfo struct {
+	InnerGoType   reflect.Type
+	BsonType      bsontype.Type
+	BinarySubType byte
+}
 
 type CodecBuilder struct {
 	// The master interface for the possible field values.
@@ -18,6 +27,9 @@ type CodecBuilder struct {
 	// disambiguate between the target decode types, since we can embed the type name
 	// in the written document.
 	embeddedDocTypeMap map[string]reflect.Type
+	// Manual element info passed in from higher-level builders. This may include
+	// elements from other one-ofs.
+	innerTypeMap map[reflect.Type][]bsonTypeKey
 }
 
 // Validate that a type conforms to the expected constraints to a concrete one-of
@@ -26,23 +38,12 @@ func (builder *CodecBuilder) validateValueWrapperType(oneOfType reflect.Type) er
 	// Our concrete type must implement our oneof type
 	if !oneOfType.Implements(builder.oneOfInterface) {
 		return fmt.Errorf(
-			"'%v' does not implement oneof interface '%v'",
+			"%w: '%v' does not implement '%v'",
+			ErrWrongOneOfInterface,
 			oneOfType,
 			builder.oneOfInterface,
 		)
 		// Our concrete type must be a pointer
-	} else if oneOfType.Kind() != reflect.Ptr {
-		return fmt.Errorf(
-			"'%v' is not a pointer type",
-			oneOfType,
-		)
-		// The number of fields must be 1
-	} else if oneOfType.Elem().NumField() != 1 {
-		return fmt.Errorf(
-			"'%v' contains %v fields, expected 1",
-			oneOfType,
-			oneOfType.NumField(),
-		)
 	}
 	return nil
 }
@@ -58,9 +59,15 @@ func (builder *CodecBuilder) deduceConcreteTypeEncoding(
 	}
 
 	innerType := oneOfType.Elem().Field(0).Type
+
+	// first see if this inner type has been manually added
+	bsonTypes, known := builder.innerTypeMap[innerType]
+
 	// First try to register it if it's a known type that serialized to something
 	// other than an embedded doc
-	bsonTypes, known := builder.deduceKnownTypeEncoding(oneOfType, innerType)
+	if !known {
+		bsonTypes, known = builder.deduceKnownTypeEncoding(oneOfType, innerType)
+	}
 
 	// If it's not known, we're next try to register it as an unknown type.
 	if !known {
@@ -115,6 +122,9 @@ func (builder *CodecBuilder) deduceUnknownTypeEncoding(
 		bsonTypes = []bsonTypeKey{newSimpleKey(bsontype.Double)}
 	case reflect.Float32:
 		bsonTypes = []bsonTypeKey{newSimpleKey(bsontype.Double)}
+	// NOTE: slices / arrays cannot be directly used as a oneof value, so we don't need
+	// to handle them here. They will require a custom wrapper type for including in
+	// a oneof, which can be registered with the options.
 	case reflect.Ptr:
 		// If this inner type is not a struct, it's out of spec for protobuf structures
 		// and we cannot handle it.
@@ -321,10 +331,6 @@ func (builder *CodecBuilder) fromMessageOneOfField(
 		concreteWrapperTypes = append(concreteWrapperTypes, goWrapperType)
 	}
 
-	// Initialize our decode type maps here
-	builder.decodeMap = make(map[bsonTypeKey]reflect.Type)
-	builder.embeddedDocTypeMap = make(map[string]reflect.Type)
-
 	err := builder.AutoAddConcrete(concreteWrapperTypes...)
 	if err != nil {
 		return err
@@ -347,10 +353,27 @@ func NewCodecBuilder() *CodecBuilder {
 	return &CodecBuilder{
 		decodeMap:          make(map[bsonTypeKey]reflect.Type),
 		embeddedDocTypeMap: make(map[string]reflect.Type),
+		innerTypeMap:       make(map[reflect.Type][]bsonTypeKey),
 	}
 }
 
-func CodecBuildersForMessage(message proto.Message) ([]*CodecBuilder, error) {
+func CodecBuildersForMessage(
+	message proto.Message, elementInfo []*ElementInfo,
+) ([]*CodecBuilder, error) {
+	innerTypeMap := make(map[reflect.Type][]bsonTypeKey)
+
+	// Create the inner type map for manually added types
+	for _, elementInfo := range elementInfo {
+		// Some go types can be encoded to multiple bson types depending on the
+		// situation. For instance, int64s can be encoded as int32s when small enough,
+		// so we need to support registering multiple bson types. We need to fetch
+		// the current list if any and add the new bson type to it.
+		bsonKey := newBsonTypeKey(elementInfo.BsonType, elementInfo.BinarySubType)
+		bsonTypes, _ := innerTypeMap[elementInfo.InnerGoType]
+		bsonTypes = append(bsonTypes, bsonKey)
+		innerTypeMap[elementInfo.InnerGoType] = bsonTypes
+	}
+
 	// Register the one-of fields for a message
 	oneOfs := message.ProtoReflect().Descriptor().Oneofs()
 	builders := make([]*CodecBuilder, 0, oneOfs.Len())
@@ -359,6 +382,7 @@ func CodecBuildersForMessage(message proto.Message) ([]*CodecBuilder, error) {
 		oneOfField := oneOfs.Get(i)
 
 		builder := NewCodecBuilder()
+		builder.innerTypeMap = innerTypeMap
 
 		err := builder.fromMessageOneOfField(message, oneOfField)
 		if err != nil {
