@@ -115,6 +115,29 @@
 			
 			
 				
+				<dd><a href="godoc.4.html#DecimalList">type DecimalList</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.4.html#DecimalList.Descriptor">func (*DecimalList) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.4.html#DecimalList.GetValue">func (x *DecimalList) GetValue() []*messagesCereal.Decimal</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.4.html#DecimalList.ProtoMessage">func (*DecimalList) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.4.html#DecimalList.ProtoReflect">func (x *DecimalList) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.4.html#DecimalList.Reset">func (x *DecimalList) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.4.html#DecimalList.String">func (x *DecimalList) String() string</a></dd>
+				
+			
+				
 				<dd><a href="godoc.4.html#EnumTest">type EnumTest</a></dd>
 				
 				
@@ -138,6 +161,53 @@
 				
 			
 				
+				<dd><a href="godoc.4.html#HasCustomOneOf">type HasCustomOneOf</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.4.html#HasCustomOneOf.Descriptor">func (*HasCustomOneOf) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.4.html#HasCustomOneOf.GetDecimalList">func (x *HasCustomOneOf) GetDecimalList() *DecimalList</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.4.html#HasCustomOneOf.GetDecimalValue">func (x *HasCustomOneOf) GetDecimalValue() *messagesCereal.Decimal</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.4.html#HasCustomOneOf.GetMany">func (m *HasCustomOneOf) GetMany() isHasCustomOneOf_Many</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.4.html#HasCustomOneOf.GetStringValue">func (x *HasCustomOneOf) GetStringValue() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.4.html#HasCustomOneOf.ProtoMessage">func (*HasCustomOneOf) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.4.html#HasCustomOneOf.ProtoReflect">func (x *HasCustomOneOf) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.4.html#HasCustomOneOf.Reset">func (x *HasCustomOneOf) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.4.html#HasCustomOneOf.String">func (x *HasCustomOneOf) String() string</a></dd>
+				
+			
+				
+				<dd><a href="godoc.4.html#HasCustomOneOf_DecimalList">type HasCustomOneOf_DecimalList</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.4.html#HasCustomOneOf_DecimalValue">type HasCustomOneOf_DecimalValue</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.4.html#HasCustomOneOf_StringValue">type HasCustomOneOf_StringValue</a></dd>
+				
+				
+			
+				
 				<dd><a href="godoc.4.html#Houses">type Houses</a></dd>
 				
 				
@@ -158,6 +228,11 @@
 				
 					
 					<dd>&nbsp; &nbsp; <a href="godoc.4.html#Houses.Type">func (Houses) Type() protoreflect.EnumType</a></dd>
+				
+			
+				
+				<dd><a href="godoc.4.html#IsHasCustomOneofList">type IsHasCustomOneofList</a></dd>
+				
 				
 			
 				
@@ -406,6 +481,8 @@
 			
 				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneOfInterfaces.go">oneOfInterfaces.go</a>
 			
+				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go">oneof.pb.go</a>
+			
 				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/test.pb.go">test.pb.go</a>
 			
 			</span>
@@ -443,10 +520,116 @@ Enum value maps for Houses.
 				<pre>var <span id="File_cereal_proto_test_enum_proto">File_cereal_proto_test_enum_proto</span> <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#FileDescriptor">FileDescriptor</a></pre>
 			
 				
+				<pre>var <span id="File_cereal_proto_test_oneof_proto">File_cereal_proto_test_oneof_proto</span> <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#FileDescriptor">FileDescriptor</a></pre>
+			
+				
 				<pre>var <span id="File_cereal_proto_test_test_proto">File_cereal_proto_test_test_proto</span> <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#FileDescriptor">FileDescriptor</a></pre>
 			
 		
 		
+		
+			
+			
+			<h2 id="DecimalList">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=877:1159#L19">DecimalList</a>
+				<a class="permalink" href="godoc.4.html#DecimalList">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type DecimalList struct {
+
+    <span class="comment">// @inject_tag: bson:&#34;value&#34;</span>
+<span id="DecimalList.Value"></span>    Value []*<a href="godoc.3.html">messagesCereal</a>.<a href="godoc.3.html#Decimal">Decimal</a> `protobuf:&#34;bytes,1,rep,name=value,proto3&#34; json:&#34;value,omitempty&#34; bson:&#34;value&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="DecimalList.Descriptor">func (*DecimalList) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=1895:1943#L56">Descriptor</a>
+					<a class="permalink" href="godoc.4.html#DecimalList.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.4.html#DecimalList">DecimalList</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use DecimalList.ProtoReflect.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="DecimalList.GetValue">func (*DecimalList) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=2016:2074#L60">GetValue</a>
+					<a class="permalink" href="godoc.4.html#DecimalList.GetValue">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.4.html#DecimalList">DecimalList</a>) GetValue() []*<a href="godoc.3.html">messagesCereal</a>.<a href="godoc.3.html#Decimal">Decimal</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="DecimalList.ProtoMessage">func (*DecimalList) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=1470:1504#L41">ProtoMessage</a>
+					<a class="permalink" href="godoc.4.html#DecimalList.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.4.html#DecimalList">DecimalList</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="DecimalList.ProtoReflect">func (*DecimalList) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=1509:1566#L43">ProtoReflect</a>
+					<a class="permalink" href="godoc.4.html#DecimalList.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.4.html#DecimalList">DecimalList</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="DecimalList.Reset">func (*DecimalList) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=1161:1190#L28">Reset</a>
+					<a class="permalink" href="godoc.4.html#DecimalList.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.4.html#DecimalList">DecimalList</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="DecimalList.String">func (*DecimalList) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=1388:1425#L37">String</a>
+					<a class="permalink" href="godoc.4.html#DecimalList.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.4.html#DecimalList">DecimalList</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
 		
 			
 			
@@ -550,6 +733,225 @@ Deprecated: Use EnumTest.ProtoReflect.Descriptor instead.
 				
 				
 				
+			
+		
+			
+			
+			<h2 id="HasCustomOneOf">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=2127:2503#L67">HasCustomOneOf</a>
+				<a class="permalink" href="godoc.4.html#HasCustomOneOf">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type HasCustomOneOf struct {
+
+    <span class="comment">// @inject_tag: bson:&#34;many&#34;</span>
+    <span class="comment">//</span>
+    <span class="comment">// Types that are assignable to Many:</span>
+    <span class="comment">//	*HasCustomOneOf_DecimalValue</span>
+    <span class="comment">//	*HasCustomOneOf_StringValue</span>
+    <span class="comment">//	*HasCustomOneOf_DecimalList</span>
+<span id="HasCustomOneOf.Many"></span>    Many isHasCustomOneOf_Many `protobuf_oneof:&#34;many&#34; bson:&#34;many&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="HasCustomOneOf.Descriptor">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=3257:3308#L109">Descriptor</a>
+					<a class="permalink" href="godoc.4.html#HasCustomOneOf.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.4.html#HasCustomOneOf">HasCustomOneOf</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use HasCustomOneOf.ProtoReflect.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="HasCustomOneOf.GetDecimalList">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=3814:3868#L134">GetDecimalList</a>
+					<a class="permalink" href="godoc.4.html#HasCustomOneOf.GetDecimalList">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.4.html#HasCustomOneOf">HasCustomOneOf</a>) GetDecimalList() *<a href="godoc.4.html#DecimalList">DecimalList</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HasCustomOneOf.GetDecimalValue">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=3489:3555#L120">GetDecimalValue</a>
+					<a class="permalink" href="godoc.4.html#HasCustomOneOf.GetDecimalValue">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.4.html#HasCustomOneOf">HasCustomOneOf</a>) GetDecimalValue() *<a href="godoc.3.html">messagesCereal</a>.<a href="godoc.3.html#Decimal">Decimal</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HasCustomOneOf.GetMany">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=3381:3437#L113">GetMany</a>
+					<a class="permalink" href="godoc.4.html#HasCustomOneOf.GetMany">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="godoc.4.html#HasCustomOneOf">HasCustomOneOf</a>) GetMany() isHasCustomOneOf_Many</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HasCustomOneOf.GetStringValue">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=3662:3710#L127">GetStringValue</a>
+					<a class="permalink" href="godoc.4.html#HasCustomOneOf.GetStringValue">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.4.html#HasCustomOneOf">HasCustomOneOf</a>) GetStringValue() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HasCustomOneOf.ProtoMessage">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=2823:2860#L94">ProtoMessage</a>
+					<a class="permalink" href="godoc.4.html#HasCustomOneOf.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.4.html#HasCustomOneOf">HasCustomOneOf</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HasCustomOneOf.ProtoReflect">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=2865:2925#L96">ProtoReflect</a>
+					<a class="permalink" href="godoc.4.html#HasCustomOneOf.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.4.html#HasCustomOneOf">HasCustomOneOf</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HasCustomOneOf.Reset">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=2505:2537#L81">Reset</a>
+					<a class="permalink" href="godoc.4.html#HasCustomOneOf.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.4.html#HasCustomOneOf">HasCustomOneOf</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HasCustomOneOf.String">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=2738:2778#L90">String</a>
+					<a class="permalink" href="godoc.4.html#HasCustomOneOf.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.4.html#HasCustomOneOf">HasCustomOneOf</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="HasCustomOneOf_DecimalList">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=4335:4476#L153">HasCustomOneOf_DecimalList</a>
+				<a class="permalink" href="godoc.4.html#HasCustomOneOf_DecimalList">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type HasCustomOneOf_DecimalList struct {
+<span id="HasCustomOneOf_DecimalList.DecimalList"></span>    DecimalList *<a href="godoc.4.html#DecimalList">DecimalList</a> `protobuf:&#34;bytes,3,opt,name=decimal_list,json=decimalList,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="HasCustomOneOf_DecimalValue">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=4040:4196#L145">HasCustomOneOf_DecimalValue</a>
+				<a class="permalink" href="godoc.4.html#HasCustomOneOf_DecimalValue">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type HasCustomOneOf_DecimalValue struct {
+<span id="HasCustomOneOf_DecimalValue.DecimalValue"></span>    DecimalValue *<a href="godoc.3.html">messagesCereal</a>.<a href="godoc.3.html#Decimal">Decimal</a> `protobuf:&#34;bytes,1,opt,name=decimal_value,json=decimalValue,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="HasCustomOneOf_StringValue">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneof.pb.go?s=4198:4333#L149">HasCustomOneOf_StringValue</a>
+				<a class="permalink" href="godoc.4.html#HasCustomOneOf_StringValue">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type HasCustomOneOf_StringValue struct {
+<span id="HasCustomOneOf_StringValue.StringValue"></span>    StringValue <a href="http://localhost:6161/pkg/builtin/#string">string</a> `protobuf:&#34;bytes,2,opt,name=string_value,json=stringValue,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
 			
 		
 			
@@ -658,6 +1060,28 @@ Deprecated: Use Houses.Descriptor instead.
 				
 				
 				
+			
+		
+			
+			
+			<h2 id="IsHasCustomOneofList">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal_test/oneOfInterfaces.go?s=153:202#L1">IsHasCustomOneofList</a>
+				<a class="permalink" href="godoc.4.html#IsHasCustomOneofList">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type IsHasCustomOneofList = isHasCustomOneOf_Many</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
 			
 		
 			

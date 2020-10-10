@@ -394,11 +394,14 @@ Oneof Fields
 ------------
 
 We still have to resolve the error caused by our oneof field. Under the hood, oneof
-values are represented by a shared interface that a wrapper struct containing each
-possible value implements.
+values are represented by a shared interface that a wrapper struct for each possible
+value implements.
 
 In our case, the interface is ``docs.isWizard_Weapon``. BSON has no idea what to do when
 asked to decode into a literal interface, so we need to register a codec for it.
+
+Auto-Generation
+###############
 
 Luckily, with protoCereal creating a codec for oneof fields is easy as:
 
@@ -468,6 +471,67 @@ Unmarshalling the document to a struct now works correctly as well.
   encoding the object, decoding it, and encoding it again with the added field, which
   may have performance implications for large data structures.
 
+Custom BSON Mapping
+###################
+
+It may be the case that protoCereal cannot deduce correctly what a oneof wrapper type
+will encode to / decode from when round-tripping through BSON. We can supply our
+own inner value type mapping in these cases.
+
+Lets say we have the following protobuf file:
+
+.. code-block:: protobuf
+
+  import "cereal_proto/decimal.proto";
+
+  message DecimalList {
+    // @inject_tag: bson:"value"
+    repeated cereal.Decimal value = 1;
+  }
+
+  message HasCustomOneOf {
+    // @inject_tag: bson:"many"
+    oneof many {
+      cereal.Decimal decimal_value = 1;
+      string string_value = 2;
+      DecimalList decimal_list = 3;
+    }
+  }
+
+We have registered ``DecimalList`` as a custom wrapper type (see
+`Custom Wrapper Types`_):
+
+.. code-block:: go
+
+    cerealOpts := protoBson.
+      NewMongoOpts().
+      WithCustomWrappers(
+        new(messagesCereal_test.DecimalList),
+      ).
+      WithOneOfFields(new(messagesCereal_test.HasCustomOneOf))
+
+When protoCereal attempts to encode the ``decimal_list`` subfield of the ``many``
+oneof, it will not realize that ``messagesCereal_test.DecimalList`` will encode
+to an array of decimal values, rather than an embedded document.
+
+We can signal that this will be the case like so:
+
+.. code-block:: go
+
+  cerealOpts := protoBson.
+    NewMongoOpts().
+    WithCustomWrappers(
+      new(messagesCereal_test.DecimalList),
+    ).
+    WithOneOfElementMapping(
+      new(messagesCereal_test.DecimalList),
+      bsontype.Array,
+      0x0,
+    ).
+    WithOneOfFields(new(messagesCereal_test.HasCustomOneOf))
+
+Now protoCereal knows that to interpret arrays as ``*messagesCereal_test.DecimalList``
+so whenever a oneof wrapper is wrapping this type, the correct mapping will be used.
 
 Enums
 -----
@@ -499,11 +563,11 @@ Now when we encode our document, we get:
   currently does not support the selective conversion of enum types, but such a feature
   could be added if there is interest!
 
-Wrapper Types
--------------
+Custom Wrapper Types
+--------------------
 
 Google uses wrapper types from it's
-` wrappers from it's Well Known Types package <https://godoc.org/google.golang.org/protobuf/types/known/wrapperspb>`_
+`wrappers from it's Well Known Types package <https://godoc.org/google.golang.org/protobuf/types/known/wrapperspb>`_
 package to represent nillable values. Using the default options, protoCereal will
 register all of the wrapper types from google's Well Known Types into the codec
 registry.
@@ -515,7 +579,6 @@ a defined wrapper for a fixed64 value, we can define one like so:
 
   // Wrapper for fixed int64.
   message Fixed64Value {
-    // @inject_tag: bson:"value"
     fixed64 value= 1;
   }
 
