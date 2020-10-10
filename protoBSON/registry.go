@@ -14,33 +14,10 @@ import (
 	"strings"
 )
 
-<<<<<<< HEAD
 func validateWrapperType(wrapperType reflect.Type) error {
 	// Check that this is a pointer to a struct
 	if wrapperType.Kind() != reflect.Ptr ||
 		wrapperType.Elem().Kind() != reflect.Struct {
-=======
-// Holds options for registering codecs.
-type Opts struct {
-	addDefaultCodecs bool
-	enumStrings      bool
-	oneOfBuilders    []*oneof.CodecBuilder
-	customWrappers   []proto.Message
-}
-
-// Whether to add the default mongo codecs to the registry. Default: true.
-func (opts *Opts) WithAddDefaultCodecs(add bool) *Opts {
-	opts.addDefaultCodecs = add
-	return opts
-}
-
-// Whether to add the default mongo codecs to the registry. Default: true.
-func (opts *Opts) WithEnumStrings(enable bool) *Opts {
-	opts.enumStrings = enable
-	return opts
-}
->>>>>>> dev
-
 		return fmt.Errorf(
 			"custom wrapper type '%v' is not pointer to a struct", wrapperType,
 		)
@@ -48,8 +25,6 @@ func (opts *Opts) WithEnumStrings(enable bool) *Opts {
 
 	// Dereference to the underlying struct
 	structType := wrapperType.Elem()
-
-<<<<<<< HEAD
 	// Iterate through all the fields, counting the public ones and remembering the
 	// last one's name.
 	fieldCount := structType.NumField()
@@ -57,78 +32,11 @@ func (opts *Opts) WithEnumStrings(enable bool) *Opts {
 	publicFieldName := ""
 	for i := 0; i < fieldCount; i++ {
 		fieldInfo := structType.Field(i)
-
-=======
-// Add a new wrapper type (as wrappers.StringValue) that is not one of protoCereal's
-// default wrapper codecs.
-func (opts *Opts) WithCustomWrappers(wrapperMessages ...proto.Message) *Opts {
-	opts.customWrappers = append(opts.customWrappers, wrapperMessages...)
-	return opts
-}
-
-// Create a new mongo opts object with default values.
-func NewMongoOpts() *Opts {
-	return new(Opts).WithAddDefaultCodecs(true)
-}
-
-func validateWrapperType(wrapperType reflect.Type) error {
-	// Check that this is a pointer to a struct
-	if wrapperType.Kind() != reflect.Ptr ||
-		wrapperType.Elem().Kind() != reflect.Struct {
-
-		return fmt.Errorf(
-			"custom wrapper type '%v' is not pointer to a struct", wrapperType,
-		)
-	}
-
-	// Dereference to the underlying struct
-	structType := wrapperType.Elem()
-
-	// Iterate through all the fields, counting the public ones and remembering the
-	// last one's name.
-	fieldCount := structType.NumField()
-	publicCount := 0
-	publicFieldName := ""
-	for i := 0; i < fieldCount; i++ {
-		fieldInfo := structType.Field(i)
-
->>>>>>> dev
 		firstLetter := string([]rune(fieldInfo.Name)[0])
 		if strings.ToUpper(firstLetter) == firstLetter {
 			publicCount++
 			publicFieldName = fieldInfo.Name
 		}
-<<<<<<< HEAD
-=======
-	}
-
-	// Check that there is only one public field.
-	if publicCount != 1 {
-		return fmt.Errorf(
-			"custom wrapper type '%v' must have exactly 1 public field, but"+
-				" contains %v",
-			wrapperType,
-			publicCount,
-		)
-	}
-
-	// Check that it is called 'Value' (conforming to the google wrapper type
-	// convention).
-	if publicFieldName != "Value" {
-		return fmt.Errorf(
-			"custom wrapper message '%v' does not have 'Value' field",
-			wrapperType,
-		)
-	}
-
-	return nil
-}
-
-// Register a the cereal codecs onto a registry builder.
-func RegisterCerealCodecs(builder *bsoncodec.RegistryBuilder, opts *Opts) error {
-	if builder == nil {
-		return errors.New("registry builder cannot be nil")
->>>>>>> dev
 	}
 
 	// Check that there is only one public field.
