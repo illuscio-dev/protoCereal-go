@@ -11,7 +11,7 @@ import (
 	any "github.com/golang/protobuf/ptypes/any"
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	wrappers "github.com/golang/protobuf/ptypes/wrappers"
-	messagesCereal "github.com/illuscio-dev/protoCereal-go/messagesCereal"
+	cerealMessages "github.com/illuscio-dev/protoCereal-go/cerealMessages"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -189,7 +189,7 @@ type Wizard struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty" bson:"name"`
 	// A unique Identifier for the Wizard.
 	// @inject_tag: bson:"id"
-	Id *messagesCereal.UUID `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty" bson:"id"`
+	Id *cerealMessages.UUID `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty" bson:"id"`
 	// The exact moment the Wizard was sorted.
 	// @inject_tag: bson:"sorted_at"
 	SortedAt *timestamp.Timestamp `protobuf:"bytes,3,opt,name=sorted_at,json=sortedAt,proto3" json:"sorted_at,omitempty" bson:"sorted_at"`
@@ -198,13 +198,13 @@ type Wizard struct {
 	HogwartsHouse Houses `protobuf:"varint,4,opt,name=hogwarts_house,json=hogwartsHouse,proto3,enum=cereal_doc.Houses" json:"hogwarts_house,omitempty" bson:"hogwarts_house"`
 	// The current balance of the wizard's Gringott's account in Galleons.
 	// @inject_tag: bson:"gingotts_balance"
-	GingottsBalance *messagesCereal.Decimal `protobuf:"bytes,5,opt,name=gingotts_balance,json=gingottsBalance,proto3" json:"gingotts_balance,omitempty" bson:"gingotts_balance"`
+	GingottsBalance *cerealMessages.Decimal `protobuf:"bytes,5,opt,name=gingotts_balance,json=gingottsBalance,proto3" json:"gingotts_balance,omitempty" bson:"gingotts_balance"`
 	// Name of the Wizard's familiar. Nil if Wizard does not have a familiar.
 	// @inject_tag: bson:"familiar_name"
 	FamiliarName *wrappers.StringValue `protobuf:"bytes,6,opt,name=familiar_name,json=familiarName,proto3" json:"familiar_name,omitempty" bson:"familiar_name"`
 	// Image of the Wizard.
 	// @inject_tag: bson:"portrait"
-	Portrait *messagesCereal.RawData `protobuf:"bytes,7,opt,name=portrait,proto3" json:"portrait,omitempty" bson:"portrait"`
+	Portrait *cerealMessages.RawData `protobuf:"bytes,7,opt,name=portrait,proto3" json:"portrait,omitempty" bson:"portrait"`
 	// The preferred weapon of this wizard.
 	// @inject_tag: bson:"weapon"
 	//
@@ -256,7 +256,7 @@ func (x *Wizard) GetName() string {
 	return ""
 }
 
-func (x *Wizard) GetId() *messagesCereal.UUID {
+func (x *Wizard) GetId() *cerealMessages.UUID {
 	if x != nil {
 		return x.Id
 	}
@@ -277,7 +277,7 @@ func (x *Wizard) GetHogwartsHouse() Houses {
 	return Houses_GRYFFINDOR
 }
 
-func (x *Wizard) GetGingottsBalance() *messagesCereal.Decimal {
+func (x *Wizard) GetGingottsBalance() *cerealMessages.Decimal {
 	if x != nil {
 		return x.GingottsBalance
 	}
@@ -291,7 +291,7 @@ func (x *Wizard) GetFamiliarName() *wrappers.StringValue {
 	return nil
 }
 
-func (x *Wizard) GetPortrait() *messagesCereal.RawData {
+func (x *Wizard) GetPortrait() *cerealMessages.RawData {
 	if x != nil {
 		return x.Portrait
 	}
@@ -424,11 +424,11 @@ var file_cereal_proto_docs_wizard_proto_goTypes = []interface{}{
 	(*Wand)(nil),                   // 1: cereal_doc.Wand
 	(*Sword)(nil),                  // 2: cereal_doc.Sword
 	(*Wizard)(nil),                 // 3: cereal_doc.Wizard
-	(*messagesCereal.UUID)(nil),    // 4: cereal.UUID
+	(*cerealMessages.UUID)(nil),    // 4: cereal.UUID
 	(*timestamp.Timestamp)(nil),    // 5: google.protobuf.Timestamp
-	(*messagesCereal.Decimal)(nil), // 6: cereal.Decimal
+	(*cerealMessages.Decimal)(nil), // 6: cereal.Decimal
 	(*wrappers.StringValue)(nil),   // 7: google.protobuf.StringValue
-	(*messagesCereal.RawData)(nil), // 8: cereal.RawData
+	(*cerealMessages.RawData)(nil), // 8: cereal.RawData
 	(*any.Any)(nil),                // 9: google.protobuf.Any
 }
 var file_cereal_proto_docs_wizard_proto_depIdxs = []int32{

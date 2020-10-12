@@ -3,7 +3,7 @@ package protoBson_test
 import (
 	"fmt"
 	"github.com/google/uuid"
-	"github.com/illuscio-dev/protoCereal-go/messagesCereal"
+	"github.com/illuscio-dev/protoCereal-go/cerealMessages"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/bsontype"
@@ -16,11 +16,11 @@ func TestCodec_UUID_BsonVal(t *testing.T) {
 	assert := assert.New(t)
 
 	type hasUUID struct {
-		Value *messagesCereal.UUID
+		Value *cerealMessages.UUID
 	}
 
 	original := &hasUUID{
-		Value: messagesCereal.UUIDFromGoogle(uuid.Must(uuid.NewRandom())),
+		Value: cerealMessages.UUIDFromGoogle(uuid.Must(uuid.NewRandom())),
 	}
 
 	encoded, err := bson.MarshalWithRegistry(testRegistry, original)
@@ -51,11 +51,11 @@ func TestCodec_UUID_RoundTrip(t *testing.T) {
 	assert := assert.New(t)
 
 	type hasUUID struct {
-		Value *messagesCereal.UUID
+		Value *cerealMessages.UUID
 	}
 
 	original := &hasUUID{
-		Value: messagesCereal.UUIDFromGoogle(uuid.Must(uuid.NewRandom())),
+		Value: cerealMessages.UUIDFromGoogle(uuid.Must(uuid.NewRandom())),
 	}
 
 	encoded, err := bson.MarshalWithRegistry(testRegistry, original)
@@ -72,7 +72,7 @@ func TestCodec_UUID_RoundTrip_Null(t *testing.T) {
 	assert := assert.New(t)
 
 	type hasUUID struct {
-		Value *messagesCereal.UUID
+		Value *cerealMessages.UUID
 	}
 
 	original := &hasUUID{
@@ -95,7 +95,7 @@ func TestCodec_UUID_RoundTrip_Null(t *testing.T) {
 func TestUUID_Google_RoundTrip(t *testing.T) {
 	assert := assert.New(t)
 
-	uuidVal := messagesCereal.MustUUIDRandom()
+	uuidVal := cerealMessages.MustUUIDRandom()
 	assert.NotZero(uuidVal, "UUID is not zero value")
 
 	googleVal := uuidVal.MustGoogle()
@@ -103,14 +103,14 @@ func TestUUID_Google_RoundTrip(t *testing.T) {
 		t.FailNow()
 	}
 
-	messageLoaded := messagesCereal.UUIDFromGoogle(googleVal)
+	messageLoaded := cerealMessages.UUIDFromGoogle(googleVal)
 	assert.Equal(uuidVal.Value, messageLoaded.Value, "loaded and original")
 }
 
 func TestUUID_Google_Zero(t *testing.T) {
 	zeroGoogle := uuid.UUID{}
 
-	nilMessage := (*messagesCereal.UUID)(nil)
+	nilMessage := (*cerealMessages.UUID)(nil)
 	googleVal, err := nilMessage.ToGoogle()
 	assert.NoError(t, err, "error converting to google value")
 	assert.Equal(t, zeroGoogle, googleVal)
@@ -119,7 +119,7 @@ func TestUUID_Google_Zero(t *testing.T) {
 func TestUUID_Google_BadLength(t *testing.T) {
 	assert := assert.New(t)
 
-	badMessage := &messagesCereal.UUID{
+	badMessage := &cerealMessages.UUID{
 		Value: []byte{0x0, 0x1},
 	}
 
@@ -134,7 +134,7 @@ func TestUUID_Google_BadLengthMust(t *testing.T) {
 	assert := assert.New(t)
 
 	testFunc := func() {
-		badMessage := &messagesCereal.UUID{
+		badMessage := &cerealMessages.UUID{
 			Value: []byte{0x0, 0x1},
 		}
 
@@ -148,7 +148,7 @@ func TestUUID_Google_BadLengthMust(t *testing.T) {
 func TestUUID_Mongo_RoundTrip(t *testing.T) {
 	assert := assert.New(t)
 
-	uuidVal := messagesCereal.MustUUIDRandom()
+	uuidVal := cerealMessages.MustUUIDRandom()
 	assert.NotZero(uuidVal, "UUID is not zero value")
 
 	mongoVal := uuidVal.MustMongo()
@@ -156,14 +156,14 @@ func TestUUID_Mongo_RoundTrip(t *testing.T) {
 		t.FailNow()
 	}
 
-	messageLoaded := messagesCereal.UUIDFromMongo(mongoVal)
+	messageLoaded := cerealMessages.UUIDFromMongo(mongoVal)
 	assert.Equal(uuidVal.Value, messageLoaded.Value, "loaded and original")
 }
 
 func TestUUID_Mongo_Zero(t *testing.T) {
 	zeroMongo := mongoUUID.UUID{}
 
-	nilMessage := (*messagesCereal.UUID)(nil)
+	nilMessage := (*cerealMessages.UUID)(nil)
 	googleVal, err := nilMessage.ToMongo()
 	assert.NoError(t, err, "error converting to google value")
 	assert.Equal(t, zeroMongo, googleVal)
@@ -172,7 +172,7 @@ func TestUUID_Mongo_Zero(t *testing.T) {
 func TestUUID_Mongo_BadLength(t *testing.T) {
 	assert := assert.New(t)
 
-	badMessage := &messagesCereal.UUID{
+	badMessage := &cerealMessages.UUID{
 		Value: []byte{0x0, 0x1},
 	}
 
@@ -187,7 +187,7 @@ func TestUUID_Mongo_BadLengthMust(t *testing.T) {
 	assert := assert.New(t)
 
 	testFunc := func() {
-		badMessage := &messagesCereal.UUID{
+		badMessage := &cerealMessages.UUID{
 			Value: []byte{0x0, 0x1},
 		}
 

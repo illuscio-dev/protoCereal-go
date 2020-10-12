@@ -2,7 +2,7 @@ package protoBson_test
 
 import (
 	"fmt"
-	"github.com/illuscio-dev/protoCereal-go/messagesCereal"
+	"github.com/illuscio-dev/protoCereal-go/cerealMessages"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -13,7 +13,7 @@ func TestCodec_Decimal_BsonVal(t *testing.T) {
 	assert := assert.New(t)
 
 	type hasDecimal struct {
-		Value *messagesCereal.Decimal
+		Value *cerealMessages.Decimal
 	}
 
 	decimalVal, err := primitive.ParseDecimal128("10.25")
@@ -22,7 +22,7 @@ func TestCodec_Decimal_BsonVal(t *testing.T) {
 	high, low := decimalVal.GetBytes()
 
 	original := &hasDecimal{
-		Value: &messagesCereal.Decimal{
+		Value: &cerealMessages.Decimal{
 			High: high,
 			Low:  low,
 		},
@@ -52,7 +52,7 @@ func TestCodec_Decimal_RoundTrip(t *testing.T) {
 	assert := assert.New(t)
 
 	type hasDecimal struct {
-		Value *messagesCereal.Decimal
+		Value *cerealMessages.Decimal
 	}
 
 	decimalVal, err := primitive.ParseDecimal128("10.25")
@@ -61,7 +61,7 @@ func TestCodec_Decimal_RoundTrip(t *testing.T) {
 	high, low := decimalVal.GetBytes()
 
 	original := &hasDecimal{
-		Value: &messagesCereal.Decimal{
+		Value: &cerealMessages.Decimal{
 			High: high,
 			Low:  low,
 		},
@@ -81,7 +81,7 @@ func TestCodec_Decimal_RoundTrip_Null(t *testing.T) {
 	assert := assert.New(t)
 
 	type hasDecimal struct {
-		Value *messagesCereal.Decimal
+		Value *cerealMessages.Decimal
 	}
 
 	original := &hasDecimal{

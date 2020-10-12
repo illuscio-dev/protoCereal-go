@@ -4,11 +4,11 @@
 // 	protoc        v3.13.0
 // source: cereal_proto/test/test.proto
 
-package messagesCereal_test
+package cerealMessages_test
 
 import (
 	proto "github.com/golang/protobuf/proto"
-	messagesCereal "github.com/illuscio-dev/protoCereal-go/messagesCereal"
+	cerealMessages "github.com/illuscio-dev/protoCereal-go/cerealMessages"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -263,21 +263,21 @@ func (x *TestOneOfFirst) GetFieldDouble() float64 {
 	return 0
 }
 
-func (x *TestOneOfFirst) GetFieldDecimal() *messagesCereal.Decimal {
+func (x *TestOneOfFirst) GetFieldDecimal() *cerealMessages.Decimal {
 	if x, ok := x.GetSomeValue().(*TestOneOfFirst_FieldDecimal); ok {
 		return x.FieldDecimal
 	}
 	return nil
 }
 
-func (x *TestOneOfFirst) GetFieldUuid() *messagesCereal.UUID {
+func (x *TestOneOfFirst) GetFieldUuid() *cerealMessages.UUID {
 	if x, ok := x.GetSomeValue().(*TestOneOfFirst_FieldUuid); ok {
 		return x.FieldUuid
 	}
 	return nil
 }
 
-func (x *TestOneOfFirst) GetFieldRaw() *messagesCereal.RawData {
+func (x *TestOneOfFirst) GetFieldRaw() *cerealMessages.RawData {
 	if x, ok := x.GetSomeValue().(*TestOneOfFirst_FieldRaw); ok {
 		return x.FieldRaw
 	}
@@ -312,15 +312,15 @@ type TestOneOfFirst_FieldDouble struct {
 }
 
 type TestOneOfFirst_FieldDecimal struct {
-	FieldDecimal *messagesCereal.Decimal `protobuf:"bytes,6,opt,name=field_decimal,json=fieldDecimal,proto3,oneof"`
+	FieldDecimal *cerealMessages.Decimal `protobuf:"bytes,6,opt,name=field_decimal,json=fieldDecimal,proto3,oneof"`
 }
 
 type TestOneOfFirst_FieldUuid struct {
-	FieldUuid *messagesCereal.UUID `protobuf:"bytes,7,opt,name=field_uuid,json=fieldUuid,proto3,oneof"`
+	FieldUuid *cerealMessages.UUID `protobuf:"bytes,7,opt,name=field_uuid,json=fieldUuid,proto3,oneof"`
 }
 
 type TestOneOfFirst_FieldRaw struct {
-	FieldRaw *messagesCereal.RawData `protobuf:"bytes,8,opt,name=field_raw,json=fieldRaw,proto3,oneof"`
+	FieldRaw *cerealMessages.RawData `protobuf:"bytes,8,opt,name=field_raw,json=fieldRaw,proto3,oneof"`
 }
 
 type TestOneOfFirst_FieldWizard struct {
@@ -529,8 +529,8 @@ var file_cereal_proto_test_test_proto_rawDesc = []byte{
 	0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x42, 0x3c, 0x5a, 0x3a, 0x67, 0x69, 0x74, 0x68,
 	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x6c, 0x6c, 0x75, 0x73, 0x63, 0x69, 0x6f, 0x2d,
 	0x64, 0x65, 0x76, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x43, 0x65, 0x72, 0x65, 0x61, 0x6c, 0x2d,
-	0x67, 0x6f, 0x2f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73, 0x43, 0x65, 0x72, 0x65, 0x61,
-	0x6c, 0x5f, 0x74, 0x65, 0x73, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x67, 0x6f, 0x2f, 0x63, 0x65, 0x72, 0x65, 0x61, 0x6c, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
+	0x73, 0x5f, 0x74, 0x65, 0x73, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -553,9 +553,9 @@ var file_cereal_proto_test_test_proto_goTypes = []interface{}{
 	(*TestOneOfFirst)(nil),         // 3: cereal_test.TestOneOfFirst
 	(*TestOneOfMultiMessage)(nil),  // 4: cereal_test.TestOneOfMultiMessage
 	(*ListValue)(nil),              // 5: cereal_test.ListValue
-	(*messagesCereal.Decimal)(nil), // 6: cereal.Decimal
-	(*messagesCereal.UUID)(nil),    // 7: cereal.UUID
-	(*messagesCereal.RawData)(nil), // 8: cereal.RawData
+	(*cerealMessages.Decimal)(nil), // 6: cereal.Decimal
+	(*cerealMessages.UUID)(nil),    // 7: cereal.UUID
+	(*cerealMessages.RawData)(nil), // 8: cereal.RawData
 }
 var file_cereal_proto_test_test_proto_depIdxs = []int32{
 	6, // 0: cereal_test.TestOneOfFirst.field_decimal:type_name -> cereal.Decimal

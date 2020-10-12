@@ -2,7 +2,7 @@ package protoBson_test
 
 import (
 	"fmt"
-	"github.com/illuscio-dev/protoCereal-go/messagesCereal_test"
+	"github.com/illuscio-dev/protoCereal-go/cerealMessages_test"
 	protoBson "github.com/illuscio-dev/protoCereal-go/protoBSON"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
@@ -27,12 +27,12 @@ func init() {
 func TestOpts_WithCustomWrappers(t *testing.T) {
 	assert := assert.New(t)
 	type hasWrapper struct {
-		Info *messagesCereal_test.ListValue
+		Info *cerealMessages_test.ListValue
 	}
 
 	registryBuilder := bsoncodec.NewRegistryBuilder()
 	opts := protoBson.NewMongoOpts().
-		WithCustomWrappers(new(messagesCereal_test.ListValue))
+		WithCustomWrappers(new(cerealMessages_test.ListValue))
 
 	err := protoBson.RegisterCerealCodecs(registryBuilder, opts)
 	if !assert.NoError(err, "create registry") {
@@ -43,7 +43,7 @@ func TestOpts_WithCustomWrappers(t *testing.T) {
 
 	innerValue := []string{"some", "values"}
 	original := &hasWrapper{
-		Info: &messagesCereal_test.ListValue{
+		Info: &cerealMessages_test.ListValue{
 			Value: innerValue,
 		},
 	}
@@ -82,13 +82,13 @@ func TestOpts_WithCustomWrappers(t *testing.T) {
 func TestRegisterCustomWrapper_WithoutValueField(t *testing.T) {
 	registryBuilder := bsoncodec.NewRegistryBuilder()
 	opts := protoBson.NewMongoOpts().
-		WithCustomWrappers(new(messagesCereal_test.Wizard))
+		WithCustomWrappers(new(cerealMessages_test.Wizard))
 
 	err := protoBson.RegisterCerealCodecs(registryBuilder, opts)
 	assert.EqualError(
 		t,
 		err,
-		"custom wrapper message '*messagesCereal_test.Wizard' does not have"+
+		"custom wrapper message '*cerealMessages_test.Wizard' does not have"+
 			" 'Value' field",
 	)
 }
@@ -96,13 +96,13 @@ func TestRegisterCustomWrapper_WithoutValueField(t *testing.T) {
 func TestRegisterCustomWrapper_WithMultiplePublic(t *testing.T) {
 	registryBuilder := bsoncodec.NewRegistryBuilder()
 	opts := protoBson.NewMongoOpts().
-		WithCustomWrappers(new(messagesCereal_test.TestProto))
+		WithCustomWrappers(new(cerealMessages_test.TestProto))
 
 	err := protoBson.RegisterCerealCodecs(registryBuilder, opts)
 	assert.EqualError(
 		t,
 		err,
-		"custom wrapper type '*messagesCereal_test.TestProto' must have"+
+		"custom wrapper type '*cerealMessages_test.TestProto' must have"+
 			" exactly 1 public field, but contains 2",
 	)
 }

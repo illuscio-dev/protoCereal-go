@@ -1,7 +1,7 @@
 package protoBson
 
 import (
-	"github.com/illuscio-dev/protoCereal-go/messagesCereal"
+	"github.com/illuscio-dev/protoCereal-go/cerealMessages"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
 	"go.mongodb.org/mongo-driver/bson/bsonrw"
 	"go.mongodb.org/mongo-driver/bson/bsontype"
@@ -9,7 +9,7 @@ import (
 )
 
 // Save the zero value for a nil timestamp.
-var uuidZeroValue = reflect.Zero(reflect.TypeOf(new(messagesCereal.UUID)))
+var uuidZeroValue = reflect.Zero(reflect.TypeOf(new(cerealMessages.UUID)))
 
 // CODEC FOR MARSHALLING AND UNMARSHALLING UUIDs
 type protoUUIDCodec struct{}
@@ -28,7 +28,7 @@ func (codec protoUUIDCodec) DecodeValue(
 		return err
 	}
 
-	protoVal := &messagesCereal.UUID{
+	protoVal := &cerealMessages.UUID{
 		Value: bin,
 	}
 
@@ -44,7 +44,7 @@ func (codec protoUUIDCodec) EncodeValue(
 		return writer.WriteNull()
 	}
 
-	valueUUID := value.Interface().(*messagesCereal.UUID)
+	valueUUID := value.Interface().(*cerealMessages.UUID)
 	err := writer.WriteBinaryWithSubtype(valueUUID.Value, bsontype.BinaryUUID)
 	if err != nil {
 		return err

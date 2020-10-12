@@ -2,8 +2,8 @@ package oneof
 
 import (
 	"errors"
-	"github.com/illuscio-dev/protoCereal-go/messagesCereal"
-	"github.com/illuscio-dev/protoCereal-go/messagesCereal_test"
+	"github.com/illuscio-dev/protoCereal-go/cerealMessages"
+	"github.com/illuscio-dev/protoCereal-go/cerealMessages_test"
 	"github.com/stretchr/testify/assert"
 	"reflect"
 	"testing"
@@ -12,19 +12,19 @@ import (
 func TestOneOf_ErrorNotImplemented(t *testing.T) {
 	oneOfBuilder := NewCodecBuilder()
 	oneOfBuilder.oneOfInterface = reflect.TypeOf(
-		(*messagesCereal_test.IsTestOneOfMultiMessageMage)(nil),
+		(*cerealMessages_test.IsTestOneOfMultiMessageMage)(nil),
 	).Elem()
 
 	err := oneOfBuilder.validateValueWrapperType(
-		reflect.TypeOf(new(messagesCereal.Decimal)),
+		reflect.TypeOf(new(cerealMessages.Decimal)),
 	)
 
 	assert.EqualError(
 		t,
 		err,
 		"oneof interface not implemented: "+
-			"'*messagesCereal.Decimal' does not implement "+
-			"'messagesCereal_test.isTestOneOfMultiMessage_Mage'",
+			"'*cerealMessages.Decimal' does not implement "+
+			"'cerealMessages_test.isTestOneOfMultiMessage_Mage'",
 	)
 
 	assert.True(t, errors.Is(err, ErrWrongOneOfInterface))

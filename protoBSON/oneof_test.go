@@ -3,8 +3,8 @@ package protoBson_test
 import (
 	"fmt"
 	"github.com/google/uuid"
-	"github.com/illuscio-dev/protoCereal-go/messagesCereal"
-	"github.com/illuscio-dev/protoCereal-go/messagesCereal_test"
+	"github.com/illuscio-dev/protoCereal-go/cerealMessages"
+	"github.com/illuscio-dev/protoCereal-go/cerealMessages_test"
 	protoBson "github.com/illuscio-dev/protoCereal-go/protoBSON"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
@@ -18,7 +18,7 @@ import (
 func TestOneOfFirst(t *testing.T) {
 	cerealOpts := protoBson.NewMongoOpts()
 
-	cerealOpts.WithOneOfFields(new(messagesCereal_test.TestOneOfFirst))
+	cerealOpts.WithOneOfFields(new(cerealMessages_test.TestOneOfFirst))
 
 	uuidVal, err := uuid.NewRandom()
 	if !assert.NoError(t, err, "uuid generation") {
@@ -35,29 +35,29 @@ func TestOneOfFirst(t *testing.T) {
 
 	type testCase struct {
 		name            string
-		value           messagesCereal_test.IsTestOneOfFirstSomeValue
+		value           cerealMessages_test.IsTestOneOfFirstSomeValue
 		serializedValue interface{}
 	}
 
 	testCases := []testCase{
 		{
 			name: "int32",
-			value: &messagesCereal_test.TestOneOfFirst_FieldInt32{
+			value: &cerealMessages_test.TestOneOfFirst_FieldInt32{
 				FieldInt32: 42,
 			},
 			serializedValue: int32(42),
 		},
 		{
 			name: "string",
-			value: &messagesCereal_test.TestOneOfFirst_FieldString{
+			value: &cerealMessages_test.TestOneOfFirst_FieldString{
 				FieldString: "Some Data",
 			},
 			serializedValue: "Some Data",
 		},
 		{
 			name: "decimal",
-			value: &messagesCereal_test.TestOneOfFirst_FieldDecimal{
-				FieldDecimal: &messagesCereal.Decimal{
+			value: &cerealMessages_test.TestOneOfFirst_FieldDecimal{
+				FieldDecimal: &cerealMessages.Decimal{
 					High: 42,
 					Low:  77,
 				},
@@ -66,8 +66,8 @@ func TestOneOfFirst(t *testing.T) {
 		},
 		{
 			name: "uuid",
-			value: &messagesCereal_test.TestOneOfFirst_FieldUuid{
-				FieldUuid: messagesCereal.UUIDFromGoogle(uuidVal),
+			value: &cerealMessages_test.TestOneOfFirst_FieldUuid{
+				FieldUuid: cerealMessages.UUIDFromGoogle(uuidVal),
 			},
 			serializedValue: primitive.Binary{
 				Subtype: bsontype.BinaryUUID,
@@ -76,8 +76,8 @@ func TestOneOfFirst(t *testing.T) {
 		},
 		{
 			name: "raw",
-			value: &messagesCereal_test.TestOneOfFirst_FieldRaw{
-				FieldRaw: &messagesCereal.RawData{Data: []byte("some bin data")},
+			value: &cerealMessages_test.TestOneOfFirst_FieldRaw{
+				FieldRaw: &cerealMessages.RawData{Data: []byte("some bin data")},
 			},
 			serializedValue: primitive.Binary{
 				Subtype: bsontype.BinaryUserDefined,
@@ -86,8 +86,8 @@ func TestOneOfFirst(t *testing.T) {
 		},
 		{
 			name: "wizard",
-			value: &messagesCereal_test.TestOneOfFirst_FieldWizard{
-				FieldWizard: &messagesCereal_test.Wizard{
+			value: &cerealMessages_test.TestOneOfFirst_FieldWizard{
+				FieldWizard: &cerealMessages_test.Wizard{
 					Name: "Harry Potter",
 				},
 			},
@@ -97,7 +97,7 @@ func TestOneOfFirst(t *testing.T) {
 		},
 		{
 			name: "interior nil",
-			value: &messagesCereal_test.TestOneOfFirst_FieldDecimal{
+			value: &cerealMessages_test.TestOneOfFirst_FieldDecimal{
 				FieldDecimal: nil,
 			},
 			serializedValue: nil,
@@ -114,7 +114,7 @@ func TestOneOfFirst(t *testing.T) {
 	runTest := func(t *testing.T) {
 		assert := assert.New(t)
 
-		original := &messagesCereal_test.TestOneOfFirst{
+		original := &cerealMessages_test.TestOneOfFirst{
 			SomeValue: thisCase.value,
 		}
 
@@ -140,7 +140,7 @@ func TestOneOfFirst(t *testing.T) {
 		}
 		assert.Equal(thisCase.serializedValue, mapValue)
 
-		unmarshalled := new(messagesCereal_test.TestOneOfFirst)
+		unmarshalled := new(cerealMessages_test.TestOneOfFirst)
 		err = bson.UnmarshalWithRegistry(registry, encoded, unmarshalled)
 		assert.NoError(err, "error unmarshalling proto")
 		if err != nil {
@@ -163,7 +163,7 @@ func TestOneOfFirst(t *testing.T) {
 func TestOneOfMultiMessageTargets(t *testing.T) {
 	builder := bson.NewRegistryBuilder()
 	cerealOpts := protoBson.NewMongoOpts().WithOneOfFields(
-		new(messagesCereal_test.TestOneOfMultiMessage),
+		new(cerealMessages_test.TestOneOfMultiMessage),
 	)
 
 	err := protoBson.RegisterCerealCodecs(builder, cerealOpts)
@@ -174,15 +174,15 @@ func TestOneOfMultiMessageTargets(t *testing.T) {
 	registry := builder.Build()
 
 	type hasMessage struct {
-		Message *messagesCereal_test.TestOneOfMultiMessage
+		Message *cerealMessages_test.TestOneOfMultiMessage
 	}
 
 	assert := assert.New(t)
 
 	original := &hasMessage{
-		Message: &messagesCereal_test.TestOneOfMultiMessage{
-			Mage: &messagesCereal_test.TestOneOfMultiMessage_Wizard{
-				Wizard: &messagesCereal_test.Wizard{Name: "Harry Potter"},
+		Message: &cerealMessages_test.TestOneOfMultiMessage{
+			Mage: &cerealMessages_test.TestOneOfMultiMessage_Wizard{
+				Wizard: &cerealMessages_test.Wizard{Name: "Harry Potter"},
 			},
 		},
 	}
@@ -230,7 +230,7 @@ func TestAutoRegisterOneOfs(t *testing.T) {
 	builder := bson.NewRegistryBuilder()
 	cerealOpts := protoBson.
 		NewMongoOpts().
-		WithOneOfFields(new(messagesCereal_test.TestOneOfFirst))
+		WithOneOfFields(new(cerealMessages_test.TestOneOfFirst))
 
 	_ = protoBson.RegisterCerealCodecs(builder, cerealOpts)
 }
@@ -239,14 +239,14 @@ func TestOneOf_CustomMapping(t *testing.T) {
 	cerealOpts := protoBson.
 		NewMongoOpts().
 		WithCustomWrappers(
-			new(messagesCereal_test.DecimalList),
+			new(cerealMessages_test.DecimalList),
 		).
 		WithOneOfElementMapping(
-			new(messagesCereal_test.DecimalList),
+			new(cerealMessages_test.DecimalList),
 			bsontype.Array,
 			0x0,
 		).
-		WithOneOfFields(new(messagesCereal_test.HasCustomOneOf))
+		WithOneOfFields(new(cerealMessages_test.HasCustomOneOf))
 
 	builder, err := protoBson.NewCerealRegistryBuilder(cerealOpts)
 	if !assert.NoError(t, err, "create registry") {
@@ -257,7 +257,7 @@ func TestOneOf_CustomMapping(t *testing.T) {
 
 	type testCase struct {
 		Name            string
-		ElementValue    messagesCereal_test.IsHasCustomOneofList
+		ElementValue    cerealMessages_test.IsHasCustomOneofList
 		SerializedValue interface{}
 	}
 
@@ -266,15 +266,15 @@ func TestOneOf_CustomMapping(t *testing.T) {
 	testCases := []*testCase{
 		{
 			Name: "String",
-			ElementValue: &messagesCereal_test.HasCustomOneOf_StringValue{
+			ElementValue: &cerealMessages_test.HasCustomOneOf_StringValue{
 				StringValue: "some value",
 			},
 			SerializedValue: "some value",
 		},
 		{
 			Name: "Decimal",
-			ElementValue: &messagesCereal_test.HasCustomOneOf_DecimalValue{
-				DecimalValue: &messagesCereal.Decimal{
+			ElementValue: &cerealMessages_test.HasCustomOneOf_DecimalValue{
+				DecimalValue: &cerealMessages.Decimal{
 					High: 47,
 					Low:  101,
 				},
@@ -283,9 +283,9 @@ func TestOneOf_CustomMapping(t *testing.T) {
 		},
 		{
 			Name: "DecimalList",
-			ElementValue: &messagesCereal_test.HasCustomOneOf_DecimalList{
-				DecimalList: &messagesCereal_test.DecimalList{
-					Value: []*messagesCereal.Decimal{
+			ElementValue: &cerealMessages_test.HasCustomOneOf_DecimalList{
+				DecimalList: &cerealMessages_test.DecimalList{
+					Value: []*cerealMessages.Decimal{
 						{
 							High: 100,
 							Low:  101,
@@ -307,7 +307,7 @@ func TestOneOf_CustomMapping(t *testing.T) {
 	testFunc := func(t *testing.T) {
 		assert := assert.New(t)
 
-		message := &messagesCereal_test.HasCustomOneOf{
+		message := &cerealMessages_test.HasCustomOneOf{
 			Many: thisCase.ElementValue,
 		}
 
@@ -331,7 +331,7 @@ func TestOneOf_CustomMapping(t *testing.T) {
 			"correct serialized value",
 		)
 
-		deserialized := new(messagesCereal_test.HasCustomOneOf)
+		deserialized := new(cerealMessages_test.HasCustomOneOf)
 		err = bson.UnmarshalWithRegistry(registry, serialized, deserialized)
 		if !assert.NoError(err, "unmarshall to proto") {
 			t.FailNow()
@@ -351,7 +351,7 @@ func TestOneOf_BytesValue(t *testing.T) {
 	assert := assert.New(t)
 
 	cerealOpts := protoBson.NewMongoOpts().
-		WithOneOfFields(new(messagesCereal_test.HasOneOfBytes))
+		WithOneOfFields(new(cerealMessages_test.HasOneOfBytes))
 
 	registryBuilder, err := protoBson.NewCerealRegistryBuilder(cerealOpts)
 	if !assert.NoError(err, "create registry builder") {
@@ -360,8 +360,8 @@ func TestOneOf_BytesValue(t *testing.T) {
 
 	registry := registryBuilder.Build()
 
-	message := &messagesCereal_test.HasOneOfBytes{
-		Value: &messagesCereal_test.HasOneOfBytes_BytesValue{
+	message := &cerealMessages_test.HasOneOfBytes{
+		Value: &cerealMessages_test.HasOneOfBytes_BytesValue{
 			BytesValue: []byte("some bin data"),
 		},
 	}
@@ -391,7 +391,7 @@ func TestOneOf_BytesValue(t *testing.T) {
 		t.FailNow()
 	}
 
-	deserialized := new(messagesCereal_test.HasOneOfBytes)
+	deserialized := new(cerealMessages_test.HasOneOfBytes)
 	err = bson.UnmarshalWithRegistry(registry, serialized, deserialized)
 	if !assert.NoError(err, "unmarshall to protobuf") {
 		t.FailNow()
