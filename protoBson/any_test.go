@@ -3,7 +3,7 @@ package protoBson_test
 import (
 	"fmt"
 	"github.com/illuscio-dev/protoCereal-go/cerealMessages_test"
-	"github.com/illuscio-dev/protoCereal-go/protoBSON/common"
+	"github.com/illuscio-dev/protoCereal-go/protoBson/common"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"google.golang.org/protobuf/types/known/anypb"

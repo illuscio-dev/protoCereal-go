@@ -2,7 +2,7 @@ package protoBson_test
 
 import (
 	"github.com/illuscio-dev/protoCereal-go/cerealMessages_test"
-	protoBson "github.com/illuscio-dev/protoCereal-go/protoBSON"
+	protoBson "github.com/illuscio-dev/protoCereal-go/protoBson"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
