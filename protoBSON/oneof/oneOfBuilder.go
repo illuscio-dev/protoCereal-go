@@ -387,9 +387,10 @@ func CodecBuildersForMessage(
 		err := builder.fromMessageOneOfField(message, oneOfField)
 		if err != nil {
 			return nil, fmt.Errorf(
-				"error registering one-of field '%v' of type '%v'",
+				"error registering one-of field '%v' of type '%v': %w",
 				oneOfField.Name(),
 				reflect.TypeOf(message),
+				err,
 			)
 		}
 
