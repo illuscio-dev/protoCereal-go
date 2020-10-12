@@ -11,6 +11,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
 	"go.mongodb.org/mongo-driver/bson/bsontype"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"log"
 	"testing"
 )
 
@@ -344,4 +345,57 @@ func TestOneOf_CustomMapping(t *testing.T) {
 	for _, thisCase = range testCases {
 		t.Run(thisCase.Name, testFunc)
 	}
+}
+
+func TestOneOf_BytesValue(t *testing.T) {
+	assert := assert.New(t)
+
+	cerealOpts := protoBson.NewMongoOpts().
+		WithOneOfFields(new(messagesCereal_test.HasOneOfBytes))
+
+	registryBuilder, err := protoBson.NewCerealRegistryBuilder(cerealOpts)
+	if !assert.NoError(err, "create registry builder") {
+		t.FailNow()
+	}
+
+	registry := registryBuilder.Build()
+
+	message := &messagesCereal_test.HasOneOfBytes{
+		Value: &messagesCereal_test.HasOneOfBytes_BytesValue{
+			BytesValue: []byte("some bin data"),
+		},
+	}
+
+	serialized, err := bson.MarshalWithRegistry(registry, message)
+	if !assert.NoError(err, "serialize message") {
+		t.FailNow()
+	}
+
+	document := bson.M{}
+	err = bson.UnmarshalWithRegistry(registry, serialized, document)
+	if !assert.NoError(err, "unmarshall to document") {
+		t.FailNow()
+	}
+
+	log.Println("DOCUMENT:", document)
+	if !assert.Contains(document, "value") {
+		t.FailNow()
+	}
+
+	expectedValue := primitive.Binary{
+		Subtype: 0x0,
+		Data:    []byte("some bin data"),
+	}
+
+	if !assert.Equal(expectedValue, document["value"]) {
+		t.FailNow()
+	}
+
+	deserialized := new(messagesCereal_test.HasOneOfBytes)
+	err = bson.UnmarshalWithRegistry(registry, serialized, deserialized)
+	if !assert.NoError(err, "unmarshall to protobuf") {
+		t.FailNow()
+	}
+
+	assert.Equal(message, deserialized, "unmarshalled equals original")
 }

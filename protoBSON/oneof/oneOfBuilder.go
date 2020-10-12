@@ -122,9 +122,18 @@ func (builder *CodecBuilder) deduceUnknownTypeEncoding(
 		bsonTypes = []bsonTypeKey{newSimpleKey(bsontype.Double)}
 	case reflect.Float32:
 		bsonTypes = []bsonTypeKey{newSimpleKey(bsontype.Double)}
-	// NOTE: slices / arrays cannot be directly used as a oneof value, so we don't need
-	// to handle them here. They will require a custom wrapper type for including in
-	// a oneof, which can be registered with the options.
+	// NOTE: bytes are always represented as a []uint8. Because repeated fields are
+	// disallowed in one-ofs, we can assume an array represents a bytes field.
+	case reflect.Slice:
+		if innerType != bytesFieldType {
+			return nil, fmt.Errorf(
+				"inner slice type '%v' is not a bytes field for"+
+					" oneof wrapper '%v'",
+				innerType,
+				oneOfType,
+			)
+		}
+		bsonTypes = []bsonTypeKey{newBsonTypeKey(bsontype.Binary, 0x0)}
 	case reflect.Ptr:
 		// If this inner type is not a struct, it's out of spec for protobuf structures
 		// and we cannot handle it.
