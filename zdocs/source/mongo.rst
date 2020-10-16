@@ -653,7 +653,7 @@ A wrapper type must:
 
 - Contain only one public field.
 
-- The field must be called "Value"
+- This field must not be an embedded field.
 
 The codec will serialize a ``bsontype.Null`` value if the wrapper message is a nil
 pointer.
