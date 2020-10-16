@@ -11,55 +11,7 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 	"reflect"
-	"strings"
 )
-
-func validateWrapperType(wrapperType reflect.Type) error {
-	// Check that this is a pointer to a struct
-	if wrapperType.Kind() != reflect.Ptr ||
-		wrapperType.Elem().Kind() != reflect.Struct {
-		return fmt.Errorf(
-			"custom wrapper type '%v' is not pointer to a struct", wrapperType,
-		)
-	}
-
-	// Dereference to the underlying struct
-	structType := wrapperType.Elem()
-	// Iterate through all the fields, counting the public ones and remembering the
-	// last one's name.
-	fieldCount := structType.NumField()
-	publicCount := 0
-	publicFieldName := ""
-	for i := 0; i < fieldCount; i++ {
-		fieldInfo := structType.Field(i)
-		firstLetter := string([]rune(fieldInfo.Name)[0])
-		if strings.ToUpper(firstLetter) == firstLetter {
-			publicCount++
-			publicFieldName = fieldInfo.Name
-		}
-	}
-
-	// Check that there is only one public field.
-	if publicCount != 1 {
-		return fmt.Errorf(
-			"custom wrapper type '%v' must have exactly 1 public field, but"+
-				" contains %v",
-			wrapperType,
-			publicCount,
-		)
-	}
-
-	// Check that it is called 'Value' (conforming to the google wrapper type
-	// convention).
-	if publicFieldName != "Value" {
-		return fmt.Errorf(
-			"custom wrapper message '%v' does not have 'Value' field",
-			wrapperType,
-		)
-	}
-
-	return nil
-}
 
 // Register the bson codecs that come with protoCereal.
 func registerProtoCerealCodecs(builder *bsoncodec.RegistryBuilder, opts *Opts) {
@@ -76,33 +28,41 @@ func registerProtoCerealCodecs(builder *bsoncodec.RegistryBuilder, opts *Opts) {
 	)
 	// Wrapper types
 	builder.RegisterCodec(
-		reflect.TypeOf(new(wrapperspb.BoolValue)), protoWrapperCodec{},
+		reflect.TypeOf(
+			new(wrapperspb.BoolValue)), mustWrapperCodec(new(wrapperspb.BoolValue)),
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(new(wrapperspb.BytesValue)), protoWrapperCodec{},
+		reflect.TypeOf(
+			new(wrapperspb.BytesValue)), mustWrapperCodec(new(wrapperspb.BytesValue)),
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(new(wrapperspb.FloatValue)), protoWrapperCodec{},
+		reflect.TypeOf(
+			new(wrapperspb.FloatValue)), mustWrapperCodec(new(wrapperspb.FloatValue)),
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(new(wrapperspb.DoubleValue)), protoWrapperCodec{},
+		reflect.TypeOf(
+			new(wrapperspb.DoubleValue)), mustWrapperCodec(new(wrapperspb.DoubleValue)),
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(new(wrapperspb.Int32Value)), protoWrapperCodec{},
+		reflect.TypeOf(
+			new(wrapperspb.Int32Value)), mustWrapperCodec(new(wrapperspb.Int32Value)),
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(new(wrapperspb.Int64Value)), protoWrapperCodec{},
+		reflect.TypeOf(
+			new(wrapperspb.Int64Value)), mustWrapperCodec(new(wrapperspb.Int64Value)),
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(new(wrapperspb.StringValue)), protoWrapperCodec{},
+		reflect.TypeOf(
+			new(wrapperspb.StringValue)), mustWrapperCodec(new(wrapperspb.StringValue)),
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(new(wrapperspb.UInt32Value)), protoWrapperCodec{},
+		reflect.TypeOf(
+			new(wrapperspb.UInt32Value)), mustWrapperCodec(new(wrapperspb.UInt32Value)),
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(new(wrapperspb.UInt64Value)), protoWrapperCodec{},
+		reflect.TypeOf(
+			new(wrapperspb.UInt64Value)), mustWrapperCodec(new(wrapperspb.UInt64Value)),
 	)
-
 }
 
 func buildAndRegisterOneOfCodecs(builder *bsoncodec.RegistryBuilder, opts *Opts) error {
@@ -137,22 +97,11 @@ func registerEnumStringCodec(builder *bsoncodec.RegistryBuilder, opts *Opts) {
 func registerCustomWrappers(builder *bsoncodec.RegistryBuilder, opts *Opts) error {
 	// Add custom wrapper type
 	for _, wrapper := range opts.customWrappers {
-		wrapperType := reflect.TypeOf(wrapper)
-		err := validateWrapperType(wrapperType)
+		wrapperCodec, err := newWrapperCodec(wrapper)
 		if err != nil {
-			return err
+			return fmt.Errorf("error creating custom wrapper codec: %w", err)
 		}
-		builder.RegisterCodec(wrapperType, protoWrapperCodec{})
-	}
-
-	// Add custom wrapper type
-	for _, wrapper := range opts.customWrappers {
-		wrapperType := reflect.TypeOf(wrapper)
-		err := validateWrapperType(wrapperType)
-		if err != nil {
-			return err
-		}
-		builder.RegisterCodec(wrapperType, protoWrapperCodec{})
+		builder.RegisterCodec(reflect.TypeOf(wrapper), wrapperCodec)
 	}
 
 	return nil

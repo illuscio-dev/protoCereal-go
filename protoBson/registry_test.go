@@ -79,20 +79,6 @@ func TestOpts_WithCustomWrappers(t *testing.T) {
 	assert.Equal(original, unmarshalled, "message match")
 }
 
-func TestRegisterCustomWrapper_WithoutValueField(t *testing.T) {
-	registryBuilder := bsoncodec.NewRegistryBuilder()
-	opts := protoBson.NewMongoOpts().
-		WithCustomWrappers(new(cerealMessages_test.Wizard))
-
-	err := protoBson.RegisterCerealCodecs(registryBuilder, opts)
-	assert.EqualError(
-		t,
-		err,
-		"custom wrapper message '*cerealMessages_test.Wizard' does not have"+
-			" 'Value' field",
-	)
-}
-
 func TestRegisterCustomWrapper_WithMultiplePublic(t *testing.T) {
 	registryBuilder := bsoncodec.NewRegistryBuilder()
 	opts := protoBson.NewMongoOpts().
@@ -102,8 +88,9 @@ func TestRegisterCustomWrapper_WithMultiplePublic(t *testing.T) {
 	assert.EqualError(
 		t,
 		err,
-		"custom wrapper type '*cerealMessages_test.TestProto' must have"+
-			" exactly 1 public field, but contains 2",
+		"error creating custom wrapper codec: wrapper expected to have"+
+			" exactly 1 public field, found 2 public fields for type"+
+			" '*cerealMessages_test.TestProto'",
 	)
 }
 
@@ -123,7 +110,7 @@ func TestRegisterCustomWrapper_NonStructPointerWrapper(t *testing.T) {
 	assert.EqualError(
 		t,
 		err,
-		"custom wrapper type 'protoBson_test.badMessage' is not pointer"+
-			" to a struct",
+		"error creating custom wrapper codec: wrapper codec expected"+
+			" pointer to struct, got 'protoBson_test.badMessage'",
 	)
 }
