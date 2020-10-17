@@ -1,4 +1,4 @@
-package protoBson_test
+package wrapper_test
 
 import (
 	"github.com/golang/protobuf/ptypes/wrappers"

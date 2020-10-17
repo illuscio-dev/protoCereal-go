@@ -3,6 +3,7 @@ package oneof
 import (
 	"errors"
 	"fmt"
+	"github.com/illuscio-dev/protoCereal-go/protoBson/wrapper"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
 	"go.mongodb.org/mongo-driver/bson/bsontype"
 	"google.golang.org/protobuf/proto"
@@ -18,9 +19,16 @@ type ElementInfo struct {
 	BinarySubType byte
 }
 
+type ConcreteTypeCodecInfo struct {
+	ConcreteType reflect.Type
+	Codec        bsoncodec.ValueCodec
+}
+
 type CodecBuilder struct {
 	// The master interface for the possible field values.
 	oneOfInterface reflect.Type
+	// List of concrete oneof wrapper types
+	concreteTypeCodecs []*ConcreteTypeCodecInfo
 	// Map of the encoded bson type to the oneof field type it decodes to
 	decodeMap map[bsonTypeKey]reflect.Type
 	// For message types that can be encoded into an embedded document, we actually CAN
@@ -270,6 +278,24 @@ func (builder *CodecBuilder) AddConcrete(
 	// Store the struct type for the one-of wrapper
 	builder.decodeMap[typeKey] = oneOfType.Elem()
 
+	// Add the concrete type to the oneof so we can register it as a wrapper.
+	wrapperCodec, err := wrapper.NewWrapperCodec(
+		reflect.New(oneOfType.Elem()).Interface(),
+	)
+	if err != nil {
+		return fmt.Errorf(
+			"error building wrapper codec for concrete oneof type '%v': %w",
+			oneOfType,
+			err,
+		)
+	}
+
+	concreteCodecInfo := &ConcreteTypeCodecInfo{
+		ConcreteType: oneOfType,
+		Codec:        wrapperCodec,
+	}
+	builder.concreteTypeCodecs = append(builder.concreteTypeCodecs, concreteCodecInfo)
+
 	return nil
 }
 
@@ -348,7 +374,10 @@ func (builder *CodecBuilder) fromMessageOneOfField(
 	return nil
 }
 
-func (builder *CodecBuilder) Register(registryBuilder *bsoncodec.RegistryBuilder) {
+func (builder *CodecBuilder) Register(
+	registryBuilder *bsoncodec.RegistryBuilder,
+) error {
+	// Register the main codec
 	codec := &oneOfCodec{
 		oneOfInterface:     builder.oneOfInterface,
 		decodeMap:          builder.decodeMap,
@@ -356,6 +385,15 @@ func (builder *CodecBuilder) Register(registryBuilder *bsoncodec.RegistryBuilder
 	}
 
 	registryBuilder.RegisterCodec(codec.oneOfInterface, codec)
+
+	// Register the concrete wrapper codecs. We need to register these in case we ever
+	// want to serialize the wrapper types divorced from their original fields (say as
+	// part of a map).
+	for _, codecInfo := range builder.concreteTypeCodecs {
+		registryBuilder.RegisterCodec(codecInfo.ConcreteType, codecInfo.Codec)
+	}
+
+	return nil
 }
 
 func NewCodecBuilder() *CodecBuilder {

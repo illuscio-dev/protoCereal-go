@@ -399,3 +399,44 @@ func TestOneOf_BytesValue(t *testing.T) {
 
 	assert.Equal(message, deserialized, "unmarshalled equals original")
 }
+
+func TestMarshallOneOfInMap(t *testing.T) {
+	assert := assert.New(t)
+
+	cerealOpts := protoBson.NewMongoOpts().
+		WithOneOfFields(new(cerealMessages_test.TestOneOfFirst))
+
+	registryBuilder, err := protoBson.NewCerealRegistryBuilder(cerealOpts)
+	if !assert.NoError(err, "create registry builder") {
+		t.FailNow()
+	}
+
+	registry := registryBuilder.Build()
+
+	original := bson.M{
+		"field": &cerealMessages_test.TestOneOfFirst_FieldBool{
+			FieldBool: true,
+		},
+	}
+
+	serialized, err := bson.MarshalWithRegistry(registry, original)
+	if !assert.NoError(err, "serialization") {
+		t.FailNow()
+	}
+
+	document := bson.M{}
+	err = bson.UnmarshalWithRegistry(registry, serialized, document)
+	if !assert.NoError(err, "document deserialization") {
+		t.FailNow()
+	}
+
+	assert.Equal(bson.M{"field": true}, document)
+
+	deserialized := make(map[string]*cerealMessages_test.TestOneOfFirst_FieldBool)
+	err = bson.UnmarshalWithRegistry(registry, serialized, deserialized)
+	if !assert.NoError(err, "deserialization") {
+		t.FailNow()
+	}
+
+	assert.Equal(true, deserialized["field"].FieldBool)
+}

@@ -1,4 +1,4 @@
-package protoBson
+package wrapper
 
 import (
 	"errors"
@@ -20,11 +20,11 @@ var ErrWrapperPublicFieldCount = errors.New(
 
 // Codec for encoding gRPC wrappers.BoolValue, which exposes an API for having nullable
 // boolean values.
-type protoWrapperCodec struct {
+type ProtoWrapperCodec struct {
 	FieldIndex int
 }
 
-func (codec protoWrapperCodec) EncodeValue(
+func (codec ProtoWrapperCodec) EncodeValue(
 	context bsoncodec.EncodeContext, writer bsonrw.ValueWriter, value reflect.Value,
 ) error {
 	// If this is a nil value, write a nil value
@@ -61,7 +61,7 @@ func (codec protoWrapperCodec) EncodeValue(
 	return nil
 }
 
-func (codec protoWrapperCodec) DecodeValue(
+func (codec ProtoWrapperCodec) DecodeValue(
 	context bsoncodec.DecodeContext, reader bsonrw.ValueReader, value reflect.Value,
 ) error {
 	valueType := value.Type()
@@ -77,7 +77,7 @@ func (codec protoWrapperCodec) DecodeValue(
 	newWrapper := reflect.New(valueType.Elem())
 
 	// Get the reflect.Value for the value field of the new wrapper object.
-	innerValue := newWrapper.Elem().FieldByName("Value")
+	innerValue := newWrapper.Elem().Field(codec.FieldIndex)
 
 	// Get the encoder for this inner value so we can encode it directly
 	innerDecoder, err := context.LookupDecoder(innerValue.Type())
@@ -113,17 +113,17 @@ func (codec protoWrapperCodec) DecodeValue(
 //
 //	- Have exactly 1 non-embedded public field. This field's value will be extracted
 //	  and marshalled as the bson value.
-func newWrapperCodec(protoMessage proto.Message) (protoWrapperCodec, error) {
+func NewWrapperCodec(protoMessage interface{}) (ProtoWrapperCodec, error) {
 	pointerType := reflect.TypeOf(protoMessage)
 	if pointerType.Kind() != reflect.Ptr {
-		return protoWrapperCodec{}, fmt.Errorf(
+		return ProtoWrapperCodec{}, fmt.Errorf(
 			"%w, got '%v'", ErrWrapperMessageType, pointerType,
 		)
 	}
 
 	structType := pointerType.Elem()
 	if structType.Kind() != reflect.Struct {
-		return protoWrapperCodec{}, fmt.Errorf(
+		return ProtoWrapperCodec{}, fmt.Errorf(
 			"%w, got '%v'", ErrWrapperMessageType, pointerType,
 		)
 	}
@@ -138,7 +138,7 @@ func newWrapperCodec(protoMessage proto.Message) (protoWrapperCodec, error) {
 		}
 		pubCount++
 		if len(fieldInfo.Index) != 1 {
-			return protoWrapperCodec{}, fmt.Errorf(
+			return ProtoWrapperCodec{}, fmt.Errorf(
 				"%w, '%v' of type '%v' is embedded",
 				ErrWrapperEmbeddedField,
 				fieldInfo.Name,
@@ -149,7 +149,7 @@ func newWrapperCodec(protoMessage proto.Message) (protoWrapperCodec, error) {
 	}
 
 	if pubCount != 1 {
-		return protoWrapperCodec{}, fmt.Errorf(
+		return ProtoWrapperCodec{}, fmt.Errorf(
 			"%w, found %v public fields for type '%v'",
 			ErrWrapperPublicFieldCount,
 			pubCount,
@@ -157,11 +157,11 @@ func newWrapperCodec(protoMessage proto.Message) (protoWrapperCodec, error) {
 		)
 	}
 
-	return protoWrapperCodec{FieldIndex: fieldIndex}, nil
+	return ProtoWrapperCodec{FieldIndex: fieldIndex}, nil
 }
 
-func mustWrapperCodec(protoMessage proto.Message) protoWrapperCodec {
-	newCodec, err := newWrapperCodec(protoMessage)
+func MustWrapperCodec(protoMessage proto.Message) ProtoWrapperCodec {
+	newCodec, err := NewWrapperCodec(protoMessage)
 	if err != nil {
 		panic(err)
 	}

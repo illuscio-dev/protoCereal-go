@@ -6,6 +6,7 @@ import (
 	"github.com/illuscio-dev/protoCereal-go/cerealMessages"
 	"github.com/illuscio-dev/protoCereal-go/protoBson/enum"
 	"github.com/illuscio-dev/protoCereal-go/protoBson/oneof"
+	"github.com/illuscio-dev/protoCereal-go/protoBson/wrapper"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
 	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -28,40 +29,40 @@ func registerProtoCerealCodecs(builder *bsoncodec.RegistryBuilder, opts *Opts) {
 	)
 	// Wrapper types
 	builder.RegisterCodec(
-		reflect.TypeOf(
-			new(wrapperspb.BoolValue)), mustWrapperCodec(new(wrapperspb.BoolValue)),
+		reflect.TypeOf(new(wrapperspb.BoolValue)),
+		wrapper.MustWrapperCodec(new(wrapperspb.BoolValue)),
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(
-			new(wrapperspb.BytesValue)), mustWrapperCodec(new(wrapperspb.BytesValue)),
+		reflect.TypeOf(new(wrapperspb.BytesValue)),
+		wrapper.MustWrapperCodec(new(wrapperspb.BytesValue)),
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(
-			new(wrapperspb.FloatValue)), mustWrapperCodec(new(wrapperspb.FloatValue)),
+		reflect.TypeOf(new(wrapperspb.FloatValue)),
+		wrapper.MustWrapperCodec(new(wrapperspb.FloatValue)),
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(
-			new(wrapperspb.DoubleValue)), mustWrapperCodec(new(wrapperspb.DoubleValue)),
+		reflect.TypeOf(new(wrapperspb.DoubleValue)),
+		wrapper.MustWrapperCodec(new(wrapperspb.DoubleValue)),
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(
-			new(wrapperspb.Int32Value)), mustWrapperCodec(new(wrapperspb.Int32Value)),
+		reflect.TypeOf(new(wrapperspb.Int32Value)),
+		wrapper.MustWrapperCodec(new(wrapperspb.Int32Value)),
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(
-			new(wrapperspb.Int64Value)), mustWrapperCodec(new(wrapperspb.Int64Value)),
+		reflect.TypeOf(new(wrapperspb.Int64Value)),
+		wrapper.MustWrapperCodec(new(wrapperspb.Int64Value)),
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(
-			new(wrapperspb.StringValue)), mustWrapperCodec(new(wrapperspb.StringValue)),
+		reflect.TypeOf(new(wrapperspb.StringValue)),
+		wrapper.MustWrapperCodec(new(wrapperspb.StringValue)),
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(
-			new(wrapperspb.UInt32Value)), mustWrapperCodec(new(wrapperspb.UInt32Value)),
+		reflect.TypeOf(new(wrapperspb.UInt32Value)),
+		wrapper.MustWrapperCodec(new(wrapperspb.UInt32Value)),
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(
-			new(wrapperspb.UInt64Value)), mustWrapperCodec(new(wrapperspb.UInt64Value)),
+		reflect.TypeOf(new(wrapperspb.UInt64Value)),
+		wrapper.MustWrapperCodec(new(wrapperspb.UInt64Value)),
 	)
 }
 
@@ -96,12 +97,12 @@ func registerEnumStringCodec(builder *bsoncodec.RegistryBuilder, opts *Opts) {
 
 func registerCustomWrappers(builder *bsoncodec.RegistryBuilder, opts *Opts) error {
 	// Add custom wrapper type
-	for _, wrapper := range opts.customWrappers {
-		wrapperCodec, err := newWrapperCodec(wrapper)
+	for _, wrapperType := range opts.customWrappers {
+		wrapperCodec, err := wrapper.NewWrapperCodec(wrapperType)
 		if err != nil {
 			return fmt.Errorf("error creating custom wrapper codec: %w", err)
 		}
-		builder.RegisterCodec(reflect.TypeOf(wrapper), wrapperCodec)
+		builder.RegisterCodec(reflect.TypeOf(wrapperType), wrapperCodec)
 	}
 
 	return nil
