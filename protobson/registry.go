@@ -1,12 +1,12 @@
-package protoBson
+package protobson
 
 import (
 	"errors"
 	"fmt"
 	"github.com/illuscio-dev/protoCereal-go/cereal"
-	"github.com/illuscio-dev/protoCereal-go/protoBson/enum"
-	"github.com/illuscio-dev/protoCereal-go/protoBson/oneof"
-	"github.com/illuscio-dev/protoCereal-go/protoBson/wrapper"
+	"github.com/illuscio-dev/protoCereal-go/protobson/enum"
+	"github.com/illuscio-dev/protoCereal-go/protobson/oneof"
+	"github.com/illuscio-dev/protoCereal-go/protobson/wrapper"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
 	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/timestamppb"

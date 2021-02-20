@@ -10,7 +10,6 @@ import (
 
 // Interface that generated enum types conform to.
 type ProtoEnum interface {
-	String() string
 	Descriptor() protoreflect.EnumDescriptor
 	Type() protoreflect.EnumType
 	Number() protoreflect.EnumNumber
@@ -29,7 +28,11 @@ func (codec *CodecEnumStringer) EncodeValue(
 			value.Type(),
 		)
 	}
-	err := writer.WriteString(enumVal.String())
+
+	// Get the proto-defined name here. This may be different from
+	err := writer.WriteString(
+		string(enumVal.Descriptor().Values().Get(int(enumVal.Number())).Name()),
+	)
 	if err != nil {
 		return fmt.Errorf("error writing enum of type '%v'", value.Type())
 	}

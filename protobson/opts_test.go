@@ -1,4 +1,4 @@
-package protoBson
+package protobson
 
 import (
 	"github.com/stretchr/testify/assert"

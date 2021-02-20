@@ -10,6 +10,7 @@ require (
 	github.com/illuscio-dev/docmodule-go v0.1.0
 	github.com/improbable-io/go-junit-report v0.0.0-20161011155305-8a980da7388d // indirect
 	github.com/jstemmer/go-junit-report v0.9.1
+	github.com/mattn/go-sqlite3 v1.14.6 // indirect
 	github.com/mgechev/revive v1.0.2
 	github.com/stretchr/testify v1.6.1
 	go.mongodb.org/mongo-driver v1.4.1

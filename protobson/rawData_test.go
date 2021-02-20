@@ -1,4 +1,4 @@
-package protoBson_test
+package protobson_test
 
 import (
 	"fmt"

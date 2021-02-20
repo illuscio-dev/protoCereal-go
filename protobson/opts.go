@@ -1,7 +1,7 @@
-package protoBson
+package protobson
 
 import (
-	"github.com/illuscio-dev/protoCereal-go/protoBson/oneof"
+	"github.com/illuscio-dev/protoCereal-go/protobson/oneof"
 	"go.mongodb.org/mongo-driver/bson/bsontype"
 	"google.golang.org/protobuf/proto"
 	"reflect"

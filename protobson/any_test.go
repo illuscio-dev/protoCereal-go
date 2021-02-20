@@ -1,9 +1,9 @@
-package protoBson_test
+package protobson_test
 
 import (
 	"fmt"
 	"github.com/illuscio-dev/protoCereal-go/cereal_test"
-	"github.com/illuscio-dev/protoCereal-go/protoBson/common"
+	"github.com/illuscio-dev/protoCereal-go/protobson/common"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"google.golang.org/protobuf/types/known/anypb"

@@ -35,7 +35,7 @@ const (
 	Houses_SLYTHERIN  Houses = 3
 )
 
-// Enum value maps for Houses.
+// enum value maps for Houses.
 var (
 	Houses_name = map[int32]string{
 		0: "GRYFFINDOR",

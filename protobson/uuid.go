@@ -1,4 +1,4 @@
-package protoBson
+package protobson
 
 import (
 	"github.com/illuscio-dev/protoCereal-go/cereal"
@@ -29,7 +29,7 @@ func (codec protoUUIDCodec) DecodeValue(
 	}
 
 	protoVal := &cereal.UUID{
-		Value: bin,
+		Bin: bin,
 	}
 
 	value.Set(reflect.ValueOf(protoVal))
@@ -45,7 +45,7 @@ func (codec protoUUIDCodec) EncodeValue(
 	}
 
 	valueUUID := value.Interface().(*cereal.UUID)
-	err := writer.WriteBinaryWithSubtype(valueUUID.Value, bsontype.BinaryUUID)
+	err := writer.WriteBinaryWithSubtype(valueUUID.Bin, bsontype.BinaryUUID)
 	if err != nil {
 		return err
 	}

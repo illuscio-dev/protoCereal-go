@@ -1,8 +1,8 @@
-package protoBson
+package protobson
 
 import (
 	"fmt"
-	"github.com/illuscio-dev/protoCereal-go/protoBson/common"
+	"github.com/illuscio-dev/protoCereal-go/protobson/common"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
 	"go.mongodb.org/mongo-driver/bson/bsonrw"
 	"google.golang.org/protobuf/proto"

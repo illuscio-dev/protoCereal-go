@@ -3,7 +3,7 @@ package oneof
 import (
 	"errors"
 	"fmt"
-	"github.com/illuscio-dev/protoCereal-go/protoBson/wrapper"
+	"github.com/illuscio-dev/protoCereal-go/protobson/wrapper"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
 	"go.mongodb.org/mongo-driver/bson/bsontype"
 	"google.golang.org/protobuf/proto"

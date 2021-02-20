@@ -1,11 +1,11 @@
-package protoBson_test
+package protobson_test
 
 import (
 	"fmt"
 	"github.com/google/uuid"
 	"github.com/illuscio-dev/protoCereal-go/cereal"
 	"github.com/illuscio-dev/protoCereal-go/cereal_test"
-	protoBson "github.com/illuscio-dev/protoCereal-go/protoBson"
+	protoBson "github.com/illuscio-dev/protoCereal-go/protobson"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"

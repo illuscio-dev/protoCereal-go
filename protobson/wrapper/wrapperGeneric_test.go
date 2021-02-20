@@ -2,7 +2,7 @@ package wrapper_test
 
 import (
 	"github.com/golang/protobuf/ptypes/wrappers"
-	protoBson "github.com/illuscio-dev/protoCereal-go/protoBson"
+	protoBson "github.com/illuscio-dev/protoCereal-go/protobson"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"

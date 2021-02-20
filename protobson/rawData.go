@@ -1,4 +1,4 @@
-package protoBson
+package protobson
 
 import (
 	"github.com/illuscio-dev/protoCereal-go/cereal"

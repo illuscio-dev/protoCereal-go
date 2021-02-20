@@ -1,7 +1,7 @@
 protoMongo - MongoDB
 ====================
 
-The protoBSON package contains codecs for marshaling and unmarshalling common protobuf
+The protobson package contains codecs for marshaling and unmarshalling common protobuf
 data structures to more user-friendly BSON documents and values.
 
 Basic Usage
@@ -254,9 +254,9 @@ registered to handle these proto message types:
   // Create a new BSON registry builder
   registryBuilder := bson.NewRegistryBuilder()
 
-  // Hand it off to protoBson to register our new codecs. We don't need to pass an
+  // Hand it off to protobson to register our new codecs. We don't need to pass an
   // options object if we just want the default options.
-  err = protoBson.RegisterCerealCodecs(registryBuilder, nil)
+  err = protobson.RegisterCerealCodecs(registryBuilder, nil)
   if err != nil {
     panic(fmt.Errorf("error building registry: %w", err))
   }
@@ -411,13 +411,13 @@ Luckily, with protoCereal creating a codec for oneof fields is easy as:
   registryBuilder := bson.NewRegistryBuilder()
 
   // Create new options object
-  cerealOpts := protoBson.NewMongoOpts().
+  cerealOpts := protobson.NewMongoOpts().
     // passing one or more message types to this option automatically finds and
     // creates codecs for all oneof fields they contain.
     WithOneOfFields(new(docs.Wizard))
 
-  // Hand it off to protoBson to register our new codecs.
-  err = protoBson.RegisterCerealCodecs(registryBuilder, cerealOpts)
+  // Hand it off to protobson to register our new codecs.
+  err = protobson.RegisterCerealCodecs(registryBuilder, cerealOpts)
   if err != nil {
     panic(fmt.Errorf("error building registry: %w", err))
   }
@@ -447,7 +447,7 @@ Unmarshalling the document to a struct now works correctly as well.
   contains two types that both map to the same BSON type. For instance if a oneof
   contains more than one of either ``float``, ``double``, ``wrappers.FloatValue``,
   or ``wrappers.DoubleValue``, the codec builder will panic while calling the
-  ``protoBson.MongoOpts.WithOneOfFields`` setting.
+  ``protobson.MongoOpts.WithOneOfFields`` setting.
 
   We panic because it is ambiguous as to what sort of value we should decode the raw
   ``bsontype.Double`` to when encountering it in a document.
@@ -503,7 +503,7 @@ We have registered ``DecimalList`` as a custom wrapper type (see
 
 .. code-block:: go
 
-    cerealOpts := protoBson.
+    cerealOpts := protobson.
       NewMongoOpts().
       WithCustomWrappers(
         new(messagesCereal_test.DecimalList),
@@ -518,7 +518,7 @@ We can signal that this will be the case like so:
 
 .. code-block:: go
 
-  cerealOpts := protoBson.
+  cerealOpts := protobson.
     NewMongoOpts().
     WithCustomWrappers(
       new(messagesCereal_test.DecimalList),
@@ -543,7 +543,7 @@ human-friendly documents. By default, proto enums are encoded to BSON as
 .. code-block:: go
 
   // Create a new options object
-  cerealOpts := protoBson.NewMongoOpts().
+  cerealOpts := protobson.NewMongoOpts().
     // Enable conversion of enums into strings for all enum types
     WithEnumStrings(true)
 
@@ -591,11 +591,11 @@ Register the message as a wrapper type like so:
 
   // Pass an empty proto message to the WithCustomWrappers option to add it's type
   // as a wrapper type.
-  opts := protoBson.NewMongoOpts().
+  opts := protobson.NewMongoOpts().
     WithCustomWrappers(new(docsProto.Fixed64Value))
 
   // Register protoCereal BSON codecs with the registry.
-  err := protoBson.RegisterCerealCodecs(registryBuilder, opts)
+  err := protobson.RegisterCerealCodecs(registryBuilder, opts)
   if err != nil {
     panic(fmt.Errorf("error adding to registry: %w", err))
   }

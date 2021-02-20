@@ -1,4 +1,4 @@
-package protoBson_test
+package protobson_test
 
 import (
 	"fmt"
@@ -65,7 +65,7 @@ func TestCodec_UUID_RoundTrip(t *testing.T) {
 	err = bson.UnmarshalWithRegistry(testRegistry, encoded, decoded)
 	assert.NoError(err, "decoding error")
 
-	assert.Equal(original.Value.Value, decoded.Value.Value, "uuid val")
+	assert.Equal(original.Value.Bin, decoded.Value.Bin, "uuid val")
 }
 
 func TestCodec_UUID_RoundTrip_Null(t *testing.T) {
@@ -104,7 +104,7 @@ func TestUUID_Google_RoundTrip(t *testing.T) {
 	}
 
 	messageLoaded := cereal.UUIDFromGoogle(googleVal)
-	assert.Equal(uuidVal.Value, messageLoaded.Value, "loaded and original")
+	assert.Equal(uuidVal.Bin, messageLoaded.Bin, "loaded and original")
 }
 
 func TestUUID_Google_Zero(t *testing.T) {
@@ -120,7 +120,7 @@ func TestUUID_Google_BadLength(t *testing.T) {
 	assert := assert.New(t)
 
 	badMessage := &cereal.UUID{
-		Value: []byte{0x0, 0x1},
+		Bin: []byte{0x0, 0x1},
 	}
 
 	zeroVal, err := badMessage.ToGoogle()
@@ -135,7 +135,7 @@ func TestUUID_Google_BadLengthMust(t *testing.T) {
 
 	testFunc := func() {
 		badMessage := &cereal.UUID{
-			Value: []byte{0x0, 0x1},
+			Bin: []byte{0x0, 0x1},
 		}
 
 		_ = badMessage.MustGoogle()
@@ -157,7 +157,7 @@ func TestUUID_Mongo_RoundTrip(t *testing.T) {
 	}
 
 	messageLoaded := cereal.UUIDFromMongo(mongoVal)
-	assert.Equal(uuidVal.Value, messageLoaded.Value, "loaded and original")
+	assert.Equal(uuidVal.Bin, messageLoaded.Bin, "loaded and original")
 }
 
 func TestUUID_Mongo_Zero(t *testing.T) {
@@ -173,7 +173,7 @@ func TestUUID_Mongo_BadLength(t *testing.T) {
 	assert := assert.New(t)
 
 	badMessage := &cereal.UUID{
-		Value: []byte{0x0, 0x1},
+		Bin: []byte{0x0, 0x1},
 	}
 
 	zeroVal, err := badMessage.ToMongo()
@@ -188,7 +188,7 @@ func TestUUID_Mongo_BadLengthMust(t *testing.T) {
 
 	testFunc := func() {
 		badMessage := &cereal.UUID{
-			Value: []byte{0x0, 0x1},
+			Bin: []byte{0x0, 0x1},
 		}
 
 		_ = badMessage.MustMongo()

@@ -1,9 +1,9 @@
-package protoBson_test
+package protobson_test
 
 import (
 	"fmt"
 	"github.com/illuscio-dev/protoCereal-go/cereal_test"
-	protoBson "github.com/illuscio-dev/protoCereal-go/protoBson"
+	protoBson "github.com/illuscio-dev/protoCereal-go/protobson"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
@@ -111,6 +111,6 @@ func TestRegisterCustomWrapper_NonStructPointerWrapper(t *testing.T) {
 		t,
 		err,
 		"error creating custom wrapper codec: wrapper codec expected"+
-			" pointer to struct, got 'protoBson_test.badMessage'",
+			" pointer to struct, got 'protobson_test.badMessage'",
 	)
 }
