@@ -355,9 +355,9 @@ Proto Type                    BSON Type                   Binary Subtype
 \*wrapperspb.UInt64Value      int32 / int64
 \*anypb.Any                   bsontype.EmbeddedDocument
 \*timestamppb.Timestamp       primitive.DateTime
-\*cereal.Decimal      primitive.Decimal128
-\*cereal.RawData      primitive.Binary,           bsontype.BinaryUserDefined
-\*cereal.UUID         primitive.Binary,           bsontype.UUID
+\*cereal.Decimal              primitive.Decimal128
+\*cereal.RawData              primitive.Binary,           bsontype.BinaryUserDefined
+\*cereal.UUID                 primitive.Binary,           bsontype.UUID
 ==========================    ==========================  ==========================
 
 .. note::
