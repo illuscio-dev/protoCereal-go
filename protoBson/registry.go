@@ -3,7 +3,7 @@ package protoBson
 import (
 	"errors"
 	"fmt"
-	"github.com/illuscio-dev/protoCereal-go/cerealMessages"
+	"github.com/illuscio-dev/protoCereal-go/cereal"
 	"github.com/illuscio-dev/protoCereal-go/protoBson/enum"
 	"github.com/illuscio-dev/protoCereal-go/protoBson/oneof"
 	"github.com/illuscio-dev/protoCereal-go/protoBson/wrapper"
@@ -17,12 +17,12 @@ import (
 // Register the bson codecs that come with protoCereal.
 func registerProtoCerealCodecs(builder *bsoncodec.RegistryBuilder, opts *Opts) {
 	builder.RegisterCodec(reflect.TypeOf(new(anypb.Any)), protoAnyCodec{})
-	builder.RegisterCodec(reflect.TypeOf(new(cerealMessages.UUID)), protoUUIDCodec{})
+	builder.RegisterCodec(reflect.TypeOf(new(cereal.UUID)), protoUUIDCodec{})
 	builder.RegisterCodec(
-		reflect.TypeOf(new(cerealMessages.Decimal)), protoDecimalCodec{},
+		reflect.TypeOf(new(cereal.Decimal)), protoDecimalCodec{},
 	)
 	builder.RegisterCodec(
-		reflect.TypeOf(new(cerealMessages.RawData)), protoRawDataCodec{},
+		reflect.TypeOf(new(cereal.RawData)), protoRawDataCodec{},
 	)
 	builder.RegisterCodec(
 		reflect.TypeOf(new(timestamppb.Timestamp)), protoTimestampCodec{},

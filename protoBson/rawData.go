@@ -1,7 +1,7 @@
 package protoBson
 
 import (
-	"github.com/illuscio-dev/protoCereal-go/cerealMessages"
+	"github.com/illuscio-dev/protoCereal-go/cereal"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
 	"go.mongodb.org/mongo-driver/bson/bsonrw"
 	"go.mongodb.org/mongo-driver/bson/bsontype"
@@ -9,7 +9,7 @@ import (
 )
 
 // Save the zero value for a nil bool wrapper.
-var dataZeroValue = reflect.Zero(reflect.TypeOf(new(cerealMessages.RawData)))
+var dataZeroValue = reflect.Zero(reflect.TypeOf(new(cereal.RawData)))
 
 // CODEC FOR MARSHALLING AND UNMARSHALLING RAW DATA
 type protoRawDataCodec struct{}
@@ -22,7 +22,7 @@ func (codec protoRawDataCodec) EncodeValue(
 		return writer.WriteNull()
 	}
 
-	valueRaw := value.Interface().(*cerealMessages.RawData)
+	valueRaw := value.Interface().(*cereal.RawData)
 	err := writer.WriteBinaryWithSubtype(valueRaw.Data, bsontype.BinaryUserDefined)
 	if err != nil {
 		return err
@@ -44,7 +44,7 @@ func (codec protoRawDataCodec) DecodeValue(
 		return err
 	}
 
-	protoVal := &cerealMessages.RawData{
+	protoVal := &cereal.RawData{
 		Data: bin,
 	}
 

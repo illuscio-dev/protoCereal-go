@@ -2,7 +2,7 @@ package protoBson_test
 
 import (
 	"fmt"
-	"github.com/illuscio-dev/protoCereal-go/cerealMessages"
+	"github.com/illuscio-dev/protoCereal-go/cereal"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/bsontype"
@@ -14,11 +14,11 @@ func TestCodec_RawData_BsonVal(t *testing.T) {
 	assert := assert.New(t)
 
 	type hasVal struct {
-		Value *cerealMessages.RawData
+		Value *cereal.RawData
 	}
 
 	original := &hasVal{
-		Value: &cerealMessages.RawData{
+		Value: &cereal.RawData{
 			Data: []byte("some data"),
 		},
 	}
@@ -51,11 +51,11 @@ func TestCodec_RawData_RoundTrip(t *testing.T) {
 	assert := assert.New(t)
 
 	type hasVal struct {
-		Value *cerealMessages.RawData
+		Value *cereal.RawData
 	}
 
 	original := &hasVal{
-		Value: &cerealMessages.RawData{
+		Value: &cereal.RawData{
 			Data: []byte("some data"),
 		},
 	}
@@ -74,7 +74,7 @@ func TestCodec_RawData_RoundTrip_Null(t *testing.T) {
 	assert := assert.New(t)
 
 	type hasVal struct {
-		Value *cerealMessages.RawData
+		Value *cereal.RawData
 	}
 
 	original := &hasVal{

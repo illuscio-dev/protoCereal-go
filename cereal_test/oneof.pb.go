@@ -4,11 +4,11 @@
 // 	protoc        v3.13.0
 // source: cereal_proto/test/oneof.proto
 
-package cerealMessages_test
+package cereal_test
 
 import (
 	proto "github.com/golang/protobuf/proto"
-	cerealMessages "github.com/illuscio-dev/protoCereal-go/cerealMessages"
+	cereal "github.com/illuscio-dev/protoCereal-go/cereal"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -32,7 +32,7 @@ type DecimalList struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: bson:"value"
-	Value []*cerealMessages.Decimal `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" bson:"value"`
+	Value []*cereal.Decimal `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" bson:"value"`
 }
 
 func (x *DecimalList) Reset() {
@@ -67,7 +67,7 @@ func (*DecimalList) Descriptor() ([]byte, []int) {
 	return file_cereal_proto_test_oneof_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *DecimalList) GetValue() []*cerealMessages.Decimal {
+func (x *DecimalList) GetValue() []*cereal.Decimal {
 	if x != nil {
 		return x.Value
 	}
@@ -127,7 +127,7 @@ func (m *HasCustomOneOf) GetMany() isHasCustomOneOf_Many {
 	return nil
 }
 
-func (x *HasCustomOneOf) GetDecimalValue() *cerealMessages.Decimal {
+func (x *HasCustomOneOf) GetDecimalValue() *cereal.Decimal {
 	if x, ok := x.GetMany().(*HasCustomOneOf_DecimalValue); ok {
 		return x.DecimalValue
 	}
@@ -153,7 +153,7 @@ type isHasCustomOneOf_Many interface {
 }
 
 type HasCustomOneOf_DecimalValue struct {
-	DecimalValue *cerealMessages.Decimal `protobuf:"bytes,1,opt,name=decimal_value,json=decimalValue,proto3,oneof"`
+	DecimalValue *cereal.Decimal `protobuf:"bytes,1,opt,name=decimal_value,json=decimalValue,proto3,oneof"`
 }
 
 type HasCustomOneOf_StringValue struct {
@@ -278,11 +278,11 @@ var file_cereal_proto_test_oneof_proto_rawDesc = []byte{
 	0x79, 0x74, 0x65, 0x73, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x23, 0x0a, 0x0c, 0x73, 0x74, 0x72,
 	0x69, 0x6e, 0x67, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x48,
 	0x00, 0x52, 0x0b, 0x73, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x42, 0x07,
-	0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x42, 0x3c, 0x5a, 0x3a, 0x67, 0x69, 0x74, 0x68, 0x75,
+	0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75,
 	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x6c, 0x6c, 0x75, 0x73, 0x63, 0x69, 0x6f, 0x2d, 0x64,
 	0x65, 0x76, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x43, 0x65, 0x72, 0x65, 0x61, 0x6c, 0x2d, 0x67,
-	0x6f, 0x2f, 0x63, 0x65, 0x72, 0x65, 0x61, 0x6c, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73,
-	0x5f, 0x74, 0x65, 0x73, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6f, 0x2f, 0x63, 0x65, 0x72, 0x65, 0x61, 0x6c, 0x5f, 0x74, 0x65, 0x73, 0x74, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -299,10 +299,10 @@ func file_cereal_proto_test_oneof_proto_rawDescGZIP() []byte {
 
 var file_cereal_proto_test_oneof_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_cereal_proto_test_oneof_proto_goTypes = []interface{}{
-	(*DecimalList)(nil),            // 0: cereal_test.DecimalList
-	(*HasCustomOneOf)(nil),         // 1: cereal_test.HasCustomOneOf
-	(*HasOneOfBytes)(nil),          // 2: cereal_test.HasOneOfBytes
-	(*cerealMessages.Decimal)(nil), // 3: cereal.Decimal
+	(*DecimalList)(nil),    // 0: cereal_test.DecimalList
+	(*HasCustomOneOf)(nil), // 1: cereal_test.HasCustomOneOf
+	(*HasOneOfBytes)(nil),  // 2: cereal_test.HasOneOfBytes
+	(*cereal.Decimal)(nil), // 3: cereal.Decimal
 }
 var file_cereal_proto_test_oneof_proto_depIdxs = []int32{
 	3, // 0: cereal_test.DecimalList.value:type_name -> cereal.Decimal

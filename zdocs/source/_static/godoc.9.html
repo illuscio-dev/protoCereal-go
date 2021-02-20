@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#375EAB">
 
-  <title>scratch - Go Documentation Server</title>
+  <title>wrapper - Go Documentation Server</title>
 
 <link type="text/css" rel="stylesheet" href="style.css">
 
@@ -43,7 +43,7 @@
 
 
   <h1>
-    Command scratch
+    Package wrapper
     <span class="text-muted"></span>
   </h1>
 
@@ -75,6 +75,190 @@
 
 	
 		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "github.com/illuscio-dev/protoCereal-go/protoBson/wrapper"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="godoc.9.html#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="godoc.9.html#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+			
+				<dd><a href="godoc.9.html#pkg-variables">Variables</a></dd>
+			
+			
+			
+				
+				<dd><a href="godoc.9.html#ProtoWrapperCodec">type ProtoWrapperCodec</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.9.html#MustWrapperCodec">func MustWrapperCodec(protoMessage proto.Message) ProtoWrapperCodec</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.9.html#NewWrapperCodec">func NewWrapperCodec(protoMessage interface{}) (ProtoWrapperCodec, error)</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.9.html#ProtoWrapperCodec.DecodeValue">func (codec ProtoWrapperCodec) DecodeValue(context bsoncodec.DecodeContext, reader bsonrw.ValueReader, value reflect.Value) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.9.html#ProtoWrapperCodec.EncodeValue">func (codec ProtoWrapperCodec) EncodeValue(context bsoncodec.EncodeContext, writer bsonrw.ValueWriter, value reflect.Value) error</a></dd>
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBson/wrapper/wrapperGeneric.go">wrapperGeneric.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+		
+			<h2 id="pkg-variables">Variables</h2>
+			
+				
+				<pre>var <span id="ErrWrapperEmbeddedField">ErrWrapperEmbeddedField</span> = <a href="http://localhost:6161/pkg/errors/">errors</a>.<a href="http://localhost:6161/pkg/errors/#New">New</a>(
+    &#34;wrapper messages should not have embedded fields&#34;,
+)</pre>
+			
+				
+				<pre>var <span id="ErrWrapperMessageType">ErrWrapperMessageType</span> = <a href="http://localhost:6161/pkg/errors/">errors</a>.<a href="http://localhost:6161/pkg/errors/#New">New</a>(&#34;wrapper codec expected pointer to struct&#34;)</pre>
+			
+				
+				<pre>var <span id="ErrWrapperPublicFieldCount">ErrWrapperPublicFieldCount</span> = <a href="http://localhost:6161/pkg/errors/">errors</a>.<a href="http://localhost:6161/pkg/errors/#New">New</a>(
+    &#34;wrapper expected to have exactly 1 public field&#34;,
+)</pre>
+			
+		
+		
+		
+			
+			
+			<h2 id="ProtoWrapperCodec">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBson/wrapper/wrapperGeneric.go?s=580:629#L13">ProtoWrapperCodec</a>
+				<a class="permalink" href="godoc.9.html#ProtoWrapperCodec">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+Codec for encoding gRPC wrappers.BoolValue, which exposes an API for having nullable
+boolean values.
+</p>
+
+			<pre>type ProtoWrapperCodec struct {
+<span id="ProtoWrapperCodec.FieldIndex"></span>    FieldIndex <a href="http://localhost:6161/pkg/builtin/#int">int</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="MustWrapperCodec">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBson/wrapper/wrapperGeneric.go?s=4190:4257#L153">MustWrapperCodec</a>
+					<a class="permalink" href="godoc.9.html#MustWrapperCodec">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func MustWrapperCodec(protoMessage <a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/">proto</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/#Message">Message</a>) <a href="godoc.9.html#ProtoWrapperCodec">ProtoWrapperCodec</a></pre>
+				
+				
+				
+			
+				
+				<h3 id="NewWrapperCodec">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBson/wrapper/wrapperGeneric.go?s=3019:3092#L106">NewWrapperCodec</a>
+					<a class="permalink" href="godoc.9.html#NewWrapperCodec">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewWrapperCodec(protoMessage interface{}) (<a href="godoc.9.html#ProtoWrapperCodec">ProtoWrapperCodec</a>, <a href="http://localhost:6161/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Builds the wrapper codec for a given proto message.
+</p>
+<p>
+Wrapper messages must:
+</p>
+<pre>- Have exactly 1 non-embedded public field. This field&#39;s value will be extracted
+  and marshalled as the bson value.
+</pre>
+
+				
+				
+			
+
+			
+				
+				<h3 id="ProtoWrapperCodec.DecodeValue">func (ProtoWrapperCodec) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBson/wrapper/wrapperGeneric.go?s=1549:1682#L54">DecodeValue</a>
+					<a class="permalink" href="godoc.9.html#ProtoWrapperCodec.DecodeValue">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (codec <a href="godoc.9.html#ProtoWrapperCodec">ProtoWrapperCodec</a>) DecodeValue(
+    context <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/">bsoncodec</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/#DecodeContext">DecodeContext</a>, reader <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/">bsonrw</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/#ValueReader">ValueReader</a>, value <a href="http://localhost:6161/pkg/reflect/">reflect</a>.<a href="http://localhost:6161/pkg/reflect/#Value">Value</a>,
+) <a href="http://localhost:6161/pkg/builtin/#error">error</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ProtoWrapperCodec.EncodeValue">func (ProtoWrapperCodec) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBson/wrapper/wrapperGeneric.go?s=631:764#L17">EncodeValue</a>
+					<a class="permalink" href="godoc.9.html#ProtoWrapperCodec.EncodeValue">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (codec <a href="godoc.9.html#ProtoWrapperCodec">ProtoWrapperCodec</a>) EncodeValue(
+    context <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/">bsoncodec</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/#EncodeContext">EncodeContext</a>, writer <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/">bsonrw</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/#ValueWriter">ValueWriter</a>, value <a href="http://localhost:6161/pkg/reflect/">reflect</a>.<a href="http://localhost:6161/pkg/reflect/#Value">Value</a>,
+) <a href="http://localhost:6161/pkg/builtin/#error">error</a></pre>
+				
+				
+				
+				
+			
 		
 	
 

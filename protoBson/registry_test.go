@@ -2,7 +2,7 @@ package protoBson_test
 
 import (
 	"fmt"
-	"github.com/illuscio-dev/protoCereal-go/cerealMessages_test"
+	"github.com/illuscio-dev/protoCereal-go/cereal_test"
 	protoBson "github.com/illuscio-dev/protoCereal-go/protoBson"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
@@ -27,12 +27,12 @@ func init() {
 func TestOpts_WithCustomWrappers(t *testing.T) {
 	assert := assert.New(t)
 	type hasWrapper struct {
-		Info *cerealMessages_test.ListValue
+		Info *cereal_test.ListValue
 	}
 
 	registryBuilder := bsoncodec.NewRegistryBuilder()
 	opts := protoBson.NewMongoOpts().
-		WithCustomWrappers(new(cerealMessages_test.ListValue))
+		WithCustomWrappers(new(cereal_test.ListValue))
 
 	err := protoBson.RegisterCerealCodecs(registryBuilder, opts)
 	if !assert.NoError(err, "create registry") {
@@ -43,7 +43,7 @@ func TestOpts_WithCustomWrappers(t *testing.T) {
 
 	innerValue := []string{"some", "values"}
 	original := &hasWrapper{
-		Info: &cerealMessages_test.ListValue{
+		Info: &cereal_test.ListValue{
 			Value: innerValue,
 		},
 	}
@@ -82,7 +82,7 @@ func TestOpts_WithCustomWrappers(t *testing.T) {
 func TestRegisterCustomWrapper_WithMultiplePublic(t *testing.T) {
 	registryBuilder := bsoncodec.NewRegistryBuilder()
 	opts := protoBson.NewMongoOpts().
-		WithCustomWrappers(new(cerealMessages_test.TestProto))
+		WithCustomWrappers(new(cereal_test.TestProto))
 
 	err := protoBson.RegisterCerealCodecs(registryBuilder, opts)
 	assert.EqualError(
@@ -90,7 +90,7 @@ func TestRegisterCustomWrapper_WithMultiplePublic(t *testing.T) {
 		err,
 		"error creating custom wrapper codec: wrapper expected to have"+
 			" exactly 1 public field, found 2 public fields for type"+
-			" '*cerealMessages_test.TestProto'",
+			" '*cereal_test.TestProto'",
 	)
 }
 

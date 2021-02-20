@@ -2,16 +2,16 @@ package oneof
 
 import (
 	"github.com/golang/protobuf/ptypes/wrappers"
-	"github.com/illuscio-dev/protoCereal-go/cerealMessages"
+	"github.com/illuscio-dev/protoCereal-go/cereal"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"reflect"
 )
 
-var decimalType = reflect.TypeOf(new(cerealMessages.Decimal))
+var decimalType = reflect.TypeOf(new(cereal.Decimal))
 var timestampType = reflect.TypeOf(new(timestamppb.Timestamp))
-var uuidType = reflect.TypeOf(new(cerealMessages.UUID))
-var rawDataType = reflect.TypeOf(new(cerealMessages.RawData))
+var uuidType = reflect.TypeOf(new(cereal.UUID))
+var rawDataType = reflect.TypeOf(new(cereal.RawData))
 var wrapperBoolType = reflect.TypeOf(new(wrappers.BoolValue))
 var wrapperBytesType = reflect.TypeOf(new(wrappers.BytesValue))
 var wrapperDoubleType = reflect.TypeOf(new(wrappers.DoubleValue))

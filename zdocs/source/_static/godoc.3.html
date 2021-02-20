@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#375EAB">
 
-  <title>messagesCereal - Go Documentation Server</title>
+  <title>cerealMessages_test - Go Documentation Server</title>
 
 <link type="text/css" rel="stylesheet" href="style.css">
 
@@ -43,7 +43,7 @@
 
 
   <h1>
-    Package messagesCereal
+    Package cerealMessages_test
     <span class="text-muted"></span>
   </h1>
 
@@ -77,7 +77,7 @@
 		
 		<div id="short-nav">
 			<dl>
-			<dd><code>import "github.com/illuscio-dev/protoCereal-go/messagesCereal"</code></dd>
+			<dd><code>import "github.com/illuscio-dev/protoCereal-go/cerealMessages_test"</code></dd>
 			</dl>
 			<dl>
 			<dd><a href="godoc.3.html#pkg-overview" class="overviewLink">Overview</a></dd>
@@ -113,113 +113,396 @@
 				<dd><a href="godoc.3.html#pkg-variables">Variables</a></dd>
 			
 			
-				
-				<dd><a href="godoc.3.html#ClipTimestamp">func ClipTimestamp(timestamp *timestamppb.Timestamp)</a></dd>
-			
 			
 				
-				<dd><a href="godoc.3.html#Decimal">type Decimal</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#DecimalFromBson">func DecimalFromBson(value primitive.Decimal128) *Decimal</a></dd>
+				<dd><a href="godoc.3.html#DecimalList">type DecimalList</a></dd>
 				
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Decimal.Descriptor">func (*Decimal) Descriptor() ([]byte, []int)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#DecimalList.Descriptor">func (*DecimalList) Descriptor() ([]byte, []int)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Decimal.GetHigh">func (x *Decimal) GetHigh() uint64</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#DecimalList.GetValue">func (x *DecimalList) GetValue() []*cerealMessages.Decimal</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Decimal.GetLow">func (x *Decimal) GetLow() uint64</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#DecimalList.ProtoMessage">func (*DecimalList) ProtoMessage()</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Decimal.ProtoMessage">func (*Decimal) ProtoMessage()</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#DecimalList.ProtoReflect">func (x *DecimalList) ProtoReflect() protoreflect.Message</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Decimal.ProtoReflect">func (x *Decimal) ProtoReflect() protoreflect.Message</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#DecimalList.Reset">func (x *DecimalList) Reset()</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Decimal.Reset">func (x *Decimal) Reset()</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Decimal.String">func (x *Decimal) String() string</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Decimal.ToBson">func (x *Decimal) ToBson() primitive.Decimal128</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#DecimalList.String">func (x *DecimalList) String() string</a></dd>
 				
 			
 				
-				<dd><a href="godoc.3.html#RawData">type RawData</a></dd>
+				<dd><a href="godoc.3.html#EnumTest">type EnumTest</a></dd>
 				
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#RawData.Descriptor">func (*RawData) Descriptor() ([]byte, []int)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#EnumTest.Descriptor">func (*EnumTest) Descriptor() ([]byte, []int)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#RawData.GetData">func (x *RawData) GetData() []byte</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#EnumTest.GetHouse">func (x *EnumTest) GetHouse() Houses</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#RawData.ProtoMessage">func (*RawData) ProtoMessage()</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#EnumTest.ProtoMessage">func (*EnumTest) ProtoMessage()</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#RawData.ProtoReflect">func (x *RawData) ProtoReflect() protoreflect.Message</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#EnumTest.ProtoReflect">func (x *EnumTest) ProtoReflect() protoreflect.Message</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#RawData.Reset">func (x *RawData) Reset()</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#EnumTest.Reset">func (x *EnumTest) Reset()</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#RawData.String">func (x *RawData) String() string</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#EnumTest.String">func (x *EnumTest) String() string</a></dd>
 				
 			
 				
-				<dd><a href="godoc.3.html#UUID">type UUID</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#MustUUIDRandom">func MustUUIDRandom() *UUID</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#NewUUIDRandom">func NewUUIDRandom() (*UUID, error)</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUIDFromGoogle">func UUIDFromGoogle(value googleUUID.UUID) *UUID</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUIDFromMongo">func UUIDFromMongo(value mongoUUID.UUID) *UUID</a></dd>
+				<dd><a href="godoc.3.html#HasCustomOneOf">type HasCustomOneOf</a></dd>
 				
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.Descriptor">func (*UUID) Descriptor() ([]byte, []int)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasCustomOneOf.Descriptor">func (*HasCustomOneOf) Descriptor() ([]byte, []int)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.GetValue">func (x *UUID) GetValue() []byte</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasCustomOneOf.GetDecimalList">func (x *HasCustomOneOf) GetDecimalList() *DecimalList</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.MustGoogle">func (x *UUID) MustGoogle() googleUUID.UUID</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasCustomOneOf.GetDecimalValue">func (x *HasCustomOneOf) GetDecimalValue() *cerealMessages.Decimal</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.MustMongo">func (x *UUID) MustMongo() mongoUUID.UUID</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasCustomOneOf.GetMany">func (m *HasCustomOneOf) GetMany() isHasCustomOneOf_Many</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.ProtoMessage">func (*UUID) ProtoMessage()</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasCustomOneOf.GetStringValue">func (x *HasCustomOneOf) GetStringValue() string</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.ProtoReflect">func (x *UUID) ProtoReflect() protoreflect.Message</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasCustomOneOf.ProtoMessage">func (*HasCustomOneOf) ProtoMessage()</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.Reset">func (x *UUID) Reset()</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasCustomOneOf.ProtoReflect">func (x *HasCustomOneOf) ProtoReflect() protoreflect.Message</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.String">func (x *UUID) String() string</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasCustomOneOf.Reset">func (x *HasCustomOneOf) Reset()</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.ToGoogle">func (x *UUID) ToGoogle() (googleUUID.UUID, error)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasCustomOneOf.String">func (x *HasCustomOneOf) String() string</a></dd>
+				
+			
+				
+				<dd><a href="godoc.3.html#HasCustomOneOf_DecimalList">type HasCustomOneOf_DecimalList</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#HasCustomOneOf_DecimalValue">type HasCustomOneOf_DecimalValue</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#HasCustomOneOf_StringValue">type HasCustomOneOf_StringValue</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#HasOneOfBytes">type HasOneOfBytes</a></dd>
+				
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.ToMongo">func (x *UUID) ToMongo() (mongoUUID.UUID, error)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasOneOfBytes.Descriptor">func (*HasOneOfBytes) Descriptor() ([]byte, []int)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="godoc.3.html#UUID.Validate">func (x *UUID) Validate() error</a></dd>
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasOneOfBytes.GetBytesValue">func (x *HasOneOfBytes) GetBytesValue() []byte</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasOneOfBytes.GetStringValue">func (x *HasOneOfBytes) GetStringValue() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasOneOfBytes.GetValue">func (m *HasOneOfBytes) GetValue() isHasOneOfBytes_Value</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasOneOfBytes.ProtoMessage">func (*HasOneOfBytes) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasOneOfBytes.ProtoReflect">func (x *HasOneOfBytes) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasOneOfBytes.Reset">func (x *HasOneOfBytes) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#HasOneOfBytes.String">func (x *HasOneOfBytes) String() string</a></dd>
+				
+			
+				
+				<dd><a href="godoc.3.html#HasOneOfBytes_BytesValue">type HasOneOfBytes_BytesValue</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#HasOneOfBytes_StringValue">type HasOneOfBytes_StringValue</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#Houses">type Houses</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Houses.Descriptor">func (Houses) Descriptor() protoreflect.EnumDescriptor</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Houses.Enum">func (x Houses) Enum() *Houses</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Houses.EnumDescriptor">func (Houses) EnumDescriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Houses.Number">func (x Houses) Number() protoreflect.EnumNumber</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Houses.String">func (x Houses) String() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Houses.Type">func (Houses) Type() protoreflect.EnumType</a></dd>
+				
+			
+				
+				<dd><a href="godoc.3.html#IsHasCustomOneofList">type IsHasCustomOneofList</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#IsTestOneOfFirstSomeValue">type IsTestOneOfFirstSomeValue</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#IsTestOneOfMultiMessageMage">type IsTestOneOfMultiMessageMage</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#ListValue">type ListValue</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#ListValue.Descriptor">func (*ListValue) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#ListValue.GetValue">func (x *ListValue) GetValue() []string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#ListValue.ProtoMessage">func (*ListValue) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#ListValue.ProtoReflect">func (x *ListValue) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#ListValue.Reset">func (x *ListValue) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#ListValue.String">func (x *ListValue) String() string</a></dd>
+				
+			
+				
+				<dd><a href="godoc.3.html#TestOneOfFirst">type TestOneOfFirst</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfFirst.Descriptor">func (*TestOneOfFirst) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfFirst.GetFieldBool">func (x *TestOneOfFirst) GetFieldBool() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfFirst.GetFieldDecimal">func (x *TestOneOfFirst) GetFieldDecimal() *cerealMessages.Decimal</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfFirst.GetFieldDouble">func (x *TestOneOfFirst) GetFieldDouble() float64</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfFirst.GetFieldInt32">func (x *TestOneOfFirst) GetFieldInt32() int32</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfFirst.GetFieldRaw">func (x *TestOneOfFirst) GetFieldRaw() *cerealMessages.RawData</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfFirst.GetFieldString">func (x *TestOneOfFirst) GetFieldString() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfFirst.GetFieldUuid">func (x *TestOneOfFirst) GetFieldUuid() *cerealMessages.UUID</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfFirst.GetFieldWizard">func (x *TestOneOfFirst) GetFieldWizard() *Wizard</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfFirst.GetSomeValue">func (m *TestOneOfFirst) GetSomeValue() isTestOneOfFirst_SomeValue</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfFirst.ProtoMessage">func (*TestOneOfFirst) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfFirst.ProtoReflect">func (x *TestOneOfFirst) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfFirst.Reset">func (x *TestOneOfFirst) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfFirst.String">func (x *TestOneOfFirst) String() string</a></dd>
+				
+			
+				
+				<dd><a href="godoc.3.html#TestOneOfFirst_FieldBool">type TestOneOfFirst_FieldBool</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#TestOneOfFirst_FieldDecimal">type TestOneOfFirst_FieldDecimal</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#TestOneOfFirst_FieldDouble">type TestOneOfFirst_FieldDouble</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#TestOneOfFirst_FieldInt32">type TestOneOfFirst_FieldInt32</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#TestOneOfFirst_FieldRaw">type TestOneOfFirst_FieldRaw</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#TestOneOfFirst_FieldString">type TestOneOfFirst_FieldString</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#TestOneOfFirst_FieldUuid">type TestOneOfFirst_FieldUuid</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#TestOneOfFirst_FieldWizard">type TestOneOfFirst_FieldWizard</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#TestOneOfMultiMessage">type TestOneOfMultiMessage</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfMultiMessage.Descriptor">func (*TestOneOfMultiMessage) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfMultiMessage.GetMage">func (m *TestOneOfMultiMessage) GetMage() isTestOneOfMultiMessage_Mage</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfMultiMessage.GetWitch">func (x *TestOneOfMultiMessage) GetWitch() *Witch</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfMultiMessage.GetWizard">func (x *TestOneOfMultiMessage) GetWizard() *Wizard</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfMultiMessage.ProtoMessage">func (*TestOneOfMultiMessage) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfMultiMessage.ProtoReflect">func (x *TestOneOfMultiMessage) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfMultiMessage.Reset">func (x *TestOneOfMultiMessage) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestOneOfMultiMessage.String">func (x *TestOneOfMultiMessage) String() string</a></dd>
+				
+			
+				
+				<dd><a href="godoc.3.html#TestOneOfMultiMessage_Witch">type TestOneOfMultiMessage_Witch</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#TestOneOfMultiMessage_Wizard">type TestOneOfMultiMessage_Wizard</a></dd>
+				
+				
+			
+				
+				<dd><a href="godoc.3.html#TestProto">type TestProto</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestProto.Descriptor">func (*TestProto) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestProto.GetFieldInt32">func (x *TestProto) GetFieldInt32() int32</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestProto.GetFieldString">func (x *TestProto) GetFieldString() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestProto.ProtoMessage">func (*TestProto) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestProto.ProtoReflect">func (x *TestProto) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestProto.Reset">func (x *TestProto) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#TestProto.String">func (x *TestProto) String() string</a></dd>
+				
+			
+				
+				<dd><a href="godoc.3.html#Witch">type Witch</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Witch.Descriptor">func (*Witch) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Witch.GetName">func (x *Witch) GetName() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Witch.ProtoMessage">func (*Witch) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Witch.ProtoReflect">func (x *Witch) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Witch.Reset">func (x *Witch) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Witch.String">func (x *Witch) String() string</a></dd>
+				
+			
+				
+				<dd><a href="godoc.3.html#Wizard">type Wizard</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Wizard.Descriptor">func (*Wizard) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Wizard.GetName">func (x *Wizard) GetName() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Wizard.ProtoMessage">func (*Wizard) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Wizard.ProtoReflect">func (x *Wizard) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Wizard.Reset">func (x *Wizard) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Wizard.String">func (x *Wizard) String() string</a></dd>
 				
 			
 			
@@ -233,17 +516,13 @@
 			<p>
 			<span style="font-size:90%">
 			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go">decimal.pb.go</a>
+				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/enum.pb.go">enum.pb.go</a>
 			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimalMethods.go">decimalMethods.go</a>
+				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneOfInterfaces.go">oneOfInterfaces.go</a>
 			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/raw_data.pb.go">raw_data.pb.go</a>
+				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go">oneof.pb.go</a>
 			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/timeMethods.proto.go">timeMethods.proto.go</a>
-			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuid.pb.go">uuid.pb.go</a>
-			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go">uuidMethods.go</a>
+				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go">test.pb.go</a>
 			
 			</span>
 			</p>
@@ -257,198 +536,49 @@
 		
 			<h2 id="pkg-variables">Variables</h2>
 			
-				
-				<pre>var <span id="ErrUUIDByteLen">ErrUUIDByteLen</span> = <a href="http://localhost:6161/pkg/errors/">errors</a>.<a href="http://localhost:6161/pkg/errors/#New">New</a>(&#34;proto uuid message must be 16 bytes&#34;)</pre>
-			
-				
-				<pre>var <span id="File_cereal_proto_decimal_proto">File_cereal_proto_decimal_proto</span> <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#FileDescriptor">FileDescriptor</a></pre>
-			
-				
-				<pre>var <span id="File_cereal_proto_raw_data_proto">File_cereal_proto_raw_data_proto</span> <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#FileDescriptor">FileDescriptor</a></pre>
-			
-				
-				<pre>var <span id="File_cereal_proto_uuid_proto">File_cereal_proto_uuid_proto</span> <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#FileDescriptor">FileDescriptor</a></pre>
-			
-		
-		
-			
-			
-			<h2 id="ClipTimestamp">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/timeMethods.proto.go?s=301:353#L1">ClipTimestamp</a>
-				<a class="permalink" href="godoc.3.html#ClipTimestamp">&#xb6;</a>
-				
-				
-			</h2>
-			<pre>func ClipTimestamp(timestamp *<a href="http://localhost:6161/pkg/google.golang.org/protobuf/types/known/timestamppb/">timestamppb</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/types/known/timestamppb/#Timestamp">Timestamp</a>)</pre>
-			<p>
-Mongo db only stores time down to the millisecond, this method clips the accuracy
-of the protobuf time message to match mongo db. This can be useful for testing
-code round trips through BSON / the database.
-</p>
-
-			
-			
-
-		
-		
-			
-			
-			<h2 id="Decimal">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go?s=885:1203#L19">Decimal</a>
-				<a class="permalink" href="godoc.3.html#Decimal">&#xb6;</a>
-				
-				
-			</h2>
-			<p>
-Decimal 128 binary that matches the bson specification using a dual uint64 encoding.
-</p>
-
-			<pre>type Decimal struct {
-
-<span id="Decimal.High"></span>    <span class="comment">// High bytes</span>
-    High <a href="http://localhost:6161/pkg/builtin/#uint64">uint64</a> `protobuf:&#34;varint,1,opt,name=high,proto3&#34; json:&#34;high,omitempty&#34;`
-    <span class="comment">// low bytes</span>
-<span id="Decimal.Low"></span>    Low <a href="http://localhost:6161/pkg/builtin/#uint64">uint64</a> `protobuf:&#34;varint,2,opt,name=low,proto3&#34; json:&#34;low,omitempty&#34;`
-    <span class="comment">// contains filtered or unexported fields</span>
-}
-</pre>
-
-			
-
-			
-
-			
-			
-			
-
-			
-				
-				<h3 id="DecimalFromBson">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimalMethods.go?s=182:239#L1">DecimalFromBson</a>
-					<a class="permalink" href="godoc.3.html#DecimalFromBson">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func DecimalFromBson(value <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/primitive/">primitive</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/primitive/#Decimal128">Decimal128</a>) *<a href="godoc.3.html#Decimal">Decimal</a></pre>
-				
-				
-				
-			
-
-			
-				
-				<h3 id="Decimal.Descriptor">func (*Decimal) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go?s=1909:1953#L58">Descriptor</a>
-					<a class="permalink" href="godoc.3.html#Decimal.Descriptor">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (*<a href="godoc.3.html#Decimal">Decimal</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
 				<p>
-Deprecated: Use Decimal.ProtoReflect.Descriptor instead.
+Enum value maps for Houses.
 </p>
 
-				
-				
-				
+				<pre>var (
+    <span id="Houses_name">Houses_name</span> = map[<a href="http://localhost:6161/pkg/builtin/#int32">int32</a>]<a href="http://localhost:6161/pkg/builtin/#string">string</a>{
+        0: &#34;GRYFFINDOR&#34;,
+        1: &#34;RAVENCLAW&#34;,
+        2: &#34;HUFFLEPUFF&#34;,
+        3: &#34;SLYTHERIN&#34;,
+    }
+    <span id="Houses_value">Houses_value</span> = map[<a href="http://localhost:6161/pkg/builtin/#string">string</a>]<a href="http://localhost:6161/pkg/builtin/#int32">int32</a>{
+        &#34;GRYFFINDOR&#34;: 0,
+        &#34;RAVENCLAW&#34;:  1,
+        &#34;HUFFLEPUFF&#34;: 2,
+        &#34;SLYTHERIN&#34;:  3,
+    }
+)</pre>
 			
 				
-				<h3 id="Decimal.GetHigh">func (*Decimal) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go?s=2023:2057#L62">GetHigh</a>
-					<a class="permalink" href="godoc.3.html#Decimal.GetHigh">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (x *<a href="godoc.3.html#Decimal">Decimal</a>) GetHigh() <a href="http://localhost:6161/pkg/builtin/#uint64">uint64</a></pre>
-				
-				
-				
-				
+				<pre>var <span id="File_cereal_proto_test_enum_proto">File_cereal_proto_test_enum_proto</span> <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#FileDescriptor">FileDescriptor</a></pre>
 			
 				
-				<h3 id="Decimal.GetLow">func (*Decimal) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go?s=2107:2140#L69">GetLow</a>
-					<a class="permalink" href="godoc.3.html#Decimal.GetLow">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (x *<a href="godoc.3.html#Decimal">Decimal</a>) GetLow() <a href="http://localhost:6161/pkg/builtin/#uint64">uint64</a></pre>
-				
-				
-				
-				
+				<pre>var <span id="File_cereal_proto_test_oneof_proto">File_cereal_proto_test_oneof_proto</span> <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#FileDescriptor">FileDescriptor</a></pre>
 			
 				
-				<h3 id="Decimal.ProtoMessage">func (*Decimal) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go?s=1499:1529#L43">ProtoMessage</a>
-					<a class="permalink" href="godoc.3.html#Decimal.ProtoMessage">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (*<a href="godoc.3.html#Decimal">Decimal</a>) ProtoMessage()</pre>
-				
-				
-				
-				
+				<pre>var <span id="File_cereal_proto_test_test_proto">File_cereal_proto_test_test_proto</span> <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#FileDescriptor">FileDescriptor</a></pre>
 			
-				
-				<h3 id="Decimal.ProtoReflect">func (*Decimal) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go?s=1534:1587#L45">ProtoReflect</a>
-					<a class="permalink" href="godoc.3.html#Decimal.ProtoReflect">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (x *<a href="godoc.3.html#Decimal">Decimal</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
-				
-				
-				
-				
-			
-				
-				<h3 id="Decimal.Reset">func (*Decimal) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go?s=1205:1230#L30">Reset</a>
-					<a class="permalink" href="godoc.3.html#Decimal.Reset">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (x *<a href="godoc.3.html#Decimal">Decimal</a>) Reset()</pre>
-				
-				
-				
-				
-			
-				
-				<h3 id="Decimal.String">func (*Decimal) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimal.pb.go?s=1421:1454#L39">String</a>
-					<a class="permalink" href="godoc.3.html#Decimal.String">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (x *<a href="godoc.3.html#Decimal">Decimal</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
-				
-				
-				
-				
-			
-				
-				<h3 id="Decimal.ToBson">func (*Decimal) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/decimalMethods.go?s=82:129#L1">ToBson</a>
-					<a class="permalink" href="godoc.3.html#Decimal.ToBson">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (x *<a href="godoc.3.html#Decimal">Decimal</a>) ToBson() <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/primitive/">primitive</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/primitive/#Decimal128">Decimal128</a></pre>
-				
-				
-				
-				
-			
+		
+		
 		
 			
 			
-			<h2 id="RawData">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/raw_data.pb.go?s=891:1132#L20">RawData</a>
-				<a class="permalink" href="godoc.3.html#RawData">&#xb6;</a>
+			<h2 id="DecimalList">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=877:1159#L19">DecimalList</a>
+				<a class="permalink" href="godoc.3.html#DecimalList">&#xb6;</a>
 				
 				
 			</h2>
-			<p>
-Wrapper type for Raw binary data for ease of type-based marshalling and
-unmarshalling.
-</p>
+			
+			<pre>type DecimalList struct {
 
-			<pre>type RawData struct {
-
-    <span class="comment">// Raw data bytes go here.</span>
-<span id="RawData.Data"></span>    Data []<a href="http://localhost:6161/pkg/builtin/#byte">byte</a> `protobuf:&#34;bytes,1,opt,name=data,proto3&#34; json:&#34;data,omitempty&#34;`
+    <span class="comment">// @inject_tag: bson:&#34;value&#34;</span>
+<span id="DecimalList.Value"></span>    Value []*<a href="godoc.12.html">cerealMessages</a>.<a href="godoc.12.html#Decimal">Decimal</a> `protobuf:&#34;bytes,1,rep,name=value,proto3&#34; json:&#34;value,omitempty&#34; bson:&#34;value&#34;`
     <span class="comment">// contains filtered or unexported fields</span>
 }
 </pre>
@@ -465,14 +595,14 @@ unmarshalling.
 
 			
 				
-				<h3 id="RawData.Descriptor">func (*RawData) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/raw_data.pb.go?s=1840:1884#L57">Descriptor</a>
-					<a class="permalink" href="godoc.3.html#RawData.Descriptor">&#xb6;</a>
+				<h3 id="DecimalList.Descriptor">func (*DecimalList) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=1895:1943#L56">Descriptor</a>
+					<a class="permalink" href="godoc.3.html#DecimalList.Descriptor">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (*<a href="godoc.3.html#RawData">RawData</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
+				<pre>func (*<a href="godoc.3.html#DecimalList">DecimalList</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
 				<p>
-Deprecated: Use RawData.ProtoReflect.Descriptor instead.
+Deprecated: Use DecimalList.ProtoReflect.Descriptor instead.
 </p>
 
 				
@@ -480,60 +610,60 @@ Deprecated: Use RawData.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="RawData.GetData">func (*RawData) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/raw_data.pb.go?s=1955:1989#L61">GetData</a>
-					<a class="permalink" href="godoc.3.html#RawData.GetData">&#xb6;</a>
+				<h3 id="DecimalList.GetValue">func (*DecimalList) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=2016:2074#L60">GetValue</a>
+					<a class="permalink" href="godoc.3.html#DecimalList.GetValue">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (x *<a href="godoc.3.html#RawData">RawData</a>) GetData() []<a href="http://localhost:6161/pkg/builtin/#byte">byte</a></pre>
+				<pre>func (x *<a href="godoc.3.html#DecimalList">DecimalList</a>) GetValue() []*<a href="godoc.12.html">cerealMessages</a>.<a href="godoc.12.html#Decimal">Decimal</a></pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="RawData.ProtoMessage">func (*RawData) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/raw_data.pb.go?s=1429:1459#L42">ProtoMessage</a>
-					<a class="permalink" href="godoc.3.html#RawData.ProtoMessage">&#xb6;</a>
+				<h3 id="DecimalList.ProtoMessage">func (*DecimalList) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=1470:1504#L41">ProtoMessage</a>
+					<a class="permalink" href="godoc.3.html#DecimalList.ProtoMessage">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (*<a href="godoc.3.html#RawData">RawData</a>) ProtoMessage()</pre>
+				<pre>func (*<a href="godoc.3.html#DecimalList">DecimalList</a>) ProtoMessage()</pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="RawData.ProtoReflect">func (*RawData) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/raw_data.pb.go?s=1464:1517#L44">ProtoReflect</a>
-					<a class="permalink" href="godoc.3.html#RawData.ProtoReflect">&#xb6;</a>
+				<h3 id="DecimalList.ProtoReflect">func (*DecimalList) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=1509:1566#L43">ProtoReflect</a>
+					<a class="permalink" href="godoc.3.html#DecimalList.ProtoReflect">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (x *<a href="godoc.3.html#RawData">RawData</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				<pre>func (x *<a href="godoc.3.html#DecimalList">DecimalList</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="RawData.Reset">func (*RawData) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/raw_data.pb.go?s=1134:1159#L29">Reset</a>
-					<a class="permalink" href="godoc.3.html#RawData.Reset">&#xb6;</a>
+				<h3 id="DecimalList.Reset">func (*DecimalList) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=1161:1190#L28">Reset</a>
+					<a class="permalink" href="godoc.3.html#DecimalList.Reset">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (x *<a href="godoc.3.html#RawData">RawData</a>) Reset()</pre>
+				<pre>func (x *<a href="godoc.3.html#DecimalList">DecimalList</a>) Reset()</pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="RawData.String">func (*RawData) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/raw_data.pb.go?s=1351:1384#L38">String</a>
-					<a class="permalink" href="godoc.3.html#RawData.String">&#xb6;</a>
+				<h3 id="DecimalList.String">func (*DecimalList) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=1388:1425#L37">String</a>
+					<a class="permalink" href="godoc.3.html#DecimalList.String">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (x *<a href="godoc.3.html#RawData">RawData</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				<pre>func (x *<a href="godoc.3.html#DecimalList">DecimalList</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
 				
 				
 				
@@ -542,19 +672,17 @@ Deprecated: Use RawData.ProtoReflect.Descriptor instead.
 		
 			
 			
-			<h2 id="UUID">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuid.pb.go?s=875:1116#L19">UUID</a>
-				<a class="permalink" href="godoc.3.html#UUID">&#xb6;</a>
+			<h2 id="EnumTest">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/enum.pb.go?s=1942:2184#L72">EnumTest</a>
+				<a class="permalink" href="godoc.3.html#EnumTest">&#xb6;</a>
 				
 				
 			</h2>
 			<p>
-Wrapper type for UUID to make type-based marshalling and unmarshalling easier
+Use for testing enum logic
 </p>
 
-			<pre>type UUID struct {
-
-    <span class="comment">// Raw uuid bytes go here.</span>
-<span id="UUID.Value"></span>    Value []<a href="http://localhost:6161/pkg/builtin/#byte">byte</a> `protobuf:&#34;bytes,1,opt,name=value,proto3&#34; json:&#34;value,omitempty&#34;`
+			<pre>type EnumTest struct {
+<span id="EnumTest.House"></span>    House <a href="godoc.3.html#Houses">Houses</a> `protobuf:&#34;varint,1,opt,name=house,proto3,enum=cereal_test.Houses&#34; json:&#34;house,omitempty&#34;`
     <span class="comment">// contains filtered or unexported fields</span>
 }
 </pre>
@@ -568,73 +696,17 @@ Wrapper type for UUID to make type-based marshalling and unmarshalling easier
 			
 
 			
-				
-				<h3 id="MustUUIDRandom">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=2194:2221#L90">MustUUIDRandom</a>
-					<a class="permalink" href="godoc.3.html#MustUUIDRandom">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func MustUUIDRandom() *<a href="godoc.3.html#UUID">UUID</a></pre>
-				<p>
-Generate a new random UUID using google&#39;s UUID implementation.
-</p>
-
-				
-				
-			
-				
-				<h3 id="NewUUIDRandom">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1975:2010#L80">NewUUIDRandom</a>
-					<a class="permalink" href="godoc.3.html#NewUUIDRandom">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func NewUUIDRandom() (*<a href="godoc.3.html#UUID">UUID</a>, <a href="http://localhost:6161/pkg/builtin/#error">error</a>)</pre>
-				<p>
-Generate a new random UUID using google&#39;s UUID implementation.
-</p>
-
-				
-				
-			
-				
-				<h3 id="UUIDFromGoogle">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1668:1716#L66">UUIDFromGoogle</a>
-					<a class="permalink" href="godoc.3.html#UUIDFromGoogle">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func UUIDFromGoogle(value <a href="http://localhost:6161/pkg/github.com/google/uuid/">googleUUID</a>.<a href="http://localhost:6161/pkg/github.com/google/uuid/#UUID">UUID</a>) *<a href="godoc.3.html#UUID">UUID</a></pre>
-				<p>
-Create a new protobuf UUID value from a Google UUID value.
-</p>
-
-				
-				
-			
-				
-				<h3 id="UUIDFromMongo">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1820:1866#L73">UUIDFromMongo</a>
-					<a class="permalink" href="godoc.3.html#UUIDFromMongo">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func UUIDFromMongo(value <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/x/mongo/driver/uuid/">mongoUUID</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/x/mongo/driver/uuid/#UUID">UUID</a>) *<a href="godoc.3.html#UUID">UUID</a></pre>
-				<p>
-Create a new protobuf UUID value from a Mongo UUID value.
-</p>
-
-				
-				
-			
 
 			
 				
-				<h3 id="UUID.Descriptor">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuid.pb.go?s=1798:1839#L56">Descriptor</a>
-					<a class="permalink" href="godoc.3.html#UUID.Descriptor">&#xb6;</a>
+				<h3 id="EnumTest.Descriptor">func (*EnumTest) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/enum.pb.go?s=2900:2945#L108">Descriptor</a>
+					<a class="permalink" href="godoc.3.html#EnumTest.Descriptor">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (*<a href="godoc.3.html#UUID">UUID</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
+				<pre>func (*<a href="godoc.3.html#EnumTest">EnumTest</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
 				<p>
-Deprecated: Use UUID.ProtoReflect.Descriptor instead.
+Deprecated: Use EnumTest.ProtoReflect.Descriptor instead.
 </p>
 
 				
@@ -642,26 +714,107 @@ Deprecated: Use UUID.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="UUID.GetValue">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuid.pb.go?s=1906:1938#L60">GetValue</a>
-					<a class="permalink" href="godoc.3.html#UUID.GetValue">&#xb6;</a>
+				<h3 id="EnumTest.GetHouse">func (*EnumTest) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/enum.pb.go?s=3017:3053#L112">GetHouse</a>
+					<a class="permalink" href="godoc.3.html#EnumTest.GetHouse">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) GetValue() []<a href="http://localhost:6161/pkg/builtin/#byte">byte</a></pre>
+				<pre>func (x *<a href="godoc.3.html#EnumTest">EnumTest</a>) GetHouse() <a href="godoc.3.html#Houses">Houses</a></pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="UUID.MustGoogle">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=801:844#L24">MustGoogle</a>
-					<a class="permalink" href="godoc.3.html#UUID.MustGoogle">&#xb6;</a>
+				<h3 id="EnumTest.ProtoMessage">func (*EnumTest) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/enum.pb.go?s=2485:2516#L93">ProtoMessage</a>
+					<a class="permalink" href="godoc.3.html#EnumTest.ProtoMessage">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) MustGoogle() <a href="http://localhost:6161/pkg/github.com/google/uuid/">googleUUID</a>.<a href="http://localhost:6161/pkg/github.com/google/uuid/#UUID">UUID</a></pre>
+				<pre>func (*<a href="godoc.3.html#EnumTest">EnumTest</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="EnumTest.ProtoReflect">func (*EnumTest) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/enum.pb.go?s=2521:2575#L95">ProtoReflect</a>
+					<a class="permalink" href="godoc.3.html#EnumTest.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#EnumTest">EnumTest</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="EnumTest.Reset">func (*EnumTest) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/enum.pb.go?s=2186:2212#L80">Reset</a>
+					<a class="permalink" href="godoc.3.html#EnumTest.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#EnumTest">EnumTest</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="EnumTest.String">func (*EnumTest) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/enum.pb.go?s=2406:2440#L89">String</a>
+					<a class="permalink" href="godoc.3.html#EnumTest.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#EnumTest">EnumTest</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="HasCustomOneOf">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=2127:2503#L67">HasCustomOneOf</a>
+				<a class="permalink" href="godoc.3.html#HasCustomOneOf">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type HasCustomOneOf struct {
+
+    <span class="comment">// @inject_tag: bson:&#34;many&#34;</span>
+    <span class="comment">//</span>
+    <span class="comment">// Types that are assignable to Many:</span>
+    <span class="comment">//	*HasCustomOneOf_DecimalValue</span>
+    <span class="comment">//	*HasCustomOneOf_StringValue</span>
+    <span class="comment">//	*HasCustomOneOf_DecimalList</span>
+<span id="HasCustomOneOf.Many"></span>    Many isHasCustomOneOf_Many `protobuf_oneof:&#34;many&#34; bson:&#34;many&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="HasCustomOneOf.Descriptor">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=3257:3308#L109">Descriptor</a>
+					<a class="permalink" href="godoc.3.html#HasCustomOneOf.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#HasCustomOneOf">HasCustomOneOf</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
 				<p>
-As .ToGoogle(), but panics on conversion error.
+Deprecated: Use HasCustomOneOf.ProtoReflect.Descriptor instead.
 </p>
 
 				
@@ -669,14 +822,215 @@ As .ToGoogle(), but panics on conversion error.
 				
 			
 				
-				<h3 id="UUID.MustMongo">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1416:1457#L54">MustMongo</a>
-					<a class="permalink" href="godoc.3.html#UUID.MustMongo">&#xb6;</a>
+				<h3 id="HasCustomOneOf.GetDecimalList">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=3814:3868#L134">GetDecimalList</a>
+					<a class="permalink" href="godoc.3.html#HasCustomOneOf.GetDecimalList">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) MustMongo() <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/x/mongo/driver/uuid/">mongoUUID</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/x/mongo/driver/uuid/#UUID">UUID</a></pre>
+				<pre>func (x *<a href="godoc.3.html#HasCustomOneOf">HasCustomOneOf</a>) GetDecimalList() *<a href="godoc.3.html#DecimalList">DecimalList</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HasCustomOneOf.GetDecimalValue">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=3489:3555#L120">GetDecimalValue</a>
+					<a class="permalink" href="godoc.3.html#HasCustomOneOf.GetDecimalValue">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#HasCustomOneOf">HasCustomOneOf</a>) GetDecimalValue() *<a href="godoc.12.html">cerealMessages</a>.<a href="godoc.12.html#Decimal">Decimal</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HasCustomOneOf.GetMany">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=3381:3437#L113">GetMany</a>
+					<a class="permalink" href="godoc.3.html#HasCustomOneOf.GetMany">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="godoc.3.html#HasCustomOneOf">HasCustomOneOf</a>) GetMany() isHasCustomOneOf_Many</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HasCustomOneOf.GetStringValue">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=3662:3710#L127">GetStringValue</a>
+					<a class="permalink" href="godoc.3.html#HasCustomOneOf.GetStringValue">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#HasCustomOneOf">HasCustomOneOf</a>) GetStringValue() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HasCustomOneOf.ProtoMessage">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=2823:2860#L94">ProtoMessage</a>
+					<a class="permalink" href="godoc.3.html#HasCustomOneOf.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#HasCustomOneOf">HasCustomOneOf</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HasCustomOneOf.ProtoReflect">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=2865:2925#L96">ProtoReflect</a>
+					<a class="permalink" href="godoc.3.html#HasCustomOneOf.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#HasCustomOneOf">HasCustomOneOf</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HasCustomOneOf.Reset">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=2505:2537#L81">Reset</a>
+					<a class="permalink" href="godoc.3.html#HasCustomOneOf.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#HasCustomOneOf">HasCustomOneOf</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HasCustomOneOf.String">func (*HasCustomOneOf) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=2738:2778#L90">String</a>
+					<a class="permalink" href="godoc.3.html#HasCustomOneOf.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#HasCustomOneOf">HasCustomOneOf</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="HasCustomOneOf_DecimalList">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=4335:4476#L153">HasCustomOneOf_DecimalList</a>
+				<a class="permalink" href="godoc.3.html#HasCustomOneOf_DecimalList">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type HasCustomOneOf_DecimalList struct {
+<span id="HasCustomOneOf_DecimalList.DecimalList"></span>    DecimalList *<a href="godoc.3.html#DecimalList">DecimalList</a> `protobuf:&#34;bytes,3,opt,name=decimal_list,json=decimalList,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="HasCustomOneOf_DecimalValue">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=4040:4196#L145">HasCustomOneOf_DecimalValue</a>
+				<a class="permalink" href="godoc.3.html#HasCustomOneOf_DecimalValue">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type HasCustomOneOf_DecimalValue struct {
+<span id="HasCustomOneOf_DecimalValue.DecimalValue"></span>    DecimalValue *<a href="godoc.12.html">cerealMessages</a>.<a href="godoc.12.html#Decimal">Decimal</a> `protobuf:&#34;bytes,1,opt,name=decimal_value,json=decimalValue,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="HasCustomOneOf_StringValue">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=4198:4333#L149">HasCustomOneOf_StringValue</a>
+				<a class="permalink" href="godoc.3.html#HasCustomOneOf_StringValue">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type HasCustomOneOf_StringValue struct {
+<span id="HasCustomOneOf_StringValue.StringValue"></span>    StringValue <a href="http://localhost:6161/pkg/builtin/#string">string</a> `protobuf:&#34;bytes,2,opt,name=string_value,json=stringValue,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="HasOneOfBytes">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=4668:4965#L163">HasOneOfBytes</a>
+				<a class="permalink" href="godoc.3.html#HasOneOfBytes">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type HasOneOfBytes struct {
+
+    <span class="comment">// Types that are assignable to Value:</span>
+    <span class="comment">//	*HasOneOfBytes_BytesValue</span>
+    <span class="comment">//	*HasOneOfBytes_StringValue</span>
+<span id="HasOneOfBytes.Value"></span>    Value isHasOneOfBytes_Value `protobuf_oneof:&#34;value&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="HasOneOfBytes.Descriptor">func (*HasOneOfBytes) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=5713:5763#L202">Descriptor</a>
+					<a class="permalink" href="godoc.3.html#HasOneOfBytes.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#HasOneOfBytes">HasOneOfBytes</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
 				<p>
-As .ToMongo(), but panics on conversion error.
+Deprecated: Use HasOneOfBytes.ProtoReflect.Descriptor instead.
 </p>
 
 				
@@ -684,63 +1038,205 @@ As .ToMongo(), but panics on conversion error.
 				
 			
 				
-				<h3 id="UUID.ProtoMessage">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuid.pb.go?s=1400:1427#L41">ProtoMessage</a>
-					<a class="permalink" href="godoc.3.html#UUID.ProtoMessage">&#xb6;</a>
+				<h3 id="HasOneOfBytes.GetBytesValue">func (*HasOneOfBytes) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=5945:5991#L213">GetBytesValue</a>
+					<a class="permalink" href="godoc.3.html#HasOneOfBytes.GetBytesValue">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (*<a href="godoc.3.html#UUID">UUID</a>) ProtoMessage()</pre>
+				<pre>func (x *<a href="godoc.3.html#HasOneOfBytes">HasOneOfBytes</a>) GetBytesValue() []<a href="http://localhost:6161/pkg/builtin/#byte">byte</a></pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="UUID.ProtoReflect">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuid.pb.go?s=1432:1482#L43">ProtoReflect</a>
-					<a class="permalink" href="godoc.3.html#UUID.ProtoReflect">&#xb6;</a>
+				<h3 id="HasOneOfBytes.GetStringValue">func (*HasOneOfBytes) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=6094:6141#L220">GetStringValue</a>
+					<a class="permalink" href="godoc.3.html#HasOneOfBytes.GetStringValue">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				<pre>func (x *<a href="godoc.3.html#HasOneOfBytes">HasOneOfBytes</a>) GetStringValue() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="UUID.Reset">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuid.pb.go?s=1118:1140#L28">Reset</a>
-					<a class="permalink" href="godoc.3.html#UUID.Reset">&#xb6;</a>
+				<h3 id="HasOneOfBytes.GetValue">func (*HasOneOfBytes) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=5836:5892#L206">GetValue</a>
+					<a class="permalink" href="godoc.3.html#HasOneOfBytes.GetValue">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) Reset()</pre>
+				<pre>func (m *<a href="godoc.3.html#HasOneOfBytes">HasOneOfBytes</a>) GetValue() isHasOneOfBytes_Value</pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="UUID.String">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuid.pb.go?s=1325:1355#L37">String</a>
-					<a class="permalink" href="godoc.3.html#UUID.String">&#xb6;</a>
+				<h3 id="HasOneOfBytes.ProtoMessage">func (*HasOneOfBytes) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=5282:5318#L187">ProtoMessage</a>
+					<a class="permalink" href="godoc.3.html#HasOneOfBytes.ProtoMessage">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				<pre>func (*<a href="godoc.3.html#HasOneOfBytes">HasOneOfBytes</a>) ProtoMessage()</pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="UUID.ToGoogle">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=546:596#L12">ToGoogle</a>
-					<a class="permalink" href="godoc.3.html#UUID.ToGoogle">&#xb6;</a>
+				<h3 id="HasOneOfBytes.ProtoReflect">func (*HasOneOfBytes) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=5323:5382#L189">ProtoReflect</a>
+					<a class="permalink" href="godoc.3.html#HasOneOfBytes.ProtoReflect">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) ToGoogle() (<a href="http://localhost:6161/pkg/github.com/google/uuid/">googleUUID</a>.<a href="http://localhost:6161/pkg/github.com/google/uuid/#UUID">UUID</a>, <a href="http://localhost:6161/pkg/builtin/#error">error</a>)</pre>
+				<pre>func (x *<a href="godoc.3.html#HasOneOfBytes">HasOneOfBytes</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HasOneOfBytes.Reset">func (*HasOneOfBytes) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=4967:4998#L174">Reset</a>
+					<a class="permalink" href="godoc.3.html#HasOneOfBytes.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#HasOneOfBytes">HasOneOfBytes</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="HasOneOfBytes.String">func (*HasOneOfBytes) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=5198:5237#L183">String</a>
+					<a class="permalink" href="godoc.3.html#HasOneOfBytes.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#HasOneOfBytes">HasOneOfBytes</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="HasOneOfBytes_BytesValue">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=6312:6442#L231">HasOneOfBytes_BytesValue</a>
+				<a class="permalink" href="godoc.3.html#HasOneOfBytes_BytesValue">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type HasOneOfBytes_BytesValue struct {
+<span id="HasOneOfBytes_BytesValue.BytesValue"></span>    BytesValue []<a href="http://localhost:6161/pkg/builtin/#byte">byte</a> `protobuf:&#34;bytes,1,opt,name=bytes_value,json=bytesValue,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="HasOneOfBytes_StringValue">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneof.pb.go?s=6444:6578#L235">HasOneOfBytes_StringValue</a>
+				<a class="permalink" href="godoc.3.html#HasOneOfBytes_StringValue">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type HasOneOfBytes_StringValue struct {
+<span id="HasOneOfBytes_StringValue.StringValue"></span>    StringValue <a href="http://localhost:6161/pkg/builtin/#string">string</a> `protobuf:&#34;bytes,2,opt,name=string_value,json=stringValue,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="Houses">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/enum.pb.go?s=828:845#L19">Houses</a>
+				<a class="permalink" href="godoc.3.html#Houses">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+The hogwarts houses.
+</p>
+
+			<pre>type Houses <a href="http://localhost:6161/pkg/builtin/#int32">int32</a></pre>
+
+			
+				
+				<pre>const (
+    <span id="Houses_GRYFFINDOR">Houses_GRYFFINDOR</span> <a href="godoc.3.html#Houses">Houses</a> = 0
+    <span id="Houses_RAVENCLAW">Houses_RAVENCLAW</span>  <a href="godoc.3.html#Houses">Houses</a> = 1
+    <span id="Houses_HUFFLEPUFF">Houses_HUFFLEPUFF</span> <a href="godoc.3.html#Houses">Houses</a> = 2
+    <span id="Houses_SLYTHERIN">Houses_SLYTHERIN</span>  <a href="godoc.3.html#Houses">Houses</a> = 3
+)</pre>
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="Houses.Descriptor">func (Houses) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/enum.pb.go?s=1427:1481#L54">Descriptor</a>
+					<a class="permalink" href="godoc.3.html#Houses.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (<a href="godoc.3.html#Houses">Houses</a>) Descriptor() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#EnumDescriptor">EnumDescriptor</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Houses.Enum">func (Houses) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/enum.pb.go?s=1241:1271#L44">Enum</a>
+					<a class="permalink" href="godoc.3.html#Houses.Enum">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x <a href="godoc.3.html#Houses">Houses</a>) Enum() *<a href="godoc.3.html#Houses">Houses</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Houses.EnumDescriptor">func (Houses) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/enum.pb.go?s=1794:1840#L67">EnumDescriptor</a>
+					<a class="permalink" href="godoc.3.html#Houses.EnumDescriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (<a href="godoc.3.html#Houses">Houses</a>) EnumDescriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
 				<p>
-Converts cereal UUID value into google UUID value. Returns zero value if
-message pointer is nil.
+Deprecated: Use Houses.Descriptor instead.
 </p>
 
 				
@@ -748,15 +1244,147 @@ message pointer is nil.
 				
 			
 				
-				<h3 id="UUID.ToMongo">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=1091:1139#L37">ToMongo</a>
-					<a class="permalink" href="godoc.3.html#UUID.ToMongo">&#xb6;</a>
+				<h3 id="Houses.Number">func (Houses) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/enum.pb.go?s=1659:1707#L62">Number</a>
+					<a class="permalink" href="godoc.3.html#Houses.Number">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) ToMongo() (<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/x/mongo/driver/uuid/">mongoUUID</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/x/mongo/driver/uuid/#UUID">UUID</a>, <a href="http://localhost:6161/pkg/builtin/#error">error</a>)</pre>
+				<pre>func (x <a href="godoc.3.html#Houses">Houses</a>) Number() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#EnumNumber">EnumNumber</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Houses.String">func (Houses) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/enum.pb.go?s=1313:1344#L50">String</a>
+					<a class="permalink" href="godoc.3.html#Houses.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x <a href="godoc.3.html#Houses">Houses</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Houses.Type">func (Houses) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/enum.pb.go?s=1555:1597#L58">Type</a>
+					<a class="permalink" href="godoc.3.html#Houses.Type">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (<a href="godoc.3.html#Houses">Houses</a>) Type() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#EnumType">EnumType</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="IsHasCustomOneofList">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneOfInterfaces.go?s=153:202#L1">IsHasCustomOneofList</a>
+				<a class="permalink" href="godoc.3.html#IsHasCustomOneofList">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type IsHasCustomOneofList = isHasCustomOneOf_Many</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="IsTestOneOfFirstSomeValue">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneOfInterfaces.go?s=29:88#L1">IsTestOneOfFirstSomeValue</a>
+				<a class="permalink" href="godoc.3.html#IsTestOneOfFirstSomeValue">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type IsTestOneOfFirstSomeValue = isTestOneOfFirst_SomeValue</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="IsTestOneOfMultiMessageMage">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/oneOfInterfaces.go?s=89:152#L1">IsTestOneOfMultiMessageMage</a>
+				<a class="permalink" href="godoc.3.html#IsTestOneOfMultiMessageMage">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type IsTestOneOfMultiMessageMage = isTestOneOfMultiMessage_Mage</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ListValue">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=11428:11691#L418">ListValue</a>
+				<a class="permalink" href="godoc.3.html#ListValue">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+Used to test custom wrapper types.
+</p>
+
+			<pre>type ListValue struct {
+
+    <span class="comment">// @inject_tag: bson:&#34;value&#34;</span>
+<span id="ListValue.Value"></span>    Value []<a href="http://localhost:6161/pkg/builtin/#string">string</a> `protobuf:&#34;bytes,1,rep,name=value,proto3&#34; json:&#34;value,omitempty&#34; bson:&#34;value&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="ListValue.Descriptor">func (*ListValue) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=12413:12459#L455">Descriptor</a>
+					<a class="permalink" href="godoc.3.html#ListValue.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#ListValue">ListValue</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
 				<p>
-Converts cereal UUID value into mongo helper UUID value (NOT the binary primitive
-value).
+Deprecated: Use ListValue.ProtoReflect.Descriptor instead.
 </p>
 
 				
@@ -764,16 +1392,971 @@ value).
 				
 			
 				
-				<h3 id="UUID.Validate">func (*UUID) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/messagesCereal/uuidMethods.go?s=294:325#L3">Validate</a>
-					<a class="permalink" href="godoc.3.html#UUID.Validate">&#xb6;</a>
+				<h3 id="ListValue.GetValue">func (*ListValue) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=12531:12570#L459">GetValue</a>
+					<a class="permalink" href="godoc.3.html#ListValue.GetValue">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (x *<a href="godoc.3.html#UUID">UUID</a>) Validate() <a href="http://localhost:6161/pkg/builtin/#error">error</a></pre>
+				<pre>func (x *<a href="godoc.3.html#ListValue">ListValue</a>) GetValue() []<a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ListValue.ProtoMessage">func (*ListValue) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=11995:12027#L440">ProtoMessage</a>
+					<a class="permalink" href="godoc.3.html#ListValue.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#ListValue">ListValue</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ListValue.ProtoReflect">func (*ListValue) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=12032:12087#L442">ProtoReflect</a>
+					<a class="permalink" href="godoc.3.html#ListValue.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#ListValue">ListValue</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ListValue.Reset">func (*ListValue) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=11693:11720#L427">Reset</a>
+					<a class="permalink" href="godoc.3.html#ListValue.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#ListValue">ListValue</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ListValue.String">func (*ListValue) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=11915:11950#L436">String</a>
+					<a class="permalink" href="godoc.3.html#ListValue.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#ListValue">ListValue</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="TestOneOfFirst">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=4615:5176#L170">TestOneOfFirst</a>
+				<a class="permalink" href="godoc.3.html#TestOneOfFirst">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type TestOneOfFirst struct {
+
+    <span class="comment">// @inject_tag: bson:&#34;some_value&#34;</span>
+    <span class="comment">//</span>
+    <span class="comment">// Types that are assignable to SomeValue:</span>
+    <span class="comment">//	*TestOneOfFirst_FieldString</span>
+    <span class="comment">//	*TestOneOfFirst_FieldInt32</span>
+    <span class="comment">//	*TestOneOfFirst_FieldBool</span>
+    <span class="comment">//	*TestOneOfFirst_FieldDouble</span>
+    <span class="comment">//	*TestOneOfFirst_FieldDecimal</span>
+    <span class="comment">//	*TestOneOfFirst_FieldUuid</span>
+    <span class="comment">//	*TestOneOfFirst_FieldRaw</span>
+    <span class="comment">//	*TestOneOfFirst_FieldWizard</span>
+<span id="TestOneOfFirst.SomeValue"></span>    SomeValue isTestOneOfFirst_SomeValue `protobuf_oneof:&#34;some_value&#34; bson:&#34;some_value&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="TestOneOfFirst.Descriptor">func (*TestOneOfFirst) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=5928:5979#L217">Descriptor</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfFirst.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#TestOneOfFirst">TestOneOfFirst</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
 				<p>
-Validates that a protobuf UID value is the correct number of bytes.
+Deprecated: Use TestOneOfFirst.ProtoReflect.Descriptor instead.
 </p>
 
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfFirst.GetFieldBool">func (*TestOneOfFirst) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=6483:6527#L242">GetFieldBool</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfFirst.GetFieldBool">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestOneOfFirst">TestOneOfFirst</a>) GetFieldBool() <a href="http://localhost:6161/pkg/builtin/#bool">bool</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfFirst.GetFieldDecimal">func (*TestOneOfFirst) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=6792:6858#L256">GetFieldDecimal</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfFirst.GetFieldDecimal">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestOneOfFirst">TestOneOfFirst</a>) GetFieldDecimal() *<a href="godoc.12.html">cerealMessages</a>.<a href="godoc.12.html#Decimal">Decimal</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfFirst.GetFieldDouble">func (*TestOneOfFirst) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=6635:6684#L249">GetFieldDouble</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfFirst.GetFieldDouble">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestOneOfFirst">TestOneOfFirst</a>) GetFieldDouble() <a href="http://localhost:6161/pkg/builtin/#float64">float64</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfFirst.GetFieldInt32">func (*TestOneOfFirst) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=6331:6377#L235">GetFieldInt32</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfFirst.GetFieldInt32">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestOneOfFirst">TestOneOfFirst</a>) GetFieldInt32() <a href="http://localhost:6161/pkg/builtin/#int32">int32</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfFirst.GetFieldRaw">func (*TestOneOfFirst) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=7136:7198#L270">GetFieldRaw</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfFirst.GetFieldRaw">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestOneOfFirst">TestOneOfFirst</a>) GetFieldRaw() *<a href="godoc.12.html">cerealMessages</a>.<a href="godoc.12.html#RawData">RawData</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfFirst.GetFieldString">func (*TestOneOfFirst) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=6174:6222#L228">GetFieldString</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfFirst.GetFieldString">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestOneOfFirst">TestOneOfFirst</a>) GetFieldString() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfFirst.GetFieldUuid">func (*TestOneOfFirst) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=6970:7030#L263">GetFieldUuid</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfFirst.GetFieldUuid">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestOneOfFirst">TestOneOfFirst</a>) GetFieldUuid() *<a href="godoc.12.html">cerealMessages</a>.<a href="godoc.12.html#UUID">UUID</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfFirst.GetFieldWizard">func (*TestOneOfFirst) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=7302:7351#L277">GetFieldWizard</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfFirst.GetFieldWizard">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestOneOfFirst">TestOneOfFirst</a>) GetFieldWizard() *<a href="godoc.3.html#Wizard">Wizard</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfFirst.GetSomeValue">func (*TestOneOfFirst) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=6051:6117#L221">GetSomeValue</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfFirst.GetSomeValue">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="godoc.3.html#TestOneOfFirst">TestOneOfFirst</a>) GetSomeValue() isTestOneOfFirst_SomeValue</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfFirst.ProtoMessage">func (*TestOneOfFirst) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=5495:5532#L202">ProtoMessage</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfFirst.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#TestOneOfFirst">TestOneOfFirst</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfFirst.ProtoReflect">func (*TestOneOfFirst) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=5537:5597#L204">ProtoReflect</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfFirst.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestOneOfFirst">TestOneOfFirst</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfFirst.Reset">func (*TestOneOfFirst) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=5178:5210#L189">Reset</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfFirst.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestOneOfFirst">TestOneOfFirst</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfFirst.String">func (*TestOneOfFirst) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=5410:5450#L198">String</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfFirst.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestOneOfFirst">TestOneOfFirst</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="TestOneOfFirst_FieldBool">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=7808:7934#L296">TestOneOfFirst_FieldBool</a>
+				<a class="permalink" href="godoc.3.html#TestOneOfFirst_FieldBool">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type TestOneOfFirst_FieldBool struct {
+<span id="TestOneOfFirst_FieldBool.FieldBool"></span>    FieldBool <a href="http://localhost:6161/pkg/builtin/#bool">bool</a> `protobuf:&#34;varint,3,opt,name=field_bool,json=fieldBool,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="TestOneOfFirst_FieldDecimal">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=8076:8232#L304">TestOneOfFirst_FieldDecimal</a>
+				<a class="permalink" href="godoc.3.html#TestOneOfFirst_FieldDecimal">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type TestOneOfFirst_FieldDecimal struct {
+<span id="TestOneOfFirst_FieldDecimal.FieldDecimal"></span>    FieldDecimal *<a href="godoc.12.html">cerealMessages</a>.<a href="godoc.12.html#Decimal">Decimal</a> `protobuf:&#34;bytes,6,opt,name=field_decimal,json=fieldDecimal,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="TestOneOfFirst_FieldDouble">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=7936:8074#L300">TestOneOfFirst_FieldDouble</a>
+				<a class="permalink" href="godoc.3.html#TestOneOfFirst_FieldDouble">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type TestOneOfFirst_FieldDouble struct {
+<span id="TestOneOfFirst_FieldDouble.FieldDouble"></span>    FieldDouble <a href="http://localhost:6161/pkg/builtin/#float64">float64</a> `protobuf:&#34;fixed64,5,opt,name=field_double,json=fieldDouble,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="TestOneOfFirst_FieldInt32">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=7675:7806#L292">TestOneOfFirst_FieldInt32</a>
+				<a class="permalink" href="godoc.3.html#TestOneOfFirst_FieldInt32">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type TestOneOfFirst_FieldInt32 struct {
+<span id="TestOneOfFirst_FieldInt32.FieldInt32"></span>    FieldInt32 <a href="http://localhost:6161/pkg/builtin/#int32">int32</a> `protobuf:&#34;varint,2,opt,name=field_int32,json=fieldInt32,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="TestOneOfFirst_FieldRaw">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=8377:8517#L312">TestOneOfFirst_FieldRaw</a>
+				<a class="permalink" href="godoc.3.html#TestOneOfFirst_FieldRaw">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type TestOneOfFirst_FieldRaw struct {
+<span id="TestOneOfFirst_FieldRaw.FieldRaw"></span>    FieldRaw *<a href="godoc.12.html">cerealMessages</a>.<a href="godoc.12.html#RawData">RawData</a> `protobuf:&#34;bytes,8,opt,name=field_raw,json=fieldRaw,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="TestOneOfFirst_FieldString">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=7538:7673#L288">TestOneOfFirst_FieldString</a>
+				<a class="permalink" href="godoc.3.html#TestOneOfFirst_FieldString">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type TestOneOfFirst_FieldString struct {
+<span id="TestOneOfFirst_FieldString.FieldString"></span>    FieldString <a href="http://localhost:6161/pkg/builtin/#string">string</a> `protobuf:&#34;bytes,1,opt,name=field_string,json=fieldString,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="TestOneOfFirst_FieldUuid">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=8234:8375#L308">TestOneOfFirst_FieldUuid</a>
+				<a class="permalink" href="godoc.3.html#TestOneOfFirst_FieldUuid">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type TestOneOfFirst_FieldUuid struct {
+<span id="TestOneOfFirst_FieldUuid.FieldUuid"></span>    FieldUuid *<a href="godoc.12.html">cerealMessages</a>.<a href="godoc.12.html#UUID">UUID</a> `protobuf:&#34;bytes,7,opt,name=field_uuid,json=fieldUuid,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="TestOneOfFirst_FieldWizard">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=8519:8655#L316">TestOneOfFirst_FieldWizard</a>
+				<a class="permalink" href="godoc.3.html#TestOneOfFirst_FieldWizard">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type TestOneOfFirst_FieldWizard struct {
+<span id="TestOneOfFirst_FieldWizard.FieldWizard"></span>    FieldWizard *<a href="godoc.3.html#Wizard">Wizard</a> `protobuf:&#34;bytes,9,opt,name=field_wizard,json=fieldWizard,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="TestOneOfMultiMessage">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=9283:9598#L337">TestOneOfMultiMessage</a>
+				<a class="permalink" href="godoc.3.html#TestOneOfMultiMessage">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+Used to test the ability to encode and decode multiple sub-messages as embedded docs.
+</p>
+
+			<pre>type TestOneOfMultiMessage struct {
+
+    <span class="comment">// Types that are assignable to Mage:</span>
+    <span class="comment">//	*TestOneOfMultiMessage_Witch</span>
+    <span class="comment">//	*TestOneOfMultiMessage_Wizard</span>
+<span id="TestOneOfMultiMessage.Mage"></span>    Mage isTestOneOfMultiMessage_Mage `protobuf_oneof:&#34;mage&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="TestOneOfMultiMessage.Descriptor">func (*TestOneOfMultiMessage) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=10392:10450#L376">Descriptor</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfMultiMessage.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#TestOneOfMultiMessage">TestOneOfMultiMessage</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use TestOneOfMultiMessage.ProtoReflect.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfMultiMessage.GetMage">func (*TestOneOfMultiMessage) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=10522:10592#L380">GetMage</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfMultiMessage.GetMage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="godoc.3.html#TestOneOfMultiMessage">TestOneOfMultiMessage</a>) GetMage() isTestOneOfMultiMessage_Mage</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfMultiMessage.GetWitch">func (*TestOneOfMultiMessage) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=10644:10693#L387">GetWitch</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfMultiMessage.GetWitch">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestOneOfMultiMessage">TestOneOfMultiMessage</a>) GetWitch() *<a href="godoc.3.html#Witch">Witch</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfMultiMessage.GetWizard">func (*TestOneOfMultiMessage) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=10793:10844#L394">GetWizard</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfMultiMessage.GetWizard">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestOneOfMultiMessage">TestOneOfMultiMessage</a>) GetWizard() *<a href="godoc.3.html#Wizard">Wizard</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfMultiMessage.ProtoMessage">func (*TestOneOfMultiMessage) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=9938:9982#L361">ProtoMessage</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfMultiMessage.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#TestOneOfMultiMessage">TestOneOfMultiMessage</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfMultiMessage.ProtoReflect">func (*TestOneOfMultiMessage) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=9987:10054#L363">ProtoReflect</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfMultiMessage.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestOneOfMultiMessage">TestOneOfMultiMessage</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfMultiMessage.Reset">func (*TestOneOfMultiMessage) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=9600:9639#L348">Reset</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfMultiMessage.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestOneOfMultiMessage">TestOneOfMultiMessage</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestOneOfMultiMessage.String">func (*TestOneOfMultiMessage) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=9846:9893#L357">String</a>
+					<a class="permalink" href="godoc.3.html#TestOneOfMultiMessage.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestOneOfMultiMessage">TestOneOfMultiMessage</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="TestOneOfMultiMessage_Witch">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=11027:11133#L405">TestOneOfMultiMessage_Witch</a>
+				<a class="permalink" href="godoc.3.html#TestOneOfMultiMessage_Witch">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type TestOneOfMultiMessage_Witch struct {
+<span id="TestOneOfMultiMessage_Witch.Witch"></span>    Witch *<a href="godoc.3.html#Witch">Witch</a> `protobuf:&#34;bytes,1,opt,name=witch,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="TestOneOfMultiMessage_Wizard">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=11135:11245#L409">TestOneOfMultiMessage_Wizard</a>
+				<a class="permalink" href="godoc.3.html#TestOneOfMultiMessage_Wizard">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type TestOneOfMultiMessage_Wizard struct {
+<span id="TestOneOfMultiMessage_Wizard.Wizard"></span>    Wizard *<a href="godoc.3.html#Wizard">Wizard</a> `protobuf:&#34;bytes,2,opt,name=wizard,proto3,oneof&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="TestProto">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=3097:3577#L113">TestProto</a>
+				<a class="permalink" href="godoc.3.html#TestProto">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type TestProto struct {
+
+    <span class="comment">// @inject_tag: bson:&#34;field_string&#34;</span>
+<span id="TestProto.FieldString"></span>    FieldString <a href="http://localhost:6161/pkg/builtin/#string">string</a> `protobuf:&#34;bytes,1,opt,name=field_string,json=fieldString,proto3&#34; json:&#34;field_string,omitempty&#34; bson:&#34;field_string&#34;`
+    <span class="comment">// @inject_tag: bson:&#34;field_int32&#34;</span>
+<span id="TestProto.FieldInt32"></span>    FieldInt32 <a href="http://localhost:6161/pkg/builtin/#int32">int32</a> `protobuf:&#34;varint,2,opt,name=field_int32,json=fieldInt32,proto3&#34; json:&#34;field_int32,omitempty&#34; bson:&#34;field_int32&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="TestProto.Descriptor">func (*TestProto) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=4299:4345#L152">Descriptor</a>
+					<a class="permalink" href="godoc.3.html#TestProto.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#TestProto">TestProto</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use TestProto.ProtoReflect.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="TestProto.GetFieldInt32">func (*TestProto) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=4518:4559#L163">GetFieldInt32</a>
+					<a class="permalink" href="godoc.3.html#TestProto.GetFieldInt32">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestProto">TestProto</a>) GetFieldInt32() <a href="http://localhost:6161/pkg/builtin/#int32">int32</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestProto.GetFieldString">func (*TestProto) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=4417:4460#L156">GetFieldString</a>
+					<a class="permalink" href="godoc.3.html#TestProto.GetFieldString">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestProto">TestProto</a>) GetFieldString() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestProto.ProtoMessage">func (*TestProto) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=3881:3913#L137">ProtoMessage</a>
+					<a class="permalink" href="godoc.3.html#TestProto.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#TestProto">TestProto</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestProto.ProtoReflect">func (*TestProto) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=3918:3973#L139">ProtoReflect</a>
+					<a class="permalink" href="godoc.3.html#TestProto.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestProto">TestProto</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestProto.Reset">func (*TestProto) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=3579:3606#L124">Reset</a>
+					<a class="permalink" href="godoc.3.html#TestProto.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestProto">TestProto</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestProto.String">func (*TestProto) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=3801:3836#L133">String</a>
+					<a class="permalink" href="godoc.3.html#TestProto.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#TestProto">TestProto</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="Witch">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=1991:2202#L66">Witch</a>
+				<a class="permalink" href="godoc.3.html#Witch">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type Witch struct {
+<span id="Witch.Name"></span>    Name <a href="http://localhost:6161/pkg/builtin/#string">string</a> `protobuf:&#34;bytes,1,opt,name=name,proto3&#34; json:&#34;name,omitempty&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="Witch.Descriptor">func (*Witch) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=2900:2942#L102">Descriptor</a>
+					<a class="permalink" href="godoc.3.html#Witch.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#Witch">Witch</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use Witch.ProtoReflect.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Witch.GetName">func (*Witch) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=3014:3046#L106">GetName</a>
+					<a class="permalink" href="godoc.3.html#Witch.GetName">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#Witch">Witch</a>) GetName() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Witch.ProtoMessage">func (*Witch) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=2494:2522#L87">ProtoMessage</a>
+					<a class="permalink" href="godoc.3.html#Witch.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#Witch">Witch</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Witch.ProtoReflect">func (*Witch) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=2527:2578#L89">ProtoReflect</a>
+					<a class="permalink" href="godoc.3.html#Witch.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#Witch">Witch</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Witch.Reset">func (*Witch) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=2204:2227#L74">Reset</a>
+					<a class="permalink" href="godoc.3.html#Witch.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#Witch">Witch</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Witch.String">func (*Witch) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=2418:2449#L83">String</a>
+					<a class="permalink" href="godoc.3.html#Witch.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#Witch">Witch</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="Wizard">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=876:1088#L19">Wizard</a>
+				<a class="permalink" href="godoc.3.html#Wizard">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type Wizard struct {
+<span id="Wizard.Name"></span>    Name <a href="http://localhost:6161/pkg/builtin/#string">string</a> `protobuf:&#34;bytes,1,opt,name=name,proto3&#34; json:&#34;name,omitempty&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="Wizard.Descriptor">func (*Wizard) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=1792:1835#L55">Descriptor</a>
+					<a class="permalink" href="godoc.3.html#Wizard.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#Wizard">Wizard</a>) Descriptor() ([]<a href="http://localhost:6161/pkg/builtin/#byte">byte</a>, []<a href="http://localhost:6161/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use Wizard.ProtoReflect.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Wizard.GetName">func (*Wizard) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=1907:1940#L59">GetName</a>
+					<a class="permalink" href="godoc.3.html#Wizard.GetName">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#Wizard">Wizard</a>) GetName() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Wizard.ProtoMessage">func (*Wizard) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=1383:1412#L40">ProtoMessage</a>
+					<a class="permalink" href="godoc.3.html#Wizard.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="godoc.3.html#Wizard">Wizard</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Wizard.ProtoReflect">func (*Wizard) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=1417:1469#L42">ProtoReflect</a>
+					<a class="permalink" href="godoc.3.html#Wizard.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#Wizard">Wizard</a>) ProtoReflect() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Wizard.Reset">func (*Wizard) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=1090:1114#L27">Reset</a>
+					<a class="permalink" href="godoc.3.html#Wizard.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#Wizard">Wizard</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Wizard.String">func (*Wizard) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/cerealMessages_test/test.pb.go?s=1306:1338#L36">String</a>
+					<a class="permalink" href="godoc.3.html#Wizard.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#Wizard">Wizard</a>) String() <a href="http://localhost:6161/pkg/builtin/#string">string</a></pre>
+				
 				
 				
 				

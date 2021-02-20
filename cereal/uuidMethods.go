@@ -1,4 +1,4 @@
-package cerealMessages
+package cereal
 
 import (
 	"errors"

@@ -1,7 +1,7 @@
 package protoBson_test
 
 import (
-	"github.com/illuscio-dev/protoCereal-go/cerealMessages_test"
+	"github.com/illuscio-dev/protoCereal-go/cereal_test"
 	protoBson "github.com/illuscio-dev/protoCereal-go/protoBson"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
@@ -21,21 +21,21 @@ func TestOpts_WithEnumStrings(t *testing.T) {
 	registry := builder.Build()
 
 	type testCase struct {
-		House cerealMessages_test.Houses
+		House cereal_test.Houses
 	}
 
 	testCases := []testCase{
 		{
-			House: cerealMessages_test.Houses_GRYFFINDOR,
+			House: cereal_test.Houses_GRYFFINDOR,
 		},
 		{
-			House: cerealMessages_test.Houses_RAVENCLAW,
+			House: cereal_test.Houses_RAVENCLAW,
 		},
 		{
-			House: cerealMessages_test.Houses_HUFFLEPUFF,
+			House: cereal_test.Houses_HUFFLEPUFF,
 		},
 		{
-			House: cerealMessages_test.Houses_SLYTHERIN,
+			House: cereal_test.Houses_SLYTHERIN,
 		},
 	}
 
@@ -44,7 +44,7 @@ func TestOpts_WithEnumStrings(t *testing.T) {
 	runTest := func(t *testing.T) {
 		assert := assert.New(t)
 
-		message := &cerealMessages_test.EnumTest{
+		message := &cereal_test.EnumTest{
 			House: thisCase.House,
 		}
 
@@ -67,7 +67,7 @@ func TestOpts_WithEnumStrings(t *testing.T) {
 			t.FailNow()
 		}
 
-		decoded := new(cerealMessages_test.EnumTest)
+		decoded := new(cereal_test.EnumTest)
 		err = bson.UnmarshalWithRegistry(registry, encoded, decoded)
 		if !assert.NoError(err, "unmarshal to message") {
 			t.FailNow()

@@ -2,13 +2,13 @@ package protoBson
 
 import (
 	"fmt"
-	"github.com/illuscio-dev/protoCereal-go/cerealMessages"
+	"github.com/illuscio-dev/protoCereal-go/cereal"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
 	"go.mongodb.org/mongo-driver/bson/bsonrw"
 	"reflect"
 )
 
-var decimalZeroVal = reflect.Zero(reflect.TypeOf(new(cerealMessages.Decimal)))
+var decimalZeroVal = reflect.Zero(reflect.TypeOf(new(cereal.Decimal)))
 
 type protoDecimalCodec struct{}
 
@@ -19,7 +19,7 @@ func (codec protoDecimalCodec) EncodeValue(
 		return writer.WriteNull()
 	}
 
-	decimalProto, ok := value.Interface().(*cerealMessages.Decimal)
+	decimalProto, ok := value.Interface().(*cereal.Decimal)
 	if !ok {
 		return fmt.Errorf(
 			"type '%v' passed to decimal codec was not protobuf decimal pointer",
@@ -50,7 +50,7 @@ func (codec protoDecimalCodec) DecodeValue(
 		)
 	}
 
-	decimalProto := cerealMessages.DecimalFromBson(decimalBson)
+	decimalProto := cereal.DecimalFromBson(decimalBson)
 	value.Set(reflect.ValueOf(decimalProto))
 
 	return nil

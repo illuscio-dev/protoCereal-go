@@ -4,11 +4,11 @@
 // 	protoc        v3.13.0
 // source: cereal_proto/test/test.proto
 
-package cerealMessages_test
+package cereal_test
 
 import (
 	proto "github.com/golang/protobuf/proto"
-	cerealMessages "github.com/illuscio-dev/protoCereal-go/cerealMessages"
+	cereal "github.com/illuscio-dev/protoCereal-go/cereal"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -263,21 +263,21 @@ func (x *TestOneOfFirst) GetFieldDouble() float64 {
 	return 0
 }
 
-func (x *TestOneOfFirst) GetFieldDecimal() *cerealMessages.Decimal {
+func (x *TestOneOfFirst) GetFieldDecimal() *cereal.Decimal {
 	if x, ok := x.GetSomeValue().(*TestOneOfFirst_FieldDecimal); ok {
 		return x.FieldDecimal
 	}
 	return nil
 }
 
-func (x *TestOneOfFirst) GetFieldUuid() *cerealMessages.UUID {
+func (x *TestOneOfFirst) GetFieldUuid() *cereal.UUID {
 	if x, ok := x.GetSomeValue().(*TestOneOfFirst_FieldUuid); ok {
 		return x.FieldUuid
 	}
 	return nil
 }
 
-func (x *TestOneOfFirst) GetFieldRaw() *cerealMessages.RawData {
+func (x *TestOneOfFirst) GetFieldRaw() *cereal.RawData {
 	if x, ok := x.GetSomeValue().(*TestOneOfFirst_FieldRaw); ok {
 		return x.FieldRaw
 	}
@@ -312,15 +312,15 @@ type TestOneOfFirst_FieldDouble struct {
 }
 
 type TestOneOfFirst_FieldDecimal struct {
-	FieldDecimal *cerealMessages.Decimal `protobuf:"bytes,6,opt,name=field_decimal,json=fieldDecimal,proto3,oneof"`
+	FieldDecimal *cereal.Decimal `protobuf:"bytes,6,opt,name=field_decimal,json=fieldDecimal,proto3,oneof"`
 }
 
 type TestOneOfFirst_FieldUuid struct {
-	FieldUuid *cerealMessages.UUID `protobuf:"bytes,7,opt,name=field_uuid,json=fieldUuid,proto3,oneof"`
+	FieldUuid *cereal.UUID `protobuf:"bytes,7,opt,name=field_uuid,json=fieldUuid,proto3,oneof"`
 }
 
 type TestOneOfFirst_FieldRaw struct {
-	FieldRaw *cerealMessages.RawData `protobuf:"bytes,8,opt,name=field_raw,json=fieldRaw,proto3,oneof"`
+	FieldRaw *cereal.RawData `protobuf:"bytes,8,opt,name=field_raw,json=fieldRaw,proto3,oneof"`
 }
 
 type TestOneOfFirst_FieldWizard struct {
@@ -526,11 +526,11 @@ var file_cereal_proto_test_test_proto_rawDesc = []byte{
 	0x61, 0x72, 0x64, 0x48, 0x00, 0x52, 0x06, 0x77, 0x69, 0x7a, 0x61, 0x72, 0x64, 0x42, 0x06, 0x0a,
 	0x04, 0x6d, 0x61, 0x67, 0x65, 0x22, 0x21, 0x0a, 0x09, 0x4c, 0x69, 0x73, 0x74, 0x56, 0x61, 0x6c,
 	0x75, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x03, 0x28,
-	0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x42, 0x3c, 0x5a, 0x3a, 0x67, 0x69, 0x74, 0x68,
+	0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68,
 	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x6c, 0x6c, 0x75, 0x73, 0x63, 0x69, 0x6f, 0x2d,
 	0x64, 0x65, 0x76, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x43, 0x65, 0x72, 0x65, 0x61, 0x6c, 0x2d,
-	0x67, 0x6f, 0x2f, 0x63, 0x65, 0x72, 0x65, 0x61, 0x6c, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
-	0x73, 0x5f, 0x74, 0x65, 0x73, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x67, 0x6f, 0x2f, 0x63, 0x65, 0x72, 0x65, 0x61, 0x6c, 0x5f, 0x74, 0x65, 0x73, 0x74, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -547,15 +547,15 @@ func file_cereal_proto_test_test_proto_rawDescGZIP() []byte {
 
 var file_cereal_proto_test_test_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_cereal_proto_test_test_proto_goTypes = []interface{}{
-	(*Wizard)(nil),                 // 0: cereal_test.Wizard
-	(*Witch)(nil),                  // 1: cereal_test.Witch
-	(*TestProto)(nil),              // 2: cereal_test.TestProto
-	(*TestOneOfFirst)(nil),         // 3: cereal_test.TestOneOfFirst
-	(*TestOneOfMultiMessage)(nil),  // 4: cereal_test.TestOneOfMultiMessage
-	(*ListValue)(nil),              // 5: cereal_test.ListValue
-	(*cerealMessages.Decimal)(nil), // 6: cereal.Decimal
-	(*cerealMessages.UUID)(nil),    // 7: cereal.UUID
-	(*cerealMessages.RawData)(nil), // 8: cereal.RawData
+	(*Wizard)(nil),                // 0: cereal_test.Wizard
+	(*Witch)(nil),                 // 1: cereal_test.Witch
+	(*TestProto)(nil),             // 2: cereal_test.TestProto
+	(*TestOneOfFirst)(nil),        // 3: cereal_test.TestOneOfFirst
+	(*TestOneOfMultiMessage)(nil), // 4: cereal_test.TestOneOfMultiMessage
+	(*ListValue)(nil),             // 5: cereal_test.ListValue
+	(*cereal.Decimal)(nil),        // 6: cereal.Decimal
+	(*cereal.UUID)(nil),           // 7: cereal.UUID
+	(*cereal.RawData)(nil),        // 8: cereal.RawData
 }
 var file_cereal_proto_test_test_proto_depIdxs = []int32{
 	6, // 0: cereal_test.TestOneOfFirst.field_decimal:type_name -> cereal.Decimal

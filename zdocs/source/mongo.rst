@@ -119,12 +119,12 @@ like this:
   // Create our wizard record.
   wizard := &docs.Wizard{
     Name:            "Harry Potter",
-    Id:              messagesCereal.MustUUIDRandom(),
+    Id:              cereal.MustUUIDRandom(),
     SortedAt:        timestamppb.New(time.Now().UTC()),
     HogwartsHouse:   docs.Houses_GRYFFINDOR,
-    GingottsBalance: messagesCereal.DecimalFromBson(gringottsBalance),
+    GingottsBalance: cereal.DecimalFromBson(gringottsBalance),
     FamiliarName:    &wrapperspb.StringValue{Value: "Hedwig"},
-    Portrait:        &messagesCereal.RawData{Data: []byte("some image bytes")},
+    Portrait:        &cereal.RawData{Data: []byte("some image bytes")},
     Weapon: &docs.Wizard_Wand{
       Wand: &docs.Wand{
         Core: "Phoenix Feather",
@@ -355,9 +355,9 @@ Proto Type                    BSON Type                   Binary Subtype
 \*wrapperspb.UInt64Value      int32 / int64
 \*anypb.Any                   bsontype.EmbeddedDocument
 \*timestamppb.Timestamp       primitive.DateTime
-\*messagesCereal.Decimal      primitive.Decimal128
-\*messagesCereal.RawData      primitive.Binary,           bsontype.BinaryUserDefined
-\*messagesCereal.UUID         primitive.Binary,           bsontype.UUID
+\*cereal.Decimal      primitive.Decimal128
+\*cereal.RawData      primitive.Binary,           bsontype.BinaryUserDefined
+\*cereal.UUID         primitive.Binary,           bsontype.UUID
 ==========================    ==========================  ==========================
 
 .. note::

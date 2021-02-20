@@ -1,4 +1,4 @@
-package cerealMessages_test
+package cereal_test
 
 type IsTestOneOfFirstSomeValue = isTestOneOfFirst_SomeValue
 type IsTestOneOfMultiMessageMage = isTestOneOfMultiMessage_Mage

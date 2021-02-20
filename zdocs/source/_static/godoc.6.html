@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#375EAB">
 
-  <title>enum - Go Documentation Server</title>
+  <title>common - Go Documentation Server</title>
 
 <link type="text/css" rel="stylesheet" href="style.css">
 
@@ -43,7 +43,7 @@
 
 
   <h1>
-    Package enum
+    Package common
     <span class="text-muted"></span>
   </h1>
 
@@ -77,7 +77,7 @@
 		
 		<div id="short-nav">
 			<dl>
-			<dd><code>import "github.com/illuscio-dev/protoCereal-go/protoBSON/enum"</code></dd>
+			<dd><code>import "github.com/illuscio-dev/protoCereal-go/protoBson/common"</code></dd>
 			</dl>
 			<dl>
 			<dd><a href="godoc.6.html#pkg-overview" class="overviewLink">Overview</a></dd>
@@ -109,24 +109,19 @@
 			<div id="manual-nav">
 			<dl>
 			
+				<dd><a href="godoc.6.html#pkg-constants">Constants</a></dd>
 			
 			
 			
 				
-				<dd><a href="godoc.6.html#CodecEnumStringer">type CodecEnumStringer</a></dd>
-				
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.6.html#CodecEnumStringer.DecodeValue">func (codec *CodecEnumStringer) DecodeValue(context bsoncodec.DecodeContext, reader bsonrw.ValueReader, value reflect.Value) error</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="godoc.6.html#CodecEnumStringer.EncodeValue">func (codec *CodecEnumStringer) EncodeValue(context bsoncodec.EncodeContext, writer bsonrw.ValueWriter, value reflect.Value) error</a></dd>
-				
+				<dd><a href="godoc.6.html#ConvertToBytesReader">func ConvertToBytesReader(reader interface{}) bsonrw.BytesReader</a></dd>
 			
 				
-				<dd><a href="godoc.6.html#ProtoEnum">type ProtoEnum</a></dd>
+				<dd><a href="godoc.6.html#DecodeStructWithTypeInfo">func DecodeStructWithTypeInfo(context bsoncodec.DecodeContext, reader bsonrw.ValueReader, typeResolver func(string) (reflect.Type, error)) (reflect.Value, error)</a></dd>
+			
 				
-				
+				<dd><a href="godoc.6.html#EncodeStructWithTypeInfo">func EncodeStructWithTypeInfo(context bsoncodec.EncodeContext, writer bsonrw.ValueWriter, value proto.Message, typeIdentifier string) error</a></dd>
+			
 			
 			
 			</dl>
@@ -139,7 +134,9 @@
 			<p>
 			<span style="font-size:90%">
 			
-				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/enum/enumCodec.go">enumCodec.go</a>
+				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBson/common/convert_to_bytes_reader.go">convert_to_bytes_reader.go</a>
+			
+				<a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBson/common/struct_with_type.go">struct_with_type.go</a>
 			
 			</span>
 			</p>
@@ -150,90 +147,66 @@
 		
 
 		
+			<h2 id="pkg-constants">Constants</h2>
+			
+				
+				<pre>const <span id="TypeURLField">TypeURLField</span> = &#34;pb_type&#34;</pre>
+			
 		
 		
 		
 			
 			
-			<h2 id="CodecEnumStringer">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/enum/enumCodec.go?s=388:421#L9">CodecEnumStringer</a>
-				<a class="permalink" href="godoc.6.html#CodecEnumStringer">&#xb6;</a>
+			<h2 id="ConvertToBytesReader">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBson/common/convert_to_bytes_reader.go?s=66:130#L1">ConvertToBytesReader</a>
+				<a class="permalink" href="godoc.6.html#ConvertToBytesReader">&#xb6;</a>
 				
 				
 			</h2>
-			
-			<pre>type CodecEnumStringer struct {
-}
-</pre>
-
-			
-
-			
-
+			<pre>func ConvertToBytesReader(reader interface{}) <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/">bsonrw</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/#BytesReader">BytesReader</a></pre>
 			
 			
 			
 
-			
-
-			
-				
-				<h3 id="CodecEnumStringer.DecodeValue">func (*CodecEnumStringer) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/enum/enumCodec.go?s=856:990#L29">DecodeValue</a>
-					<a class="permalink" href="godoc.6.html#CodecEnumStringer.DecodeValue">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (codec *<a href="godoc.6.html#CodecEnumStringer">CodecEnumStringer</a>) DecodeValue(
-    context <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/">bsoncodec</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/#DecodeContext">DecodeContext</a>, reader <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/">bsonrw</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/#ValueReader">ValueReader</a>, value <a href="http://localhost:6161/pkg/reflect/">reflect</a>.<a href="http://localhost:6161/pkg/reflect/#Value">Value</a>,
-) <a href="http://localhost:6161/pkg/builtin/#error">error</a></pre>
-				
-				
-				
-				
-			
-				
-				<h3 id="CodecEnumStringer.EncodeValue">func (*CodecEnumStringer) <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/enum/enumCodec.go?s=423:557#L12">EncodeValue</a>
-					<a class="permalink" href="godoc.6.html#CodecEnumStringer.EncodeValue">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (codec *<a href="godoc.6.html#CodecEnumStringer">CodecEnumStringer</a>) EncodeValue(
-    context <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/">bsoncodec</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/#EncodeContext">EncodeContext</a>, writer <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/">bsonrw</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/#ValueWriter">ValueWriter</a>, value <a href="http://localhost:6161/pkg/reflect/">reflect</a>.<a href="http://localhost:6161/pkg/reflect/#Value">Value</a>,
-) <a href="http://localhost:6161/pkg/builtin/#error">error</a></pre>
-				
-				
-				
-				
-			
 		
 			
 			
-			<h2 id="ProtoEnum">type <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBSON/enum/enumCodec.go?s=235:386#L2">ProtoEnum</a>
-				<a class="permalink" href="godoc.6.html#ProtoEnum">&#xb6;</a>
+			<h2 id="DecodeStructWithTypeInfo">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBson/common/struct_with_type.go?s=2418:2585#L76">DecodeStructWithTypeInfo</a>
+				<a class="permalink" href="godoc.6.html#DecodeStructWithTypeInfo">&#xb6;</a>
 				
 				
 			</h2>
+			<pre>func DecodeStructWithTypeInfo(
+    context <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/">bsoncodec</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/#DecodeContext">DecodeContext</a>,
+    reader <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/">bsonrw</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/#ValueReader">ValueReader</a>,
+    typeResolver func(<a href="http://localhost:6161/pkg/builtin/#string">string</a>) (<a href="http://localhost:6161/pkg/reflect/">reflect</a>.<a href="http://localhost:6161/pkg/reflect/#Type">Type</a>, <a href="http://localhost:6161/pkg/builtin/#error">error</a>),
+) (<a href="http://localhost:6161/pkg/reflect/">reflect</a>.<a href="http://localhost:6161/pkg/reflect/#Value">Value</a>, <a href="http://localhost:6161/pkg/builtin/#error">error</a>)</pre>
 			<p>
-Interface that generated enum types conform to.
+Decode a document with the type information appended as a field. typeResolver must
+hand back the (non-pointer) message type
 </p>
 
-			<pre>type ProtoEnum interface {
-    String() <a href="http://localhost:6161/pkg/builtin/#string">string</a>
-    Descriptor() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#EnumDescriptor">EnumDescriptor</a>
-    Type() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#EnumType">EnumType</a>
-    Number() <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#EnumNumber">EnumNumber</a>
-}</pre>
-
-			
-
-			
-
-			
 			
 			
 
+		
+			
+			
+			<h2 id="EncodeStructWithTypeInfo">func <a href="http://localhost:6161/src/github.com/illuscio-dev/protoCereal-go/protoBson/common/struct_with_type.go?s=1035:1181#L24">EncodeStructWithTypeInfo</a>
+				<a class="permalink" href="godoc.6.html#EncodeStructWithTypeInfo">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func EncodeStructWithTypeInfo(
+    context <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/">bsoncodec</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsoncodec/#EncodeContext">EncodeContext</a>,
+    writer <a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/">bsonrw</a>.<a href="http://localhost:6161/pkg/go.mongodb.org/mongo-driver/bson/bsonrw/#ValueWriter">ValueWriter</a>,
+    value <a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/">proto</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/proto/#Message">Message</a>,
+    typeIdentifier <a href="http://localhost:6161/pkg/builtin/#string">string</a>,
+) <a href="http://localhost:6161/pkg/builtin/#error">error</a></pre>
+			
+			
 			
 
-			
+		
 		
 	
 

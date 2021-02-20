@@ -1,4 +1,4 @@
-package cerealMessages
+package cereal
 
 import (
 	"go.mongodb.org/mongo-driver/bson/primitive"

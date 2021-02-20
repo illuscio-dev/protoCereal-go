@@ -3,7 +3,7 @@ package protoBson_test
 import (
 	"fmt"
 	"github.com/golang/protobuf/ptypes/timestamp"
-	"github.com/illuscio-dev/protoCereal-go/cerealMessages"
+	"github.com/illuscio-dev/protoCereal-go/cereal"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -48,7 +48,7 @@ func TestCodec_Timestamp_RoundTrip(t *testing.T) {
 	original := &hasTimestamp{
 		Value: timestamppb.New(time.Now().UTC()),
 	}
-	cerealMessages.ClipTimestamp(original.Value)
+	cereal.ClipTimestamp(original.Value)
 
 	encoded, err := bson.MarshalWithRegistry(testRegistry, original)
 	assert.NoError(err, "encoding err")

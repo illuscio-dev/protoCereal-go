@@ -3,7 +3,7 @@
 package oneof
 
 import (
-	"github.com/illuscio-dev/protoCereal-go/cerealMessages_test"
+	"github.com/illuscio-dev/protoCereal-go/cereal_test"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/proto"
 	"reflect"
@@ -13,7 +13,7 @@ import (
 func TestMessageInterfaceType(t *testing.T) {
 	assert := assert.New(t)
 
-	var wizard interface{} = new(cerealMessages_test.Wizard)
+	var wizard interface{} = new(cereal_test.Wizard)
 
 	_, ok := wizard.(proto.Message)
 	assert.True(ok, "type assert valid")

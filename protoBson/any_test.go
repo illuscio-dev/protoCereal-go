@@ -2,7 +2,7 @@ package protoBson_test
 
 import (
 	"fmt"
-	"github.com/illuscio-dev/protoCereal-go/cerealMessages_test"
+	"github.com/illuscio-dev/protoCereal-go/cereal_test"
 	"github.com/illuscio-dev/protoCereal-go/protoBson/common"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
@@ -18,7 +18,7 @@ func TestCodec_Any_MapValues(t *testing.T) {
 	}
 
 	anyVal, err := anypb.New(
-		&cerealMessages_test.TestProto{
+		&cereal_test.TestProto{
 			FieldString: "some string",
 			FieldInt32:  42,
 		},
@@ -71,7 +71,7 @@ func TestCodec_Any_RoundTrip(t *testing.T) {
 	}
 
 	anyVal, err := anypb.New(
-		&cerealMessages_test.TestProto{
+		&cereal_test.TestProto{
 			FieldString: "some string",
 			FieldInt32:  42,
 		},
@@ -108,7 +108,7 @@ func TestCodec_Any_RoundTrip(t *testing.T) {
 		t.FailNow()
 	}
 
-	message, ok := messageInterface.(*cerealMessages_test.TestProto)
+	message, ok := messageInterface.(*cereal_test.TestProto)
 	if !ok {
 		t.Errorf("could not convert any payload to dicom header")
 	}

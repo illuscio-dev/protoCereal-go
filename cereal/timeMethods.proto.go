@@ -1,4 +1,4 @@
-package cerealMessages
+package cereal
 
 import "google.golang.org/protobuf/types/known/timestamppb"
 
