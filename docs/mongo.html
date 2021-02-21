@@ -1,0 +1,863 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>protoMongo - MongoDB &mdash; protoCereal 0.2.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="protoCereal-go" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> protoCereal
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">protoMongo - MongoDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#default-codecs">Default Codecs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#any-fields">Any Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#oneof-fields">Oneof Fields</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#auto-generation">Auto-Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-bson-mapping">Custom BSON Mapping</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#enums">Enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-wrapper-types">Custom Wrapper Types</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">protoCereal</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>protoMongo - MongoDB</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/mongo.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="protomongo-mongodb">
+<h1>protoMongo - MongoDB<a class="headerlink" href="#protomongo-mongodb" title="Permalink to this headline">¶</a></h1>
+<p>The protobson package contains codecs for marshaling and unmarshalling common protobuf
+data structures to more user-friendly BSON documents and values.</p>
+<div class="section" id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<p>Lets start with a protobuf file. At <em>Hogwarts School of Witchcraft and Wizardry</em>, after
+the <code class="docutils literal notranslate"><span class="pre">SortingHat</span></code> service finishes sorting a new wizard, it seends a record to the
+archives to be added to the school’s roster. The archives stores the student roster in
+MongoDB, so they need to serialize the incoming protobuf message to BSON.</p>
+<div class="highlight-protobuf notranslate"><div class="highlight"><pre><span></span><span class="k">syntax</span> <span class="o">=</span> <span class="s">&quot;proto3&quot;</span><span class="p">;</span>
+<span class="kn">package</span> <span class="nn">proto_cereal_doc</span><span class="p">;</span>
+<span class="k">option</span> <span class="na">go_package</span> <span class="o">=</span> <span class="s">&quot;github.com/illuscio-dev/protoCereal-go/docs&quot;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s">&quot;cereal_proto/decimal.proto&quot;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">&quot;cereal_proto/uuid.proto&quot;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">&quot;cereal_proto/raw_data.proto&quot;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">&quot;google/protobuf/wrappers.proto&quot;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">&quot;google/protobuf/timestamp.proto&quot;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">&quot;google/protobuf/any.proto&quot;</span><span class="p">;</span>
+
+<span class="c1">// The hogwarts houses.</span>
+<span class="kd">enum</span> <span class="n">Houses</span> <span class="p">{</span>
+  <span class="na">GRYFFINDOR</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="na">RAVENCLAW</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="na">HUFFLEPUFF</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="na">SLYTHERIN</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Information about a Wizard&#39;s wand.</span>
+<span class="kd">message</span> <span class="nc">Wand</span> <span class="p">{</span>
+  <span class="kt">string</span> <span class="na">core</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Information about a Wizard&#39;s sword.</span>
+<span class="kd">message</span> <span class="nc">Sword</span> <span class="p">{</span>
+  <span class="kt">string</span> <span class="na">metal</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Information about a Hogwarts wizard.</span>
+<span class="kd">message</span> <span class="nc">Wizard</span> <span class="p">{</span>
+  <span class="c1">// The name of the Wizard.</span>
+  <span class="c1">// @inject_tag: bson:&quot;name&quot;</span>
+  <span class="kt">string</span> <span class="na">name</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="c1">// A unique Identifier for the Wizard.</span>
+  <span class="c1">// @inject_tag: bson:&quot;id&quot;</span>
+  <span class="n">cereal.UUID</span> <span class="na">id</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="c1">// The exact moment the Wizard was sorted.</span>
+  <span class="c1">// @inject_tag: bson:&quot;sorted_at&quot;</span>
+  <span class="n">google.protobuf.Timestamp</span> <span class="na">sorted_at</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+
+  <span class="c1">// The house this wizard belongs to.</span>
+  <span class="c1">// @inject_tag: bson:&quot;hogwarts_house&quot;</span>
+  <span class="n">Houses</span> <span class="na">hogwarts_house</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+
+  <span class="c1">// The current balance of the wizard&#39;s Gringott&#39;s account in Galleons.</span>
+  <span class="c1">// @inject_tag: bson:&quot;gingotts_balance&quot;</span>
+  <span class="n">cereal.Decimal</span> <span class="na">gingotts_balance</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+
+  <span class="c1">// Name of the Wizard&#39;s familiar. Nil if Wizard does not have a familiar.</span>
+  <span class="c1">// @inject_tag: bson:&quot;familiar_name&quot;</span>
+  <span class="n">google.protobuf.StringValue</span> <span class="na">familiar_name</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+
+  <span class="c1">// Image of the Wizard.</span>
+  <span class="c1">// @inject_tag: bson:&quot;portrait&quot;</span>
+  <span class="n">cereal.RawData</span> <span class="na">portrait</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+
+  <span class="c1">// The preferred weapon of this wizard.</span>
+  <span class="c1">// @inject_tag: bson:&quot;weapon&quot;</span>
+  <span class="k">oneof</span> <span class="n">weapon</span> <span class="p">{</span>
+    <span class="n">Wand</span> <span class="na">wand</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+    <span class="n">Sword</span> <span class="na">sword</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// An object the wizard is destined to obtain.</span>
+  <span class="c1">// @inject_tag: bson:&quot;destined_object&quot;</span>
+  <span class="n">google.protobuf.Any</span> <span class="na">destined_object</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We are injecting custom struct tags through
+<a class="reference external" href="https://github.com/favadi/protoc-go-inject-tag">protoc-go-inject-tag</a> for more
+human-friendly bson keys.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Hogwarts is a great place to work for code magicians! I highly recommend
+<a class="reference external" href="https://aphyr.com/posts/341-hexing-the-technical-interview">this overview of magical tech interviews</a>
+to brush up on your skills prior to applying.</p>
+</div>
+<p>Back the problem at hand. Instantiating a new record in our Go code might look something
+like this:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="c1">// Parse account balance as galleon decimal.</span>
+<span class="nx">gringottsBalance</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">primitive</span><span class="p">.</span><span class="nx">ParseDecimal128</span><span class="p">(</span><span class="s">&quot;50625.56713&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+  <span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;error parsing gringott&#39;s balance: %w&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="c1">// This student is destined to wield a sword, so pack that into an Any payload.</span>
+<span class="nx">destinedSword</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">docs</span><span class="p">.</span><span class="nx">Sword</span><span class="p">{</span><span class="nx">Metal</span><span class="p">:</span> <span class="s">&quot;Silver&quot;</span><span class="p">}</span>
+<span class="nx">destinedObject</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">anypb</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="nx">destinedSword</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+  <span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;error packing sword: %w&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="c1">// Create our wizard record.</span>
+<span class="nx">wizard</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">docs</span><span class="p">.</span><span class="nx">Wizard</span><span class="p">{</span>
+  <span class="nx">Name</span><span class="p">:</span>            <span class="s">&quot;Harry Potter&quot;</span><span class="p">,</span>
+  <span class="nx">Id</span><span class="p">:</span>              <span class="nx">cereal</span><span class="p">.</span><span class="nx">MustUUIDRandom</span><span class="p">(),</span>
+  <span class="nx">SortedAt</span><span class="p">:</span>        <span class="nx">timestamppb</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">().</span><span class="nx">UTC</span><span class="p">()),</span>
+  <span class="nx">HogwartsHouse</span><span class="p">:</span>   <span class="nx">docs</span><span class="p">.</span><span class="nx">Houses_GRYFFINDOR</span><span class="p">,</span>
+  <span class="nx">GingottsBalance</span><span class="p">:</span> <span class="nx">cereal</span><span class="p">.</span><span class="nx">DecimalFromBson</span><span class="p">(</span><span class="nx">gringottsBalance</span><span class="p">),</span>
+  <span class="nx">FamiliarName</span><span class="p">:</span>    <span class="o">&amp;</span><span class="nx">wrapperspb</span><span class="p">.</span><span class="nx">StringValue</span><span class="p">{</span><span class="nx">Value</span><span class="p">:</span> <span class="s">&quot;Hedwig&quot;</span><span class="p">},</span>
+  <span class="nx">Portrait</span><span class="p">:</span>        <span class="o">&amp;</span><span class="nx">cereal</span><span class="p">.</span><span class="nx">RawData</span><span class="p">{</span><span class="nx">Data</span><span class="p">:</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;some image bytes&quot;</span><span class="p">)},</span>
+  <span class="nx">Weapon</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">docs</span><span class="p">.</span><span class="nx">Wizard_Wand</span><span class="p">{</span>
+    <span class="nx">Wand</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">docs</span><span class="p">.</span><span class="nx">Wand</span><span class="p">{</span>
+      <span class="nx">Core</span><span class="p">:</span> <span class="s">&quot;Phoenix Feather&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="nx">DestinedObject</span><span class="p">:</span> <span class="nx">destinedObject</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To naively marshall this to BSON, we make the following incantation:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="c1">// Marshall to BSON binary.</span>
+<span class="nx">encoded</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">bson</span><span class="p">.</span><span class="nx">Marshal</span><span class="p">(</span><span class="nx">wizard</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+  <span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;error marshalling wizard: %w&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="c1">// Extract into a bson map so we can peer into the document&#39;s structure.</span>
+<span class="nx">rawDocument</span> <span class="o">:=</span> <span class="nx">bson</span><span class="p">.</span><span class="nx">M</span><span class="p">{}</span>
+<span class="nx">err</span> <span class="p">=</span> <span class="nx">bson</span><span class="p">.</span><span class="nx">Unmarshal</span><span class="p">(</span><span class="nx">encoded</span><span class="p">,</span> <span class="nx">rawDocument</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+  <span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;error unmarshalling to bson.M: %w&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="c1">// Pretty print the document</span>
+<span class="nx">_</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">pretty</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">rawDocument</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I am using <a class="reference external" href="github.com/kr/pretty">pretty</a> here to do the printing.</p>
+</div>
+<p>Which gives us the following output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>primitive.M{
+    &quot;id&quot;: primitive.M{
+        &quot;value&quot;: primitive.Binary{
+            Subtype: 0x0,
+            Data:    {0x46, 0xf3, 0x74, 0xc5, 0x14, 0x9f, 0x4c, 0x6a, 0x97, 0xad, 0xa7, 0xcd, 0xf3, 0x54, 0xb8, 0xa0},
+        },
+    },
+    &quot;sorted_at&quot;: primitive.M{
+        &quot;seconds&quot;: int64(1600743664),
+        &quot;nanos&quot;:   int32(229350000),
+    },
+    &quot;hogwarts_house&quot;:   int32(0),
+    &quot;gingotts_balance&quot;: primitive.M{
+        &quot;high&quot;: int64(3473964162562916352),
+        &quot;low&quot;:  int64(5062556713),
+    },
+    &quot;weapon&quot;: primitive.M{
+        &quot;wand&quot;: primitive.M{
+            &quot;core&quot;: &quot;Phoenix Feather&quot;,
+        },
+    },
+    &quot;destined_object&quot;: primitive.M{
+        &quot;typeurl&quot;: &quot;type.googleapis.com/proto_cereal_doc.Sword&quot;,
+        &quot;value&quot;:   primitive.Binary{
+            Subtype: 0x0,
+            Data:    {0x12, 0x6, 0x53, 0x69, 0x6c, 0x76, 0x65, 0x72},
+        },
+    },
+    &quot;name&quot;:     &quot;Harry Potter&quot;,
+    &quot;portrait&quot;: primitive.M{
+        &quot;data&quot;: primitive.Binary{
+            Subtype: 0x0,
+            Data:    {0x73, 0x6f, 0x6d, 0x65, 0x20, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x20, 0x62, 0x79, 0x74, 0x65, 0x73},
+        },
+    },
+    &quot;familiar_name&quot;: primitive.M{
+        &quot;value&quot;: &quot;Hedwig&quot;,
+    },
+}
+</pre></div>
+</div>
+<p>There are a lot of issues with this document, most of which involve unnecessary nesting:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Since optional values are put into wrappers, <code class="docutils literal notranslate"><span class="pre">&quot;familiar_name&quot;</span></code> is an object with a
+<code class="docutils literal notranslate"><span class="pre">&quot;value&quot;</span></code> sub-field, rather than a direct, nullable string value (what the
+protobuf data model actually represents).</p></li>
+<li><p>This also happens with <code class="docutils literal notranslate"><span class="pre">&quot;portrait&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code> fields, as both are just wrapper
+messages around a <code class="docutils literal notranslate"><span class="pre">bytes</span></code> field used to denote the kind of value these bytes
+represent. We don’t need this extra level of nesting in our db.</p></li>
+<li><p>BSON has native <code class="docutils literal notranslate"><span class="pre">bsontype.BinaryUUID</span></code> subtype for binary data, which is not being
+used on the <code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code> field.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&quot;gingotts_balance&quot;</span></code> field is encoded to a sub-document rather than a native
+<code class="docutils literal notranslate"><span class="pre">primitive.Decimal128</span></code> value.</p></li>
+<li><p>Likewise, the <code class="docutils literal notranslate"><span class="pre">&quot;sorted_at&quot;</span></code> field is not being encoded into a
+<code class="docutils literal notranslate"><span class="pre">primitive.DateTime</span></code> value, even though that is the datatype
+<code class="docutils literal notranslate"><span class="pre">timestamppb.Timestamp</span></code> represents.</p></li>
+<li><p>Because of the way oneof fields are implemented in Go, the <code class="docutils literal notranslate"><span class="pre">&quot;weapon&quot;</span></code> field has
+a nested <code class="docutils literal notranslate"><span class="pre">&quot;wand&quot;</span></code> document. If we instead had a <code class="docutils literal notranslate"><span class="pre">doc.Sword</span></code> message, we would
+have a nested <code class="docutils literal notranslate"><span class="pre">&quot;sword&quot;</span></code> field.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;hogwarts_house&quot;</span></code> is an inscrutable int value, making the document less friendly
+to human eyes when paging through the database directly.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;destined_object&quot;</span></code> is serialized as a binary blob, rather than a sub-document
+with fields we can query and inspect.</p></li>
+</ul>
+</div></blockquote>
+<p>The nesting makes reasoning about and querying our data structure more complicated than
+it needs to be.</p>
+<p>Additionally, encoding this way has some unintuitive gotchas. The familiar’s name is
+found at <code class="docutils literal notranslate"><span class="pre">&quot;familiar_name.value&quot;</span></code> if it has one, but <code class="docutils literal notranslate"><span class="pre">&quot;familiar_name&quot;</span></code> is the field
+that is nulled if no familiar exists.</p>
+<p>We COULD define some custom structs to transfer the data to before marshalling, but in
+addition to having to do a full copy of our data, this also adds an additional layer
+of data modeling we need to keep in sync for our project. That MAY be good for some
+larger projects, but it’s a headache for prototyping and rapid development.</p>
+<p>BSON <a class="reference external" href="https://godoc.org/go.mongodb.org/mongo-driver/bson/bsoncodec">uses a registry</a>
+to lookup type-based encoders and decoders when marshalling and unmarshalling structs.
+Let’s create a custom registry with
+<a class="reference external" href="https://godoc.org/go.mongodb.org/mongo-driver/bson/bsoncodec#ValueCodec">ValueCodecs</a>
+registered to handle these proto message types:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create a new BSON registry builder</span>
+<span class="nx">registryBuilder</span> <span class="o">:=</span> <span class="nx">bson</span><span class="p">.</span><span class="nx">NewRegistryBuilder</span><span class="p">()</span>
+
+<span class="c1">// Hand it off to protobson to register our new codecs. We don&#39;t need to pass an</span>
+<span class="c1">// options object if we just want the default options.</span>
+<span class="nx">err</span> <span class="p">=</span> <span class="nx">protobson</span><span class="p">.</span><span class="nx">RegisterCerealCodecs</span><span class="p">(</span><span class="nx">registryBuilder</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+  <span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;error building registry: %w&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="c1">// Build our registry</span>
+<span class="nx">registry</span> <span class="o">:=</span> <span class="nx">registryBuilder</span><span class="p">.</span><span class="nx">Build</span><span class="p">()</span>
+
+<span class="c1">// marshall to bson bytes with our new registry.</span>
+<span class="nx">encoded</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">bson</span><span class="p">.</span><span class="nx">MarshalWithRegistry</span><span class="p">(</span><span class="nx">registry</span><span class="p">,</span> <span class="nx">wizard</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+  <span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;error marshalling with registry: %w&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="c1">// Extract into a bson map to see how this changed the document.</span>
+<span class="nx">rawDocument</span> <span class="o">:=</span> <span class="nx">bson</span><span class="p">.</span><span class="nx">M</span><span class="p">{}</span>
+<span class="nx">err</span> <span class="p">=</span> <span class="nx">bson</span><span class="p">.</span><span class="nx">Unmarshal</span><span class="p">(</span><span class="nx">encoded</span><span class="p">,</span> <span class="nx">rawDocument</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+  <span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;error unmarshalling to bson.M: %w&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="nx">_</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">pretty</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">rawDocument</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>primitive.M{
+    &quot;name&quot;: &quot;Harry Potter&quot;,
+    &quot;id&quot;:   primitive.Binary{
+        Subtype: 0x4,
+        Data:    {0xf4, 0x10, 0x3, 0x6b, 0xa9, 0x67, 0x47, 0xeb, 0x95, 0xd2, 0x68, 0xa5, 0x61, 0x94, 0x53, 0x8a},
+    },
+    &quot;sorted_at&quot;:        primitive.DateTime(1600748732738),
+    &quot;hogwarts_house&quot;:   int32(0),
+    &quot;gingotts_balance&quot;: primitive.Decimal128{h:0x3036000000000000, l:0x12dc07c29},
+    &quot;familiar_name&quot;:    &quot;Hedwig&quot;,
+    &quot;portrait&quot;:         primitive.Binary{
+        Subtype: 0x80,
+        Data:    {0x73, 0x6f, 0x6d, 0x65, 0x20, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x20, 0x62, 0x79, 0x74, 0x65, 0x73},
+    },
+    &quot;weapon&quot;: primitive.M{
+        &quot;wand&quot;: primitive.M{
+            &quot;core&quot;: &quot;Phoenix Feather&quot;,
+        },
+    },
+    &quot;destined_object&quot;: primitive.M{
+        &quot;pb_type&quot;: &quot;type.googleapis.com/proto_cereal_doc.Sword&quot;,
+        &quot;metal&quot;:   &quot;Silver&quot;,
+    },
+}
+</pre></div>
+</div>
+<p>This looks much better! <code class="docutils literal notranslate"><span class="pre">&quot;familiar_name&quot;</span></code> has been extracted from it sub-document into
+a plain string field (which it represents), the <code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;portrait&quot;</span></code> fields are
+no longer nested, and are of the correct binary subtype, the <code class="docutils literal notranslate"><span class="pre">&quot;sorted_at&quot;</span></code> field
+now contains a BSON <code class="docutils literal notranslate"><span class="pre">primitive.DateTime</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;gingotts_balance&quot;</span></code> contains a native
+<code class="docutils literal notranslate"><span class="pre">primitive.Decimal128</span></code>. <code class="docutils literal notranslate"><span class="pre">&quot;destined_object&quot;</span></code> is now a scrutable sub-document rather
+than an opaque binary blob.</p>
+<p>If we unmarshall the document, our data should re-populate into it’s protobuf message
+structure:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">decoded</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">docs</span><span class="p">.</span><span class="nx">Wizard</span><span class="p">)</span>
+<span class="nx">err</span> <span class="p">=</span> <span class="nx">bson</span><span class="p">.</span><span class="nx">UnmarshalWithRegistry</span><span class="p">(</span><span class="nx">registry</span><span class="p">,</span> <span class="nx">encoded</span><span class="p">,</span> <span class="nx">decoded</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+  <span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;error unmarshalling to struct: %w&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>BUT, we get an error! 🐞</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>panic: error unmarshalling to struct: error decoding key weapon: no decoder found for docs.isWizard_Weapon
+</pre></div>
+</div>
+<p>Uh oh! The <code class="docutils literal notranslate"><span class="pre">oneof</span> <span class="pre">Weapon</span> <span class="pre">weapon</span></code> field is not being decoded properly. There is a way
+to fix that! We’ll come back to it in a moment.</p>
+</div>
+<div class="section" id="default-codecs">
+<h2>Default Codecs<a class="headerlink" href="#default-codecs" title="Permalink to this headline">¶</a></h2>
+<p>Registering the default options adds codecs that convert between the following
+protobuf and BSON types:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Proto Type</p></th>
+<th class="head"><p>BSON Type</p></th>
+<th class="head"><p>Binary Subtype</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>*wrapperspb.BoolValue</p></td>
+<td><p>boolean</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>*wrapperspb.BytesValue</p></td>
+<td><p>primitive.Binary</p></td>
+<td><p>bsontype.BinaryGeneric</p></td>
+</tr>
+<tr class="row-even"><td><p>*wrapperspb.FloatValue</p></td>
+<td><p>double</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>*wrapperspb.DoubleValue</p></td>
+<td><p>double</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>*wrapperspb.Int32Value</p></td>
+<td><p>int32</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>*wrapperspb.Int64Value</p></td>
+<td><p>int32 / int64</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>*wrapperspb.StringValue</p></td>
+<td><p>string</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>*wrapperspb.UInt32Value</p></td>
+<td><p>int32 / int64</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>*wrapperspb.UInt64Value</p></td>
+<td><p>int32 / int64</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>*anypb.Any</p></td>
+<td><p>bsontype.EmbeddedDocument</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>*timestamppb.Timestamp</p></td>
+<td><p>primitive.DateTime</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>*cereal.Decimal</p></td>
+<td><p>primitive.Decimal128</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>*cereal.RawData</p></td>
+<td><p>primitive.Binary,</p></td>
+<td><p>bsontype.BinaryUserDefined</p></td>
+</tr>
+<tr class="row-odd"><td><p>*cereal.UUID</p></td>
+<td><p>primitive.Binary,</p></td>
+<td><p>bsontype.UUID</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The above packages <code class="docutils literal notranslate"><span class="pre">wrappers</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamppb</span></code>, and <code class="docutils literal notranslate"><span class="pre">anypb</span></code> are all from the
+<a class="reference external" href="https://godoc.org/google.golang.org/protobuf/types/known/wrapperspb">Go implementation</a> of google’s
+<a class="reference external" href="https://developers.google.com/protocol-buffers/docs/reference/google.protobuf">well known types</a>
+protobuf definitions.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All above codecs also support null values which encode from nil pointers to
+<code class="docutils literal notranslate"><span class="pre">bsontype.Null</span></code> and vice-versa.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>BSON only has int32 and int64 values. uint values which overflow an int64 will result
+in a marshalling error.</p>
+<p>Likewise, bson only allows for double-precision floats, so errors may occur from
+constant round-tripping of single precision floating-point values.</p>
+</div>
+</div>
+<div class="section" id="any-fields">
+<h2>Any Fields<a class="headerlink" href="#any-fields" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">*anypb.Any</span></code> fields are encoded by adding the type url as a field to an embedded
+document created from the payload.</p>
+<p>Because of implementation details, the internal payload must be serialized,
+de-serialized, then serialized again to add the type url. There may be performance
+implications for large messages stored in an <code class="docutils literal notranslate"><span class="pre">*anypb.Any</span></code> field.</p>
+</div>
+<div class="section" id="oneof-fields">
+<h2>Oneof Fields<a class="headerlink" href="#oneof-fields" title="Permalink to this headline">¶</a></h2>
+<p>We still have to resolve the error caused by our oneof field. Under the hood, oneof
+values are represented by a shared interface that a wrapper struct for each possible
+value implements.</p>
+<p>In our case, the interface is <code class="docutils literal notranslate"><span class="pre">docs.isWizard_Weapon</span></code>. BSON has no idea what to do when
+asked to decode into a literal interface, so we need to register a codec for it.</p>
+<div class="section" id="auto-generation">
+<h3>Auto-Generation<a class="headerlink" href="#auto-generation" title="Permalink to this headline">¶</a></h3>
+<p>Luckily, with protoCereal creating a codec for oneof fields is easy as:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create a new registry builder</span>
+<span class="nx">registryBuilder</span> <span class="o">:=</span> <span class="nx">bson</span><span class="p">.</span><span class="nx">NewRegistryBuilder</span><span class="p">()</span>
+
+<span class="c1">// Create new options object</span>
+<span class="nx">cerealOpts</span> <span class="o">:=</span> <span class="nx">protobson</span><span class="p">.</span><span class="nx">NewMongoOpts</span><span class="p">().</span>
+  <span class="c1">// passing one or more message types to this option automatically finds and</span>
+  <span class="c1">// creates codecs for all oneof fields they contain.</span>
+  <span class="nx">WithOneOfFields</span><span class="p">(</span><span class="nb">new</span><span class="p">(</span><span class="nx">docs</span><span class="p">.</span><span class="nx">Wizard</span><span class="p">))</span>
+
+<span class="c1">// Hand it off to protobson to register our new codecs.</span>
+<span class="nx">err</span> <span class="p">=</span> <span class="nx">protobson</span><span class="p">.</span><span class="nx">RegisterCerealCodecs</span><span class="p">(</span><span class="nx">registryBuilder</span><span class="p">,</span> <span class="nx">cerealOpts</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+  <span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;error building registry: %w&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="c1">// Build our registry</span>
+<span class="nx">registry</span> <span class="o">:=</span> <span class="nx">registryBuilder</span><span class="p">.</span><span class="nx">Build</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now when we marshal the document, we get:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>primitive.M{
+    ...
+    &quot;weapon&quot;: primitive.M{
+        &quot;pb_type&quot;: &quot;proto_cereal_doc.Wand&quot;,
+        &quot;core&quot;:    &quot;Phoenix Feather&quot;,
+    },
+    ...
+}
+</pre></div>
+</div>
+<p>Unmarshalling the document to a struct now works correctly as well.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Oneof codecs must be able to generate a 1-1 relationship between the encoded BSON
+type and it’s decoded protobuf counterpart. Codec creation will fail if a oneof field
+contains two types that both map to the same BSON type. For instance if a oneof
+contains more than one of either <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">double</span></code>, <code class="docutils literal notranslate"><span class="pre">wrappers.FloatValue</span></code>,
+or <code class="docutils literal notranslate"><span class="pre">wrappers.DoubleValue</span></code>, the codec builder will panic while calling the
+<code class="docutils literal notranslate"><span class="pre">protobson.MongoOpts.WithOneOfFields</span></code> setting.</p>
+<p>We panic because it is ambiguous as to what sort of value we should decode the raw
+<code class="docutils literal notranslate"><span class="pre">bsontype.Double</span></code> to when encountering it in a document.</p>
+<p>The exception is messages values which encode to <code class="docutils literal notranslate"><span class="pre">bsontype.EmbeddedDocument</span></code>, for
+which we can inject the protobuf type name to aid in correct type-resolution on the
+way out, much like we do for <code class="docutils literal notranslate"><span class="pre">anypb.Any</span></code>.</p>
+<p>Oneof interfaces that have multiple entries which encode to the same BSON type are
+currently outside the scope of this library, and will need to have hand-written codecs
+created for them.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In the above example, the message type is encoded in the added <code class="docutils literal notranslate"><span class="pre">&quot;pb_type&quot;</span></code> field.
+This occurs when a oneof field has two possible types that both encode to embedded
+documents. If there is only one type the encodes to an embedded document, the type
+information is omitted.</p>
+<p>Because of certain implementation constraints, adding this type information requires
+encoding the object, decoding it, and encoding it again with the added field, which
+may have performance implications for large data structures.</p>
+</div>
+</div>
+<div class="section" id="custom-bson-mapping">
+<h3>Custom BSON Mapping<a class="headerlink" href="#custom-bson-mapping" title="Permalink to this headline">¶</a></h3>
+<p>It may be the case that protoCereal cannot deduce correctly what a oneof wrapper type
+will encode to / decode from when round-tripping through BSON. We can supply our
+own inner value type mapping in these cases.</p>
+<p>Lets say we have the following protobuf file:</p>
+<div class="highlight-protobuf notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="s">&quot;cereal_proto/decimal.proto&quot;</span><span class="p">;</span>
+
+<span class="kd">message</span> <span class="nc">DecimalList</span> <span class="p">{</span>
+  <span class="c1">// @inject_tag: bson:&quot;value&quot;</span>
+  <span class="k">repeated</span> <span class="n">cereal.Decimal</span> <span class="na">value</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">HasCustomOneOf</span> <span class="p">{</span>
+  <span class="c1">// @inject_tag: bson:&quot;many&quot;</span>
+  <span class="k">oneof</span> <span class="n">many</span> <span class="p">{</span>
+    <span class="n">cereal.Decimal</span> <span class="na">decimal_value</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">string</span> <span class="na">string_value</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">DecimalList</span> <span class="na">decimal_list</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We have registered <code class="docutils literal notranslate"><span class="pre">DecimalList</span></code> as a custom wrapper type (see
+<a class="reference internal" href="#custom-wrapper-types">Custom Wrapper Types</a>):</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">cerealOpts</span> <span class="o">:=</span> <span class="nx">protobson</span><span class="p">.</span>
+  <span class="nx">NewMongoOpts</span><span class="p">().</span>
+  <span class="nx">WithCustomWrappers</span><span class="p">(</span>
+    <span class="nb">new</span><span class="p">(</span><span class="nx">messagesCereal_test</span><span class="p">.</span><span class="nx">DecimalList</span><span class="p">),</span>
+  <span class="p">).</span>
+  <span class="nx">WithOneOfFields</span><span class="p">(</span><span class="nb">new</span><span class="p">(</span><span class="nx">messagesCereal_test</span><span class="p">.</span><span class="nx">HasCustomOneOf</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>When protoCereal attempts to encode the <code class="docutils literal notranslate"><span class="pre">decimal_list</span></code> subfield of the <code class="docutils literal notranslate"><span class="pre">many</span></code>
+oneof, it will not realize that <code class="docutils literal notranslate"><span class="pre">messagesCereal_test.DecimalList</span></code> will encode
+to an array of decimal values, rather than an embedded document.</p>
+<p>We can signal that this will be the case like so:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">cerealOpts</span> <span class="o">:=</span> <span class="nx">protobson</span><span class="p">.</span>
+  <span class="nx">NewMongoOpts</span><span class="p">().</span>
+  <span class="nx">WithCustomWrappers</span><span class="p">(</span>
+    <span class="nb">new</span><span class="p">(</span><span class="nx">messagesCereal_test</span><span class="p">.</span><span class="nx">DecimalList</span><span class="p">),</span>
+  <span class="p">).</span>
+  <span class="nx">WithOneOfElementMapping</span><span class="p">(</span>
+    <span class="nb">new</span><span class="p">(</span><span class="nx">messagesCereal_test</span><span class="p">.</span><span class="nx">DecimalList</span><span class="p">),</span>
+    <span class="nx">bsontype</span><span class="p">.</span><span class="nx">Array</span><span class="p">,</span>
+    <span class="mh">0x0</span><span class="p">,</span>
+  <span class="p">).</span>
+  <span class="nx">WithOneOfFields</span><span class="p">(</span><span class="nb">new</span><span class="p">(</span><span class="nx">messagesCereal_test</span><span class="p">.</span><span class="nx">HasCustomOneOf</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Now protoCereal knows that to interpret arrays as <code class="docutils literal notranslate"><span class="pre">*messagesCereal_test.DecimalList</span></code>
+so whenever a oneof wrapper is wrapping this type, the correct mapping will be used.</p>
+</div>
+</div>
+<div class="section" id="enums">
+<h2>Enums<a class="headerlink" href="#enums" title="Permalink to this headline">¶</a></h2>
+<p>We may want to store enums as their string representation in our database for more
+human-friendly documents. By default, proto enums are encoded to BSON as
+<code class="docutils literal notranslate"><span class="pre">bsontype.Int32</span></code>. However, we can change that with the following option:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create a new options object</span>
+<span class="nx">cerealOpts</span> <span class="o">:=</span> <span class="nx">protobson</span><span class="p">.</span><span class="nx">NewMongoOpts</span><span class="p">().</span>
+  <span class="c1">// Enable conversion of enums into strings for all enum types</span>
+  <span class="nx">WithEnumStrings</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now when we encode our document, we get:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>primitive.M{
+  ...
+  &quot;hogwarts_house&quot;:   &quot;GRYFFINDOR&quot;,
+  ...
+}
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This option turns on string conversion for ALL proto enum types. protoCereal
+currently does not support the selective conversion of enum types, but such a feature
+could be added if there is interest!</p>
+</div>
+</div>
+<div class="section" id="custom-wrapper-types">
+<h2>Custom Wrapper Types<a class="headerlink" href="#custom-wrapper-types" title="Permalink to this headline">¶</a></h2>
+<p>Google uses wrapper types from it’s
+<a class="reference external" href="https://godoc.org/google.golang.org/protobuf/types/known/wrapperspb">wrappers from it’s Well Known Types package</a>
+package to represent nillable values. Using the default options, protoCereal will
+register all of the wrapper types from google’s Well Known Types into the codec
+registry.</p>
+<p>You can register custom wrapper types as well. For instance, google does not have
+a defined wrapper for a fixed64 value, we can define one like so:</p>
+<div class="highlight-protobuf notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wrapper for fixed int64.</span>
+<span class="kd">message</span> <span class="nc">Fixed64Value</span> <span class="p">{</span>
+  <span class="kt">fixed64</span> <span class="na">value</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Register the message as a wrapper type like so:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create a registry builder</span>
+<span class="nx">registryBuilder</span> <span class="o">:=</span> <span class="nx">bsoncodec</span><span class="p">.</span><span class="nx">NewRegistryBuilder</span><span class="p">()</span>
+
+<span class="c1">// Pass an empty proto message to the WithCustomWrappers option to add it&#39;s type</span>
+<span class="c1">// as a wrapper type.</span>
+<span class="nx">opts</span> <span class="o">:=</span> <span class="nx">protobson</span><span class="p">.</span><span class="nx">NewMongoOpts</span><span class="p">().</span>
+  <span class="nx">WithCustomWrappers</span><span class="p">(</span><span class="nb">new</span><span class="p">(</span><span class="nx">docsProto</span><span class="p">.</span><span class="nx">Fixed64Value</span><span class="p">))</span>
+
+<span class="c1">// Register protoCereal BSON codecs with the registry.</span>
+<span class="nx">err</span> <span class="o">:=</span> <span class="nx">protobson</span><span class="p">.</span><span class="nx">RegisterCerealCodecs</span><span class="p">(</span><span class="nx">registryBuilder</span><span class="p">,</span> <span class="nx">opts</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+  <span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;error adding to registry: %w&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="c1">// Build the registry</span>
+<span class="nx">registry</span> <span class="o">:=</span> <span class="nx">registryBuilder</span><span class="p">.</span><span class="nx">Build</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now we can use it while serializing a struct to extract the inner value directly
+into the key holding our wrapper:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">hasWrapper</span> <span class="kd">struct</span> <span class="p">{</span>
+  <span class="nx">Info</span> <span class="o">*</span><span class="nx">docsProto</span><span class="p">.</span><span class="nx">Fixed64Value</span>
+<span class="p">}</span>
+
+<span class="nx">message</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">hasWrapper</span><span class="p">{</span>
+  <span class="nx">Info</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">docsProto</span><span class="p">.</span><span class="nx">Fixed64Value</span><span class="p">{</span><span class="nx">Value</span><span class="p">:</span> <span class="mi">123456789</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="nx">serialized</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">bson</span><span class="p">.</span><span class="nx">MarshalWithRegistry</span><span class="p">(</span><span class="nx">registry</span><span class="p">,</span> <span class="nx">message</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+  <span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;error serializing message: %w&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="nx">document</span> <span class="o">:=</span> <span class="nx">bson</span><span class="p">.</span><span class="nx">M</span><span class="p">{}</span>
+<span class="nx">err</span> <span class="p">=</span> <span class="nx">bson</span><span class="p">.</span><span class="nx">UnmarshalWithRegistry</span><span class="p">(</span><span class="nx">registry</span><span class="p">,</span> <span class="nx">serialized</span><span class="p">,</span> <span class="nx">document</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+  <span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;error umarshalling to BSON document: %w&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;BSON DOCUMENT:&quot;</span><span class="p">,</span> <span class="nx">document</span><span class="p">)</span>
+
+<span class="nx">unmarshalled</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">hasWrapper</span><span class="p">)</span>
+<span class="nx">err</span> <span class="p">=</span> <span class="nx">bson</span><span class="p">.</span><span class="nx">UnmarshalWithRegistry</span><span class="p">(</span><span class="nx">registry</span><span class="p">,</span> <span class="nx">serialized</span><span class="p">,</span> <span class="nx">unmarshalled</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+  <span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;error unmarhalling to struct: %w&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;\nUNMARSHALLED: %+v\n&quot;</span><span class="p">,</span> <span class="nx">unmarshalled</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>BSON DOCUMENT: map[info:123456789]
+
+UNMARSHALLED: &amp;{Info:value:123456789}
+</pre></div>
+</div>
+<p>A wrapper type must:</p>
+<ul class="simple">
+<li><p>Be a pointer to a struct.</p></li>
+<li><p>Implement the <code class="docutils literal notranslate"><span class="pre">proto.Message</span></code> interface.</p></li>
+<li><p>Contain only one public field.</p></li>
+<li><p>This field must not be an embedded field.</p></li>
+</ul>
+<p>The codec will serialize a <code class="docutils literal notranslate"><span class="pre">bsontype.Null</span></code> value if the wrapper message is a nil
+pointer.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="index.html" class="btn btn-neutral float-left" title="protoCereal-go" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright &#39;2020, Illuscio&#39;.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
