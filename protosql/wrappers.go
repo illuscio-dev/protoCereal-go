@@ -42,6 +42,7 @@ func (value BoolMarshaller) Value() (driver.Value, error) {
 // Scan converts a value from the database.
 func (value *BoolMarshaller) Scan(src interface{}) error {
 	if src == nil {
+		*value = BoolMarshaller{}
 		return nil
 	}
 
@@ -76,6 +77,7 @@ func (value BytesMarshaller) Value() (driver.Value, error) {
 // Scan converts a value from the database.
 func (value *BytesMarshaller) Scan(src interface{}) error {
 	if src == nil {
+		*value = BytesMarshaller{}
 		return nil
 	}
 
@@ -115,6 +117,7 @@ func (value DoubleMarshaller) Value() (driver.Value, error) {
 // Scan converts a value from the database.
 func (value *DoubleMarshaller) Scan(src interface{}) error {
 	if src == nil {
+		*value = DoubleMarshaller{}
 		return nil
 	}
 
@@ -150,6 +153,7 @@ func (value FloatMarshaller) Value() (driver.Value, error) {
 // Scan converts a value from the database.
 func (value *FloatMarshaller) Scan(src interface{}) error {
 	if src == nil {
+		*value = FloatMarshaller{}
 		return nil
 	}
 
@@ -192,6 +196,7 @@ func (value Int32Marshaller) Value() (driver.Value, error) {
 // Scan converts a value from the database.
 func (value *Int32Marshaller) Scan(src interface{}) error {
 	if src == nil {
+		*value = Int32Marshaller{}
 		return nil
 	}
 
@@ -232,6 +237,7 @@ func (value Int64Marshaller) Value() (driver.Value, error) {
 // Scan converts a value from the database.
 func (value *Int64Marshaller) Scan(src interface{}) error {
 	if src == nil {
+		*value = Int64Marshaller{}
 		return nil
 	}
 
@@ -266,6 +272,7 @@ func (value StringMarshaller) Value() (driver.Value, error) {
 // Scan converts a value from the database.
 func (value *StringMarshaller) Scan(src interface{}) error {
 	if src == nil {
+		*value = StringMarshaller{}
 		return nil
 	}
 
@@ -301,6 +308,7 @@ func (value UInt32Marshaller) Value() (driver.Value, error) {
 // Scan converts a value from the database.
 func (value *UInt32Marshaller) Scan(src interface{}) error {
 	if src == nil {
+		*value = UInt32Marshaller{}
 		return nil
 	}
 
@@ -347,6 +355,7 @@ func (value UInt64Marshaller) Value() (driver.Value, error) {
 // Scan converts a value from the database.
 func (value *UInt64Marshaller) Scan(src interface{}) error {
 	if src == nil {
+		*value = UInt64Marshaller{}
 		return nil
 	}
 
@@ -379,7 +388,6 @@ func Bytes(wrapper *wrapperspb.BytesValue) BytesMarshaller {
 	return BytesMarshaller{BytesValue: wrapper}
 }
 
-
 // Double returns a DoubleMarshaller with an inner value set to wrapper.
 func Double(wrapper *wrapperspb.DoubleValue) DoubleMarshaller {
 	return DoubleMarshaller{DoubleValue: wrapper}
@@ -399,7 +407,6 @@ func Int32(wrapper *wrapperspb.Int32Value) Int32Marshaller {
 func Int64(wrapper *wrapperspb.Int64Value) Int64Marshaller {
 	return Int64Marshaller{Int64Value: wrapper}
 }
-
 
 // String returns a StringMarshaller with an inner value set to wrapper.
 func String(wrapper *wrapperspb.StringValue) StringMarshaller {

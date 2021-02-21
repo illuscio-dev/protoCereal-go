@@ -38,3 +38,8 @@ func (uuid *UUIDHexMarshaller) Scan(src interface{}) error {
 
 	return uuid.UUID.Scan(src)
 }
+
+// UUIDHex creates a new hex string marshaller for cereal.UUID values.
+func UUIDHex(uuid *cereal.UUID) UUIDHexMarshaller {
+	return UUIDHexMarshaller{UUID: uuid}
+}

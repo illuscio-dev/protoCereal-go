@@ -89,7 +89,7 @@ func TestRoundTrip_UUID(t *testing.T) {
 		},
 		{
 			Name:         "HexMarshaller_RoundTrip_Nil",
-			Value:        protosql.UUIDHexMarshaller{UUID: nil},
+			Value:        protosql.UUIDHex(nil),
 			Decoded:      new(protosql.UUIDHexMarshaller),
 			SQLFieldType: "string",
 			SubTest: func(t *testing.T, testCase *TestCaseRoundTrip) {
@@ -104,7 +104,7 @@ func TestRoundTrip_UUID(t *testing.T) {
 		// Test that the hex string is actually being stored and not the blob.
 		{
 			Name:         "HexMarshaller_StringVal",
-			Value:        protosql.UUIDHexMarshaller{UUID: cereal.MustUUIDRandom()},
+			Value:        protosql.UUIDHex(cereal.MustUUIDRandom()),
 			Decoded:      &stringVal,
 			SQLFieldType: "string",
 			SubTest: func(t *testing.T, testCase *TestCaseRoundTrip) {

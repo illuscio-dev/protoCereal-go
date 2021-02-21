@@ -15,10 +15,8 @@ func TestRoundTrip_DatetimeField(t *testing.T) {
 
 	testCases := []*TestCaseRoundTrip{
 		{
-			Name: "NotNil",
-			Value: protosql.TimestampMarshaller{
-				Timestamp: timestamppb.New(time.Now().UTC()),
-			},
+			Name:         "NotNil",
+			Value:        protosql.Timestamp(timestamppb.New(time.Now().UTC())),
 			Decoded:      &protosql.TimestampMarshaller{},
 			SQLFieldType: "datetime",
 			SubTest: func(t *testing.T, testCase *TestCaseRoundTrip) {
@@ -34,10 +32,8 @@ func TestRoundTrip_DatetimeField(t *testing.T) {
 			},
 		},
 		{
-			Name: "Nil",
-			Value: protosql.TimestampMarshaller{
-				Timestamp: nil,
-			},
+			Name:         "Nil",
+			Value:        protosql.Timestamp(nil),
 			Decoded:      &protosql.TimestampMarshaller{},
 			SQLFieldType: "datetime",
 			SubTest: func(t *testing.T, testCase *TestCaseRoundTrip) {

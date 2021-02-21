@@ -41,3 +41,8 @@ func (timestamp *TimestampMarshaller) Scan(src interface{}) error {
 	}
 	return nil
 }
+
+// Timestamp creates a new TimestampMarshaller for a given value
+func Timestamp(value *timestamppb.Timestamp) TimestampMarshaller {
+	return TimestampMarshaller{Timestamp: value}
+}
