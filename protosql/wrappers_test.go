@@ -13,9 +13,7 @@ func TestWrappersBool(t *testing.T) {
 	cases := []*TestCaseRoundTrip{
 		{
 			Name: "NotNull",
-			Value: protosql.BoolMarshaller{
-				BoolValue: wrapperspb.Bool(true),
-			},
+			Value:        protosql.Bool(wrapperspb.Bool(true)),
 			Decoded:      new(protosql.BoolMarshaller),
 			SQLFieldType: "boolean",
 			EncodeErr:    nil,
@@ -29,7 +27,7 @@ func TestWrappersBool(t *testing.T) {
 		},
 		{
 			Name:         "Null",
-			Value:        protosql.BoolMarshaller{BoolValue: nil},
+			Value:        protosql.Bool(nil),
 			Decoded:      new(protosql.BoolMarshaller),
 			SQLFieldType: "boolean",
 			EncodeErr:    nil,
@@ -61,9 +59,7 @@ func TestWrappersBytes(t *testing.T) {
 	cases := []*TestCaseRoundTrip{
 		{
 			Name: "NotNull",
-			Value: protosql.BytesMarshaller{
-				BytesValue: wrapperspb.Bytes([]byte("hello")),
-			},
+			Value:        protosql.Bytes(wrapperspb.Bytes([]byte("hello"))),
 			Decoded:      new(protosql.BytesMarshaller),
 			SQLFieldType: "blob",
 			EncodeErr:    nil,
@@ -77,7 +73,7 @@ func TestWrappersBytes(t *testing.T) {
 		},
 		{
 			Name:         "Null",
-			Value:        protosql.BytesMarshaller{BytesValue: nil},
+			Value:        protosql.Bytes(nil),
 			Decoded:      new(protosql.BytesMarshaller),
 			SQLFieldType: "blob",
 			EncodeErr:    nil,
@@ -109,9 +105,7 @@ func TestWrappersDouble(t *testing.T) {
 	cases := []*TestCaseRoundTrip{
 		{
 			Name: "NotNull",
-			Value: protosql.DoubleMarshaller{
-				DoubleValue: wrapperspb.Double(64),
-			},
+			Value:        protosql.Double(wrapperspb.Double(64)),
 			Decoded:      new(protosql.DoubleMarshaller),
 			SQLFieldType: "double",
 			EncodeErr:    nil,
@@ -125,7 +119,7 @@ func TestWrappersDouble(t *testing.T) {
 		},
 		{
 			Name:         "Null",
-			Value:        protosql.DoubleMarshaller{DoubleValue: nil},
+			Value:        protosql.Double(nil),
 			Decoded:      new(protosql.DoubleMarshaller),
 			SQLFieldType: "double",
 			EncodeErr:    nil,
@@ -157,9 +151,7 @@ func TestWrappersFloat(t *testing.T) {
 	cases := []*TestCaseRoundTrip{
 		{
 			Name: "NotNull",
-			Value: protosql.FloatMarshaller{
-				FloatValue: wrapperspb.Float(64),
-			},
+			Value:        protosql.Float(wrapperspb.Float(64)),
 			Decoded:      new(protosql.FloatMarshaller),
 			SQLFieldType: "float",
 			EncodeErr:    nil,
@@ -173,7 +165,7 @@ func TestWrappersFloat(t *testing.T) {
 		},
 		{
 			Name:         "Null",
-			Value:        protosql.FloatMarshaller{FloatValue: nil},
+			Value:        protosql.Float(nil),
 			Decoded:      new(protosql.FloatMarshaller),
 			SQLFieldType: "float",
 			EncodeErr:    nil,
@@ -225,9 +217,7 @@ func TestWrappersInt32(t *testing.T) {
 	cases := []*TestCaseRoundTrip{
 		{
 			Name: "NotNull",
-			Value: protosql.Int32Marshaller{
-				Int32Value: wrapperspb.Int32(42),
-			},
+			Value:        protosql.Int32(wrapperspb.Int32(42)),
 			Decoded:      new(protosql.Int32Marshaller),
 			SQLFieldType: "integer",
 			EncodeErr:    nil,
@@ -241,7 +231,7 @@ func TestWrappersInt32(t *testing.T) {
 		},
 		{
 			Name:         "Null",
-			Value:        protosql.Int32Marshaller{Int32Value: nil},
+			Value:        protosql.Int32(nil),
 			Decoded:      new(protosql.Int32Marshaller),
 			SQLFieldType: "integer",
 			EncodeErr:    nil,
@@ -293,9 +283,7 @@ func TestWrappersInt64(t *testing.T) {
 	cases := []*TestCaseRoundTrip{
 		{
 			Name: "NotNull",
-			Value: protosql.Int64Marshaller{
-				Int64Value: wrapperspb.Int64(42),
-			},
+			Value:        protosql.Int64(wrapperspb.Int64(42)),
 			Decoded:      new(protosql.Int64Marshaller),
 			SQLFieldType: "integer",
 			EncodeErr:    nil,
@@ -309,7 +297,7 @@ func TestWrappersInt64(t *testing.T) {
 		},
 		{
 			Name:         "Null",
-			Value:        protosql.Int64Marshaller{Int64Value: nil},
+			Value:        protosql.Int64(nil),
 			Decoded:      new(protosql.Int64Marshaller),
 			SQLFieldType: "integer",
 			EncodeErr:    nil,
@@ -341,9 +329,7 @@ func TestWrappersString(t *testing.T) {
 	cases := []*TestCaseRoundTrip{
 		{
 			Name: "NotNull",
-			Value: protosql.StringMarshaller{
-				StringValue: wrapperspb.String("some value"),
-			},
+			Value:        protosql.String(wrapperspb.String("some value")),
 			Decoded:      new(protosql.StringMarshaller),
 			SQLFieldType: "text",
 			EncodeErr:    nil,
@@ -357,9 +343,7 @@ func TestWrappersString(t *testing.T) {
 		},
 		{
 			Name: "Null",
-			Value: protosql.StringMarshaller{
-				StringValue: nil,
-			},
+			Value:        protosql.String(nil),
 			Decoded:      new(protosql.StringMarshaller),
 			SQLFieldType: "text",
 			EncodeErr:    nil,
@@ -391,9 +375,7 @@ func TestWrappersUInt32(t *testing.T) {
 	cases := []*TestCaseRoundTrip{
 		{
 			Name: "NotNull",
-			Value: protosql.UInt32Marshaller{
-				UInt32Value: wrapperspb.UInt32(42),
-			},
+			Value:        protosql.UInt32(wrapperspb.UInt32(42)),
 			Decoded:      new(protosql.UInt32Marshaller),
 			SQLFieldType: "integer",
 			EncodeErr:    nil,
@@ -407,7 +389,7 @@ func TestWrappersUInt32(t *testing.T) {
 		},
 		{
 			Name:         "Null",
-			Value:        protosql.UInt32Marshaller{UInt32Value: nil},
+			Value:        protosql.UInt32(nil),
 			Decoded:      new(protosql.UInt32Marshaller),
 			SQLFieldType: "integer",
 			EncodeErr:    nil,
@@ -459,9 +441,7 @@ func TestWrappersUInt64(t *testing.T) {
 	cases := []*TestCaseRoundTrip{
 		{
 			Name: "NotNull",
-			Value: protosql.UInt64Marshaller{
-				UInt64Value: wrapperspb.UInt64(42),
-			},
+			Value:        protosql.UInt64(wrapperspb.UInt64(42)),
 			Decoded:      new(protosql.UInt64Marshaller),
 			SQLFieldType: "integer",
 			EncodeErr:    nil,
@@ -475,7 +455,7 @@ func TestWrappersUInt64(t *testing.T) {
 		},
 		{
 			Name:         "Null",
-			Value:        protosql.UInt64Marshaller{UInt64Value: nil},
+			Value:        protosql.UInt64(nil),
 			Decoded:      new(protosql.UInt64Marshaller),
 			SQLFieldType: "integer",
 			EncodeErr:    nil,

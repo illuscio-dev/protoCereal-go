@@ -368,3 +368,50 @@ func (value *UInt64Marshaller) Scan(src interface{}) error {
 	value.UInt64Value = wrapperspb.UInt64(uint64(srcVal))
 	return nil
 }
+
+// Bool returns a BoolMarshaller with an inner value set to wrapper.
+func Bool(wrapper *wrapperspb.BoolValue) BoolMarshaller {
+	return BoolMarshaller{BoolValue: wrapper}
+}
+
+// Bytes returns a BytesMarshaller with an inner value set to wrapper.
+func Bytes(wrapper *wrapperspb.BytesValue) BytesMarshaller {
+	return BytesMarshaller{BytesValue: wrapper}
+}
+
+
+// Double returns a DoubleMarshaller with an inner value set to wrapper.
+func Double(wrapper *wrapperspb.DoubleValue) DoubleMarshaller {
+	return DoubleMarshaller{DoubleValue: wrapper}
+}
+
+// Float returns a FloatMarshaller with an inner value set to wrapper.
+func Float(wrapper *wrapperspb.FloatValue) FloatMarshaller {
+	return FloatMarshaller{FloatValue: wrapper}
+}
+
+// Int32 returns a Int32Marshaller with an inner value set to wrapper.
+func Int32(wrapper *wrapperspb.Int32Value) Int32Marshaller {
+	return Int32Marshaller{Int32Value: wrapper}
+}
+
+// Int64 returns a Int64Marshaller with an inner value set to wrapper.
+func Int64(wrapper *wrapperspb.Int64Value) Int64Marshaller {
+	return Int64Marshaller{Int64Value: wrapper}
+}
+
+
+// String returns a StringMarshaller with an inner value set to wrapper.
+func String(wrapper *wrapperspb.StringValue) StringMarshaller {
+	return StringMarshaller{StringValue: wrapper}
+}
+
+// UInt32 returns a UInt32Marshaller with an inner value set to wrapper.
+func UInt32(wrapper *wrapperspb.UInt32Value) UInt32Marshaller {
+	return UInt32Marshaller{UInt32Value: wrapper}
+}
+
+// UInt64 returns a UInt64Marshaller with an inner value set to wrapper.
+func UInt64(wrapper *wrapperspb.UInt64Value) UInt64Marshaller {
+	return UInt64Marshaller{UInt64Value: wrapper}
+}
