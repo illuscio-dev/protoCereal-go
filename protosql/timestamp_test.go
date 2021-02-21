@@ -10,7 +10,7 @@ import (
 )
 
 // Tests that we can round-trip a timestamp
-func TestRoundTrip_DatetimeField(t *testing.T) {
+func TestTimestamp(t *testing.T) {
 	assert := assert.New(t)
 
 	testCases := []*TestCaseRoundTrip{
