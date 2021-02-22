@@ -125,7 +125,7 @@ func TestRoundTrip_UUID(t *testing.T) {
 			},
 			Decoded:      &stringVal,
 			SQLFieldType: "string",
-			EncodeErr: errors.New(
+			ExpectedEncodeErr: errors.New(
 				"sql: converting argument $1 type: error converting uuid bytes: " +
 					"proto uuid message must be 16 bytes: 10 bytes found",
 			),
@@ -135,7 +135,7 @@ func TestRoundTrip_UUID(t *testing.T) {
 			Value:        []byte("not a uuid"),
 			Decoded:      new(cereal.UUID),
 			SQLFieldType: "blob(16)",
-			DecodeErr: errors.New(
+			ExpectedDecodeErr: errors.New(
 				"sql: Scan error on column index 0, name \"value\": proto uuid" +
 					" message must be 16 bytes: 10 bytes found",
 			),
@@ -145,7 +145,7 @@ func TestRoundTrip_UUID(t *testing.T) {
 			Value:        "not a uuid",
 			Decoded:      new(cereal.UUID),
 			SQLFieldType: "string",
-			DecodeErr: errors.New(
+			ExpectedDecodeErr: errors.New(
 				"sql: Scan error on column index 0, name \"value\": error " +
 					"parsing uuid string: invalid UUID length: 10",
 			),

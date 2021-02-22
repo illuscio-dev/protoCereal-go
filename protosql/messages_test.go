@@ -51,7 +51,7 @@ func TestMessageBlobMarshaller(t *testing.T) {
 		{
 			Name:         "Nil",
 			Value:        protosql.Message(nil),
-			Decoded:      protosql.Message(new(cereal_test.Wizard)),
+			Decoded:      protosql.Message(nil),
 			SQLFieldType: "blob",
 			SubTest: func(t *testing.T, testCase *TestCaseRoundTrip) {
 				decoded := testCase.Decoded.(*protosql.MessageBlobMarshaller)
@@ -63,7 +63,7 @@ func TestMessageBlobMarshaller(t *testing.T) {
 			Value:        "not a blob",
 			Decoded:      protosql.Message(new(cereal_test.Wizard)),
 			SQLFieldType: "string",
-			DecodeErr: errors.New(
+			ExpectedDecodeErr: errors.New(
 				"sql: Scan error on column index 0, name \"value\": expected" +
 					" type '[]uint8' for target value of type" +
 					" '*cereal_test.Wizard', got 'string'",
@@ -71,24 +71,12 @@ func TestMessageBlobMarshaller(t *testing.T) {
 		},
 		{
 			Name:         "ScanErr_UnmarshalErr",
-			Value:        []byte("some bytes"),
+			Value:        []byte{0x0},
 			Decoded:      protosql.Message(new(cereal_test.Wizard)),
 			SQLFieldType: "blob",
-			DecodeErr: errors.New(
+			ExpectedDecodeErr: errors.New(
 				"sql: Scan error on column index 0, name \"value\": error " +
-					"unmarshalling message: proto: cannot parse reserved " +
-					"wire type",
-			),
-		},
-		{
-			Name:         "ScanErr_NoTarget",
-			Value:        protosql.Message(&cereal_test.Wizard{Name: "Harry Potter"}),
-			Decoded:      protosql.Message(nil),
-			SQLFieldType: "blob",
-			DecodeErr: errors.New(
-				"sql: Scan error on column index 0, name \"value\": " +
-					"'MessageBlobMarshaller.Message' field is nil: target message " +
-					"must be supplied",
+					"unmarshalling message: proto:",
 			),
 		},
 	}

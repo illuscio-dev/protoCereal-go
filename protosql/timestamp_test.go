@@ -46,7 +46,7 @@ func TestTimestamp(t *testing.T) {
 			Value:        "not a timestamp",
 			Decoded:      &protosql.TimestampMarshaller{},
 			SQLFieldType: "string",
-			DecodeErr: errors.New(
+			ExpectedDecodeErr: errors.New(
 				"sql: Scan error on column index 0, name \"value\": " +
 					"unsupported Scan, storing driver.Value type string into type" +
 					" *time.Time",

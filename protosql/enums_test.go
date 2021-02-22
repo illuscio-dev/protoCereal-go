@@ -29,45 +29,45 @@ func checkEnums(
 func TestEnums(t *testing.T) {
 	cases := []*TestCaseRoundTrip{
 		{
-			Name:         "Houses_GRYFFINDOR",
-			Value:        protosql.Enum(cereal_test.Houses_GRYFFINDOR),
-			Decoded:      protosql.Enum(cereal_test.Houses_GRYFFINDOR),
-			SQLFieldType: "text",
-			EncodeErr:    nil,
-			DecodeErr:    nil,
+			Name:              "Houses_GRYFFINDOR",
+			Value:             protosql.Enum(cereal_test.Houses_GRYFFINDOR),
+			Decoded:           protosql.Enum(cereal_test.Houses_GRYFFINDOR),
+			SQLFieldType:      "text",
+			ExpectedEncodeErr: nil,
+			ExpectedDecodeErr: nil,
 			SubTest: func(t *testing.T, testCase *TestCaseRoundTrip) {
 				checkEnums(t, testCase, cereal_test.Houses_GRYFFINDOR)
 			},
 		},
 		{
-			Name:         "Houses_RAVENCLAW",
-			Value:        protosql.Enum(cereal_test.Houses_RAVENCLAW),
-			Decoded:      protosql.Enum(cereal_test.Houses_GRYFFINDOR),
-			SQLFieldType: "text",
-			EncodeErr:    nil,
-			DecodeErr:    nil,
+			Name:              "Houses_RAVENCLAW",
+			Value:             protosql.Enum(cereal_test.Houses_RAVENCLAW),
+			Decoded:           protosql.Enum(cereal_test.Houses_GRYFFINDOR),
+			SQLFieldType:      "text",
+			ExpectedEncodeErr: nil,
+			ExpectedDecodeErr: nil,
 			SubTest: func(t *testing.T, testCase *TestCaseRoundTrip) {
 				checkEnums(t, testCase, cereal_test.Houses_RAVENCLAW)
 			},
 		},
 		{
-			Name:         "Houses_HUFFLEPUFF",
-			Value:        protosql.Enum(cereal_test.Houses_HUFFLEPUFF),
-			Decoded:      protosql.Enum(cereal_test.Houses_GRYFFINDOR),
-			SQLFieldType: "text",
-			EncodeErr:    nil,
-			DecodeErr:    nil,
+			Name:              "Houses_HUFFLEPUFF",
+			Value:             protosql.Enum(cereal_test.Houses_HUFFLEPUFF),
+			Decoded:           protosql.Enum(cereal_test.Houses_GRYFFINDOR),
+			SQLFieldType:      "text",
+			ExpectedEncodeErr: nil,
+			ExpectedDecodeErr: nil,
 			SubTest: func(t *testing.T, testCase *TestCaseRoundTrip) {
 				checkEnums(t, testCase, cereal_test.Houses_HUFFLEPUFF)
 			},
 		},
 		{
-			Name:         "Houses_SLYTHERIN",
-			Value:        protosql.Enum(cereal_test.Houses_SLYTHERIN),
-			Decoded:      protosql.Enum(cereal_test.Houses_GRYFFINDOR),
-			SQLFieldType: "text",
-			EncodeErr:    nil,
-			DecodeErr:    nil,
+			Name:              "Houses_SLYTHERIN",
+			Value:             protosql.Enum(cereal_test.Houses_SLYTHERIN),
+			Decoded:           protosql.Enum(cereal_test.Houses_GRYFFINDOR),
+			SQLFieldType:      "text",
+			ExpectedEncodeErr: nil,
+			ExpectedDecodeErr: nil,
 			SubTest: func(t *testing.T, testCase *TestCaseRoundTrip) {
 				checkEnums(t, testCase, cereal_test.Houses_SLYTHERIN)
 			},
@@ -75,12 +75,12 @@ func TestEnums(t *testing.T) {
 		// This tests decodes the value as a string, and ensures that it was encoded
 		// correctly.
 		{
-			Name:         "Houses_SLYTHERIN_GetString",
-			Value:        protosql.Enum(cereal_test.Houses_SLYTHERIN),
-			Decoded:      new(protosql.StringMarshaller),
-			SQLFieldType: "text",
-			EncodeErr:    nil,
-			DecodeErr:    nil,
+			Name:              "Houses_SLYTHERIN_GetString",
+			Value:             protosql.Enum(cereal_test.Houses_SLYTHERIN),
+			Decoded:           new(protosql.StringMarshaller),
+			SQLFieldType:      "text",
+			ExpectedEncodeErr: nil,
+			ExpectedDecodeErr: nil,
 			SubTest: func(t *testing.T, testCase *TestCaseRoundTrip) {
 				decoded := testCase.Decoded.(*protosql.StringMarshaller)
 
@@ -93,24 +93,24 @@ func TestEnums(t *testing.T) {
 			},
 		},
 		{
-			Name:         "NilValue",
-			Value:        protosql.Enum(nil),
-			Decoded:      protosql.Enum(cereal_test.Houses_GRYFFINDOR),
-			SQLFieldType: "text",
-			EncodeErr:    nil,
-			DecodeErr:    nil,
+			Name:              "NilValue",
+			Value:             protosql.Enum(nil),
+			Decoded:           protosql.Enum(cereal_test.Houses_GRYFFINDOR),
+			SQLFieldType:      "text",
+			ExpectedEncodeErr: nil,
+			ExpectedDecodeErr: nil,
 			SubTest: func(t *testing.T, testCase *TestCaseRoundTrip) {
 				decoded := testCase.Decoded.(*protosql.EnumStringMarshaller)
 				assert.Nilf(t, decoded.Enum, "enum value nil")
 			},
 		},
 		{
-			Name:         "Err_Type",
-			Value:        time.Now(),
-			Decoded:      protosql.Enum(cereal_test.Houses_GRYFFINDOR),
-			SQLFieldType: "datetime",
-			EncodeErr:    nil,
-			DecodeErr: errors.New(
+			Name:              "Err_Type",
+			Value:             time.Now(),
+			Decoded:           protosql.Enum(cereal_test.Houses_GRYFFINDOR),
+			SQLFieldType:      "datetime",
+			ExpectedEncodeErr: nil,
+			ExpectedDecodeErr: errors.New(
 				"sql: Scan error on column index 0, name \"value\": expected " +
 					"type 'string' for target value of type " +
 					"'cereal_test.Houses', got 'time.Time'",
@@ -118,12 +118,12 @@ func TestEnums(t *testing.T) {
 			SubTest: nil,
 		},
 		{
-			Name:         "Err_UnknownString",
-			Value:        "NotAHouse",
-			Decoded:      protosql.Enum(cereal_test.Houses_GRYFFINDOR),
-			SQLFieldType: "text",
-			EncodeErr:    nil,
-			DecodeErr: errors.New(
+			Name:              "Err_UnknownString",
+			Value:             "NotAHouse",
+			Decoded:           protosql.Enum(cereal_test.Houses_GRYFFINDOR),
+			SQLFieldType:      "text",
+			ExpectedEncodeErr: nil,
+			ExpectedDecodeErr: errors.New(
 				"sql: Scan error on column index 0, name \"value\": received " +
 					"string does not match any known Enum names for type " +
 					"'cereal_test.Houses'",
@@ -131,12 +131,12 @@ func TestEnums(t *testing.T) {
 			SubTest: nil,
 		},
 		{
-			Name:         "Err_Decode_NoPrototype",
-			Value:        protosql.Enum(cereal_test.Houses_SLYTHERIN),
-			Decoded:      protosql.Enum(nil),
-			SQLFieldType: "text",
-			EncodeErr:    nil,
-			DecodeErr: errors.New(
+			Name:              "Err_Decode_NoPrototype",
+			Value:             protosql.Enum(cereal_test.Houses_SLYTHERIN),
+			Decoded:           protosql.Enum(nil),
+			SQLFieldType:      "text",
+			ExpectedEncodeErr: nil,
+			ExpectedDecodeErr: errors.New(
 				"sql: Scan error on column index 0, name \"value\": cannot " +
 					"unmarshal proto Enum, Enum field is not set with concrete value " +
 					"for type inspection",

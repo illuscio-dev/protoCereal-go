@@ -30,9 +30,9 @@ type TestCaseRoundTrip struct {
 	// SQLFieldType is the field type to declare for value.
 	SQLFieldType string
 	// Expected encoding error
-	EncodeErr error
+	ExpectedEncodeErr error
 	// Expected decoding error
-	DecodeErr error
+	ExpectedDecodeErr error
 	// SubTest is an optional additional testing func for inspecting values.
 	SubTest func(t *testing.T, testCase *TestCaseRoundTrip)
 }
@@ -56,9 +56,9 @@ func RunTestRoundTrip(t *testing.T, testCase *TestCaseRoundTrip) {
 		)
 
 		// If we are expecting an error, check that we got it.
-		if testCase.EncodeErr != nil {
+		if testCase.ExpectedEncodeErr != nil {
 			assert.EqualError(
-				err, testCase.EncodeErr.Error(), "expected encode error",
+				err, testCase.ExpectedEncodeErr.Error(), "expected encode error",
 			)
 			// Return, no further tests are needed on expected errors.
 			return
@@ -76,9 +76,16 @@ func RunTestRoundTrip(t *testing.T, testCase *TestCaseRoundTrip) {
 		}
 
 		err = row.Scan(testCase.Decoded)
-		if testCase.DecodeErr != nil {
-			assert.EqualError(
-				err, testCase.DecodeErr.Error(), "expected decode error",
+		if testCase.ExpectedDecodeErr != nil {
+			assert.Error(err, "expected decode error")
+			// Annoyingly, proto messages sometimes render differently with no obvious
+			// pattern. So we are going to test that our error contains our expected
+			// string. That way we can truncate before the protobuf lib error at the end
+			// for errors that originate in that library.
+			assert.Contains(
+				err.Error(),
+				testCase.ExpectedDecodeErr.Error(),
+				"expected decode error in error",
 			)
 			// Return, no further tests are needed on expected errors.
 			return

@@ -35,13 +35,6 @@ func (message *MessageBlobMarshaller) Scan(src interface{}) error {
 		return nil
 	}
 
-	if message.Message == nil {
-		return fmt.Errorf(
-			"'MessageBlobMarshaller.Message' field is nil: target message must" +
-				" be supplied",
-		)
-	}
-
 	blob, ok := src.([]byte)
 	if !ok {
 		return newScanTypeErr(
