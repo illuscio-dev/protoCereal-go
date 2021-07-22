@@ -13,7 +13,7 @@ require (
 	github.com/mattn/go-sqlite3 v1.14.6
 	github.com/mgechev/revive v1.0.2
 	github.com/stretchr/testify v1.6.1
-	go.mongodb.org/mongo-driver v1.4.1
+	go.mongodb.org/mongo-driver v1.5.1
 	golang.org/x/tools v0.0.0-20200916195026-c9a70fc28ce3
 	google.golang.org/protobuf v1.25.0
 )
